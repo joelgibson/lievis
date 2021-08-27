@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "Libertinus Serif";
+  font-weight: normal;
+  font-style: normal;
+  src: url(./LibertinusSerif-Regular.woff2) format('woff2');
+}
+@font-face {
+  font-family: "Libertinus Serif";
+  font-weight: bold;
+  font-style: normal;
+  src: url(./LibertinusSerif-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: "Libertinus Serif";
+  font-weight: normal;
+  font-style: italic;
+  src: url(./LibertinusSerif-Italic.woff2) format('woff2');
+}
+@font-face {
+  font-family: "Libertinus Serif";
+  font-weight: bold;
+  font-style: italic;
+  src: url(./LibertinusSerif-BoldItalic.woff2) format('woff2');
+}
+@font-face {
+  font-family: "Libertinus Sans";
+  font-weight: normal;
+  font-style: normal;
+  src: url(./LibertinusSans-Regular.woff2) format('woff2');
+}
+@font-face {
+  font-family: "Libertinus Sans";
+  font-weight: bold;
+  font-style: normal;
+  src: url(./LibertinusSans-Bold.woff2) format('woff2');
+}
+@font-face {
+  font-family: "Libertinus Sans";
+  font-weight: normal;
+  font-style: italic;
+  src: url(./LibertinusSans-Italic.woff2) format('woff2');
+}
+@font-face {
+  font-family: "Fira Mono";
+  font-weight: normal;
+  font-style: normal;
+  src: url(./FiraMono-Regular.woff2) format('woff2');
+}

@@ -1,0 +1,156 @@
+@import './normalise.css';
+@import './tailwind-preflight.css';
+@import './fonts/fonts.css';
+
+:root {
+    --body-font-family: 'Libertinus Serif', serif;
+    --body-font-size: 13pt;
+
+    --heading-font-family: 'Libertinus sans', sans-serif;
+
+    --width-fullpage: 90vw;
+
+    --colour-link: rgb(3, 102, 214);
+    --colour-heading-link: #ff3e00;
+
+    text-rendering: optimizeLegibility;
+}
+
+@media screen and (min-width: 1024px) {
+    :root {
+        --width-fullpage: 1000px;
+    }
+}
+
+main {
+    font-family: var(--body-font-family);
+    font-size: var(--body-font-size);
+}
+main a { color: var(--colour-link); }
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--heading-font-family); }
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: var(--colour-heading-link); }
+h1 { font-size: 2.2rem; line-height: 2.5rem; }
+h2 { font-size: 1.7rem; }
+h3 { font-size: 1.4rem; }
+
+
+/* Make the KaTeX inline font a little smaller than it usually is, and force it to not break over lines. */
+.math-inline {
+    font-size: 0.86em;
+    white-space: nowrap;
+}
+.math-display {
+    text-align: center;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    font-size: 1rem;
+}
+
+/** Reset margin and padding in controls (they might be changed for in-document figures, tables etc). **/
+.controls * { margin: 0; padding: 0; }
+.controls input[type="text"], .controls select { border: 1px solid black; }
+.controls button {
+    border: 1px solid black;
+    padding-left: 2px;
+    padding-right: 2px;
+    background-color: #F3F4F6;
+}
+
+/* This media query only targets devices supporting "hover" (i.e. computers not phones),
+   stopping the :hover selector from 'sticking around' */
+@media (hover: hover) {
+    .controls button:hover { background-color: #E5E7EB; }
+}
+.controls button.selected {
+    background-color: #E5E7EB;
+}
+
+
+main {
+    max-width: var(--width-fullpage);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+}
+nav#top-bar {
+    font-family: var(--body-font-family);
+    font-style: italic;
+}
+header {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+footer {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-width: var(--width-fullpage);
+    font-family: var(--body-font-family);
+    font-size: var(--body-font-size);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    clear: both;
+}
+
+nav#top-bar ul { display: flex; }
+nav#top-bar ul li:not(:first-child)::before { content: '•'; margin-right: 0.4rem; margin-left: 0.4rem; }
+
+header p, article p, article ul, article ol { margin-bottom: 1rem; }
+header h1, article h1, article h2, article h3, article h4, article h5, article h6, article figure, article table { margin-bottom: 0.5rem; }
+article ul { list-style-type: disc; list-style-position: outside; margin-left: 2rem; }
+article ol { list-style-type: decimal; list-style-position: outside; margin-left: 2rem; }
+
+/** The equations have a habit of overflowing the viewport on mobile. */
+article .math-display { overflow: auto; }
+
+.aside {
+    margin-left: 1em;
+    font-size: 0.92em;
+}
+
+/* A figure.row lays out content in a row, centred but wrapping as necessary. */
+figure.row { display: flex; flex-flow: row wrap; justify-content: center; }
+figure.row.full { width: 100%; justify-content: space-between;}
+
+/* A figure.col lays out content vertically and centred. */
+figure.col { display: flex; flex-flow: column; align-items: center; }
+
+figure figcaption { text-align: center; }
+
+
+nav#TOC {
+    counter-reset: toc_1;
+
+    margin: 1em;
+    padding: 0.5rem;
+    font-family: var(--heading-font-family);
+    border: 1px solid #aaa;
+    background-color: rgb(248, 248, 248);
+    display: inline-block;
+}
+nav#TOC ul {
+    list-style-position: outside;
+    position: relative;
+}
+nav#TOC li {
+    padding-left: 1.3rem;
+}
+nav#TOC ul li::before {
+    position: absolute;
+    right: calc(100% - 1em);
+    left: unset;
+    width: 111px;
+    text-align: right;
+    font-weight: normal;
+    pointer-events: none;
+}
+nav#TOC ul li::before {
+    counter-increment: toc_1;
+    content: counter(toc_1) "\2006 ";
+}
+
+/******* Inline styles for marking content */
+.defn { color: rgb(159, 84, 20); font-style: italic; }
+.instructions { color:rgb(155, 39, 184); }
+.warning { color:rgb(212, 40, 40); font-style: italic; }

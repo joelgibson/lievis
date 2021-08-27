@@ -1,0 +1,4 @@
+.svelte-kit
+_site/
+src/**/*.html
+build

@@ -1,0 +1,5 @@
+# The base URL is the point that the site will be mounted
+# at, for example www.example.com/lievis/(rest of site).
+# Include a leading slash and a trailing slash (or a single
+# slash only to serve from the root).
+/lievis/

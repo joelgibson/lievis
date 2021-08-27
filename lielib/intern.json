@@ -1,0 +1,7 @@
+{
+    "suites": [
+        "tests/**/*.ts",
+        "table_tests/*.ts"
+    ],
+    "environments": ["node"]
+}

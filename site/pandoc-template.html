@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$"$if(dir)$ dir="$dir$"$endif$>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+  <meta name="dcterms.date" content="$date-meta$" />
+$endif$
+$if(keywords)$
+  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+$endif$
+$if(description-meta)$
+  <meta name="description" content="$description-meta$" />
+$endif$
+  <link rel="icon" href="/favicon.svg">
+  <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+  $--<style>
+  $--  $styles.html()$
+  $--</style>
+$for(css)$
+  <link rel="stylesheet" href="$css$" />
+$endfor$
+  <link rel="stylesheet" href="/lib/css/main.css">
+$if(math)$
+  <link rel="stylesheet" href="/lib/katex-v0.13.11/katex.css">
+  <script type="module" src="/lib/render-static-math.ts"></script>
+$endif$
+$for(header-includes)$
+  $header-includes$
+$endfor$
+</head>
+<body>
+<main>
+<nav id="top-bar">
+  <ul>
+    <li><a href="$base_url$">Lievis</a></li>
+    <li><a href="$base_url$about.html">About</a></li>
+    <li><a href="https://github.com/joelgibson/LieVis">GitHub</a></li>
+  </ul>
+</nav>
+<header>
+  <h1>$if(title)$$title$$else$Title here...$endif$</h1>
+</header>
+$for(include-before)$
+$include-before$
+$endfor$
+$if(date)$
+<p class="date">$date$</p>
+$endif$
+$if(toc)$
+<nav id="$idprefix$TOC" role="doc-toc">
+$if(toc-title)$
+<h2 id="$idprefix$toc-title">$toc-title$</h2>
+$endif$
+$table-of-contents$
+</nav>
+$endif$
+<article>
+$body$
+</article>
+$for(include-after)$
+$include-after$
+$endfor$
+<footer>
+  <p><a href="https://www.jgibson.id.au/">Joel Gibson</a>, 2021</p>
+</footer>
+</main>
+</body>
+</html>

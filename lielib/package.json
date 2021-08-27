@@ -1,0 +1,15 @@
+{
+  "name": "lielib",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.ts",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "intern"
+  },
+  "devDependencies": {
+    "intern": "^4.9.0"
+  }
+}

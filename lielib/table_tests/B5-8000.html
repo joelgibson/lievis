@@ -1,0 +1,1640 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
+    <link href="wm.css" type="text/css" rel="StyleSheet" />
+
+    <title>Weight Multiplicities</title>
+  </head>
+
+  <body>
+<p style="text-align:center">[<a href="index.html">Overview</a>]</p>
+    <h1>Weight Multiplicities</h1>
+<h2>Groups of type B5, degree bound 8000</h2>
+<p><strong>Diagram:</strong></p>
+<pre>
+1 < 2 - .. - 5
+</pre>
+<h3>Overview</h3>
+<table>
+<tr><th>Dimension</th><th>Highest weight</th><th>Characteristic</th></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>all</td></tr>
+<tr><td>10</td><td>[ 0, 0, 0, 0, 1 ]</td><td>2</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>not 2</td></tr>
+<tr><td>32</td><td>[ 1, 0, 0, 0, 0 ]</td><td>all</td></tr>
+<tr><td>44</td><td>[ 0, 0, 0, 1, 0 ]</td><td>2</td></tr>
+<tr><td>55</td><td>[ 0, 0, 0, 1, 0 ]</td><td>not 2</td></tr>
+<tr><td>64</td><td>[ 0, 0, 0, 0, 2 ]</td><td>11</td></tr>
+<tr><td>65</td><td>[ 0, 0, 0, 0, 2 ]</td><td>not 2, 11</td></tr>
+<tr><td>100</td><td>[ 0, 0, 1, 0, 0 ]</td><td>2</td></tr>
+<tr><td>164</td><td>[ 0, 1, 0, 0, 0 ]</td><td>2</td></tr>
+<tr><td>165</td><td>[ 0, 0, 1, 0, 0 ]</td><td>not 2</td></tr>
+<tr><td>264</td><td>[ 0, 0, 0, 0, 3 ]</td><td>13</td></tr>
+<tr><td>264</td><td>[ 0, 0, 0, 1, 1 ]</td><td>3</td></tr>
+<tr><td>275</td><td>[ 0, 0, 0, 0, 3 ]</td><td>not 2, 3, 13</td></tr>
+<tr><td>288</td><td>[ 1, 0, 0, 0, 1 ]</td><td>11</td></tr>
+<tr><td>320</td><td>[ 0, 0, 0, 1, 1 ]</td><td>2</td></tr>
+<tr><td>320</td><td>[ 1, 0, 0, 0, 1 ]</td><td>not 11</td></tr>
+<tr><td>330</td><td>[ 0, 1, 0, 0, 0 ]</td><td>not 2</td></tr>
+<tr><td>418</td><td>[ 0, 0, 0, 1, 1 ]</td><td>5</td></tr>
+<tr><td>429</td><td>[ 0, 0, 0, 1, 1 ]</td><td>not 2, 3, 5</td></tr>
+<tr><td>462</td><td>[ 2, 0, 0, 0, 0 ]</td><td>not 2</td></tr>
+<tr><td>670</td><td>[ 0, 0, 1, 0, 1 ]</td><td>2</td></tr>
+<tr><td>749</td><td>[ 0, 0, 0, 2, 0 ]</td><td>3</td></tr>
+<tr><td>870</td><td>[ 0, 0, 0, 0, 4 ]</td><td>5</td></tr>
+<tr><td>934</td><td>[ 0, 0, 0, 0, 4 ]</td><td>13</td></tr>
+<tr><td>935</td><td>[ 0, 0, 0, 0, 4 ]</td><td>not 2, 3, 5, 13</td></tr>
+<tr><td>1088</td><td>[ 1, 0, 0, 1, 0 ]</td><td>3</td></tr>
+<tr><td>1143</td><td>[ 0, 0, 0, 2, 0 ]</td><td>5</td></tr>
+<tr><td>1144</td><td>[ 0, 0, 0, 2, 0 ]</td><td>not 2, 3, 5</td></tr>
+<tr><td>1375</td><td>[ 0, 0, 1, 0, 1 ]</td><td>3</td></tr>
+<tr><td>1376</td><td>[ 1, 0, 0, 1, 0 ]</td><td>5</td></tr>
+<tr><td>1408</td><td>[ 0, 1, 0, 0, 1 ]</td><td>2</td></tr>
+<tr><td>1408</td><td>[ 1, 0, 0, 1, 0 ]</td><td>not 3, 5</td></tr>
+<tr><td>1430</td><td>[ 0, 0, 1, 0, 1 ]</td><td>not 2, 3</td></tr>
+<tr><td>1440</td><td>[ 1, 0, 0, 0, 2 ]</td><td>13</td></tr>
+<tr><td>1760</td><td>[ 1, 0, 0, 0, 2 ]</td><td>not 2, 13</td></tr>
+<tr><td>1760</td><td>[ 1, 1, 0, 0, 0 ]</td><td>5</td></tr>
+<tr><td>1961</td><td>[ 0, 0, 0, 1, 2 ]</td><td>11</td></tr>
+<tr><td>1970</td><td>[ 0, 0, 0, 1, 2 ]</td><td>13</td></tr>
+<tr><td>1991</td><td>[ 0, 0, 1, 1, 0 ]</td><td>3</td></tr>
+<tr><td>2025</td><td>[ 0, 0, 0, 1, 2 ]</td><td>not 2, 11, 13</td></tr>
+<tr><td>2112</td><td>[ 1, 0, 1, 0, 0 ]</td><td>7</td></tr>
+<tr><td>2442</td><td>[ 0, 0, 0, 0, 5 ]</td><td>17</td></tr>
+<tr><td>2541</td><td>[ 0, 1, 0, 0, 1 ]</td><td>5</td></tr>
+<tr><td>2695</td><td>[ 0, 0, 0, 1, 3 ]</td><td>5</td></tr>
+<tr><td>2708</td><td>[ 0, 0, 1, 1, 0 ]</td><td>2</td></tr>
+<tr><td>2717</td><td>[ 0, 0, 0, 0, 5 ]</td><td>not 2, 3, 5, 17</td></tr>
+<tr><td>2848</td><td>[ 3, 0, 0, 0, 0 ]</td><td>5</td></tr>
+<tr><td>3003</td><td>[ 0, 1, 0, 0, 1 ]</td><td>not 2, 5</td></tr>
+<tr><td>3124</td><td>[ 0, 1, 0, 1, 0 ]</td><td>2</td></tr>
+<tr><td>3200</td><td>[ 1, 0, 1, 0, 0 ]</td><td>2</td></tr>
+<tr><td>3488</td><td>[ 1, 0, 1, 0, 0 ]</td><td>3</td></tr>
+<tr><td>3520</td><td>[ 1, 0, 1, 0, 0 ]</td><td>not 2, 3, 7</td></tr>
+<tr><td>3828</td><td>[ 2, 0, 0, 0, 1 ]</td><td>3</td></tr>
+<tr><td>3960</td><td>[ 2, 0, 0, 0, 1 ]</td><td>7</td></tr>
+<tr><td>4036</td><td>[ 0, 0, 2, 0, 0 ]</td><td>3</td></tr>
+<tr><td>4169</td><td>[ 0, 0, 1, 0, 2 ]</td><td>5</td></tr>
+<tr><td>4192</td><td>[ 1, 1, 0, 0, 0 ]</td><td>3</td></tr>
+<tr><td>4192</td><td>[ 3, 0, 0, 0, 0 ]</td><td>7</td></tr>
+<tr><td>4224</td><td>[ 3, 0, 0, 0, 0 ]</td><td>not 2, 3, 5, 7</td></tr>
+<tr><td>4290</td><td>[ 2, 0, 0, 0, 1 ]</td><td>not 2, 3, 7</td></tr>
+<tr><td>4774</td><td>[ 0, 1, 1, 0, 0 ]</td><td>3</td></tr>
+<tr><td>4928</td><td>[ 1, 0, 0, 1, 1 ]</td><td>3</td></tr>
+<tr><td>4960</td><td>[ 1, 1, 0, 0, 0 ]</td><td>7</td></tr>
+<tr><td>5005</td><td>[ 0, 0, 1, 1, 0 ]</td><td>not 2, 3</td></tr>
+<tr><td>5248</td><td>[ 1, 1, 0, 0, 0 ]</td><td>2</td></tr>
+<tr><td>5280</td><td>[ 1, 0, 0, 0, 3 ]</td><td>5</td></tr>
+<tr><td>5280</td><td>[ 1, 1, 0, 0, 0 ]</td><td>not 2, 3, 5, 7</td></tr>
+<tr><td>6072</td><td>[ 0, 0, 0, 0, 6 ]</td><td>19</td></tr>
+<tr><td>6248</td><td>[ 0, 0, 0, 2, 1 ]</td><td>3</td></tr>
+<tr><td>6721</td><td>[ 0, 0, 2, 0, 0 ]</td><td>7</td></tr>
+<tr><td>6885</td><td>[ 0, 0, 0, 2, 2 ]</td><td>5</td></tr>
+<tr><td>6942</td><td>[ 0, 0, 0, 0, 6 ]</td><td>17</td></tr>
+<tr><td>6963</td><td>[ 0, 0, 1, 0, 2 ]</td><td>13</td></tr>
+<tr><td>7007</td><td>[ 0, 0, 0, 0, 6 ]</td><td>not 2, 3, 5, 17, 19</td></tr>
+<tr><td>7008</td><td>[ 1, 0, 0, 0, 3 ]</td><td>13</td></tr>
+<tr><td>7040</td><td>[ 1, 0, 0, 0, 3 ]</td><td>not 2, 3, 5, 13</td></tr>
+<tr><td>7128</td><td>[ 0, 0, 1, 0, 2 ]</td><td>not 2, 5, 13</td></tr>
+<tr><td>7150</td><td>[ 0, 0, 0, 2, 1 ]</td><td>not 2, 3</td></tr>
+<tr><td>7293</td><td>[ 0, 0, 0, 1, 3 ]</td><td>not 2, 3, 5</td></tr>
+<tr><td>7865</td><td>[ 0, 0, 2, 0, 0 ]</td><td>not 2, 3, 7</td></tr>
+</table><p></p>
+<h3>The characters</h3>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong> all<br />
+<strong>Dimension:</strong> 1</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>1</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 1 ]<br />
+<strong>Characteristic:</strong> 2<br />
+<strong>Dimension:</strong> 10</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>1</td><td>10</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 1 ]<br />
+<strong>Characteristic:</strong>  not 2<br />
+<strong>Dimension:</strong> 11</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>1</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>1</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong> all<br />
+<strong>Dimension:</strong> 32</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 1, 0 ]<br />
+<strong>Characteristic:</strong> 2<br />
+<strong>Dimension:</strong> 44</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>4</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 1, 0 ]<br />
+<strong>Characteristic:</strong>  not 2<br />
+<strong>Dimension:</strong> 55</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>1</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>5</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 2 ]<br />
+<strong>Characteristic:</strong> 11<br />
+<strong>Dimension:</strong> 64</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>1</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>1</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>4</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 2 ]<br />
+<strong>Characteristic:</strong>  not 2,11<br />
+<strong>Dimension:</strong> 65</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>1</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>1</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>5</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 1, 0, 0 ]<br />
+<strong>Characteristic:</strong> 2<br />
+<strong>Dimension:</strong> 100</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>2</td><td>10</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 1, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong> 2<br />
+<strong>Dimension:</strong> 164</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>2</td><td>40</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>4</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 1, 0, 0 ]<br />
+<strong>Characteristic:</strong>  not 2<br />
+<strong>Dimension:</strong> 165</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>4</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>5</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 3 ]<br />
+<strong>Characteristic:</strong> 13<br />
+<strong>Dimension:</strong> 264</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>1</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>1</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>4</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>4</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 1, 1 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 264</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>1</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>5</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>4</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 3 ]<br />
+<strong>Characteristic:</strong>  not 2,3,13<br />
+<strong>Dimension:</strong> 275</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>1</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>1</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>5</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>5</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 0, 1 ]<br />
+<strong>Characteristic:</strong> 11<br />
+<strong>Dimension:</strong> 288</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>1</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>4</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 1, 1 ]<br />
+<strong>Characteristic:</strong> 2<br />
+<strong>Dimension:</strong> 320</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>2</td><td>80</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>8</td><td>10</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 0, 1 ]<br />
+<strong>Characteristic:</strong>  not 11<br />
+<strong>Dimension:</strong> 320</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>1</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>5</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 1, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong>  not 2<br />
+<strong>Dimension:</strong> 330</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>3</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>4</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>10</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 1, 1 ]<br />
+<strong>Characteristic:</strong> 5<br />
+<strong>Dimension:</strong> 418</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>2</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>1</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>2</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>8</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>8</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 1, 1 ]<br />
+<strong>Characteristic:</strong>  not 2,3,5<br />
+<strong>Dimension:</strong> 429</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>2</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>1</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>2</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>9</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>9</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 2, 0, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong>  not 2<br />
+<strong>Dimension:</strong> 462</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>2</td><td>80</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>3</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>6</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>10</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 1, 0, 1 ]<br />
+<strong>Characteristic:</strong> 2<br />
+<strong>Dimension:</strong> 670</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>2</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>2</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>6</td><td>40</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>10</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 2, 0 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 749</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>3</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>4</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>3</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>9</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 4 ]<br />
+<strong>Characteristic:</strong> 5<br />
+<strong>Dimension:</strong> 870</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>41</td><td>[ 0, 0, 0, 0, 4 ]</td><td>1</td><td>10</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>1</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>4</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>4</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>4</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>10</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 4 ]<br />
+<strong>Characteristic:</strong> 13<br />
+<strong>Dimension:</strong> 934</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>41</td><td>[ 0, 0, 0, 0, 4 ]</td><td>1</td><td>10</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>1</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>5</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>5</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>5</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>14</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 4 ]<br />
+<strong>Characteristic:</strong>  not 2,3,5,13<br />
+<strong>Dimension:</strong> 935</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>41</td><td>[ 0, 0, 0, 0, 4 ]</td><td>1</td><td>10</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>1</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>5</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>5</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>5</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>15</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 1, 0 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 1088</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>3</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>9</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 2, 0 ]<br />
+<strong>Characteristic:</strong> 5<br />
+<strong>Dimension:</strong> 1143</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>2</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>2</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>4</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>8</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>8</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>23</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 2, 0 ]<br />
+<strong>Characteristic:</strong>  not 2,3,5<br />
+<strong>Dimension:</strong> 1144</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>2</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>2</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>4</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>8</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>8</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>24</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 1, 0, 1 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 1375</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>4</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>10</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>11</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>25</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 1, 0 ]<br />
+<strong>Characteristic:</strong> 5<br />
+<strong>Dimension:</strong> 1376</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>4</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>13</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 1, 0, 0, 1 ]<br />
+<strong>Characteristic:</strong> 2<br />
+<strong>Dimension:</strong> 1408</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>4</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>2</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>8</td><td>80</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>16</td><td>10</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 1, 0 ]<br />
+<strong>Characteristic:</strong>  not 3,5<br />
+<strong>Dimension:</strong> 1408</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>4</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>14</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 1, 0, 1 ]<br />
+<strong>Characteristic:</strong>  not 2,3<br />
+<strong>Dimension:</strong> 1430</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>4</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>11</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>12</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>30</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 0, 2 ]<br />
+<strong>Characteristic:</strong> 13<br />
+<strong>Dimension:</strong> 1440</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>36</td><td>[ 1, 0, 0, 0, 2 ]</td><td>1</td><td>160</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>4</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>10</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 0, 2 ]<br />
+<strong>Characteristic:</strong>  not 2,13<br />
+<strong>Dimension:</strong> 1760</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>36</td><td>[ 1, 0, 0, 0, 2 ]</td><td>1</td><td>160</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>5</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>15</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 1, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong> 5<br />
+<strong>Dimension:</strong> 1760</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>44</td><td>[ 1, 1, 0, 0, 0 ]</td><td>1</td><td>160</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>2</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>3</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>5</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 1, 2 ]<br />
+<strong>Characteristic:</strong> 11<br />
+<strong>Dimension:</strong> 1961</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>2</td><td>240</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>1</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>2</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>8</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>12</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>12</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>31</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 1, 2 ]<br />
+<strong>Characteristic:</strong> 13<br />
+<strong>Dimension:</strong> 1970</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>2</td><td>240</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>1</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>2</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>9</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>12</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>12</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>30</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 1, 1, 0 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 1991</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>4</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>3</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>4</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>12</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>9</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 1, 2 ]<br />
+<strong>Characteristic:</strong>  not 2,11,13<br />
+<strong>Dimension:</strong> 2025</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>2</td><td>240</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>1</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>2</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>9</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>13</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>13</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>35</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 1, 0, 0 ]<br />
+<strong>Characteristic:</strong> 7<br />
+<strong>Dimension:</strong> 2112</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>2</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>5</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>11</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 5 ]<br />
+<strong>Characteristic:</strong> 17<br />
+<strong>Dimension:</strong> 2442</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>51</td><td>[ 0, 0, 0, 0, 5 ]</td><td>1</td><td>10</td></tr>
+<tr><td>49</td><td>[ 0, 0, 0, 1, 3 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 0, 0, 2, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>41</td><td>[ 0, 0, 0, 0, 4 ]</td><td>1</td><td>10</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>4</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>4</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>4</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>4</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>4</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>10</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>10</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 1, 0, 0, 1 ]<br />
+<strong>Characteristic:</strong> 5<br />
+<strong>Dimension:</strong> 2541</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>3</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>3</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>9</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>4</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>10</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>22</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>25</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 1, 3 ]<br />
+<strong>Characteristic:</strong> 5<br />
+<strong>Dimension:</strong> 2695</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>49</td><td>[ 0, 0, 0, 1, 3 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 0, 0, 2, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>41</td><td>[ 0, 0, 0, 0, 4 ]</td><td>1</td><td>10</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>5</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>5</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>5</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>5</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>14</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>13</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 1, 1, 0 ]<br />
+<strong>Characteristic:</strong> 2<br />
+<strong>Dimension:</strong> 2708</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>2</td><td>320</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>4</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>6</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>12</td><td>80</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>26</td><td>10</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 5 ]<br />
+<strong>Characteristic:</strong>  not 2,3,5,17<br />
+<strong>Dimension:</strong> 2717</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>51</td><td>[ 0, 0, 0, 0, 5 ]</td><td>1</td><td>10</td></tr>
+<tr><td>49</td><td>[ 0, 0, 0, 1, 3 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 0, 0, 2, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>41</td><td>[ 0, 0, 0, 0, 4 ]</td><td>1</td><td>10</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>5</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>5</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>5</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>5</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>15</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>15</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 3, 0, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong> 5<br />
+<strong>Dimension:</strong> 2848</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>46</td><td>[ 3, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>44</td><td>[ 1, 1, 0, 0, 0 ]</td><td>1</td><td>160</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>2</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>3</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>5</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>8</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 1, 0, 0, 1 ]<br />
+<strong>Characteristic:</strong>  not 2,5<br />
+<strong>Dimension:</strong> 3003</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>1</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>4</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>4</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>3</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>11</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>4</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>13</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>28</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>35</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 1, 0, 1, 0 ]<br />
+<strong>Characteristic:</strong> 2<br />
+<strong>Dimension:</strong> 3124</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>47</td><td>[ 0, 1, 0, 1, 0 ]</td><td>1</td><td>480</td></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>2</td><td>160</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>2</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>4</td><td>240</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>8</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>6</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>14</td><td>40</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>24</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 1, 0, 0 ]<br />
+<strong>Characteristic:</strong> 2<br />
+<strong>Dimension:</strong> 3200</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>3</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>8</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>20</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 1, 0, 0 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 3488</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>3</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>9</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>24</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 1, 0, 0 ]<br />
+<strong>Characteristic:</strong>  not 2,3,7<br />
+<strong>Dimension:</strong> 3520</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>3</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>9</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>25</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 2, 0, 0, 0, 1 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 3828</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>1</td><td>160</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>2</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>4</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>8</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>3</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>10</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>6</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>18</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>24</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>40</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 2, 0, 0, 0, 1 ]<br />
+<strong>Characteristic:</strong> 7<br />
+<strong>Dimension:</strong> 3960</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>1</td><td>160</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>2</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>5</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>8</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>3</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>11</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>6</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>18</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>26</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>40</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 2, 0, 0 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 4036</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>49</td><td>[ 0, 0, 2, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 1, 0, 1, 0 ]</td><td>1</td><td>480</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>1</td><td>160</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>3</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>4</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>3</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>4</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>9</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>12</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>9</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>24</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 1, 0, 2 ]<br />
+<strong>Characteristic:</strong> 5<br />
+<strong>Dimension:</strong> 4169</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>2</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>2</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>3</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>4</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>7</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>10</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>7</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>10</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>22</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>23</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 1, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 4192</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>44</td><td>[ 1, 1, 0, 0, 0 ]</td><td>1</td><td>160</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>2</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>4</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>9</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>21</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 3, 0, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong> 7<br />
+<strong>Dimension:</strong> 4192</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>46</td><td>[ 3, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>44</td><td>[ 1, 1, 0, 0, 0 ]</td><td>1</td><td>160</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>2</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>4</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>9</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>20</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 3, 0, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong>  not 2,3,5,7<br />
+<strong>Dimension:</strong> 4224</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>46</td><td>[ 3, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>44</td><td>[ 1, 1, 0, 0, 0 ]</td><td>1</td><td>160</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>2</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>4</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>9</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>21</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 2, 0, 0, 0, 1 ]<br />
+<strong>Characteristic:</strong>  not 2,3,7<br />
+<strong>Dimension:</strong> 4290</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>1</td><td>160</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>2</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>5</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>3</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>9</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>12</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>6</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>21</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>30</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>50</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 1, 1, 0, 0 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 4774</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>53</td><td>[ 0, 1, 1, 0, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>49</td><td>[ 2, 0, 0, 1, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>49</td><td>[ 0, 0, 2, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 1, 0, 1, 0 ]</td><td>1</td><td>480</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>2</td><td>240</td></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>1</td><td>160</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>3</td><td>320</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>2</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>4</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>3</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>4</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>6</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>3</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>4</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>9</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>6</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 1, 1 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 4928</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>44</td><td>[ 1, 0, 0, 1, 1 ]</td><td>1</td><td>640</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>36</td><td>[ 1, 0, 0, 0, 2 ]</td><td>3</td><td>160</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>4</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>10</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>19</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 1, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong> 7<br />
+<strong>Dimension:</strong> 4960</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>44</td><td>[ 1, 1, 0, 0, 0 ]</td><td>1</td><td>160</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>2</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>5</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>11</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>25</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 1, 1, 0 ]<br />
+<strong>Characteristic:</strong>  not 2,3<br />
+<strong>Dimension:</strong> 5005</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>2</td><td>320</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>2</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>5</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>7</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>16</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>7</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>17</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>41</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>45</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 1, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong> 2<br />
+<strong>Dimension:</strong> 5248</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>44</td><td>[ 1, 1, 0, 0, 0 ]</td><td>1</td><td>160</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>2</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>5</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>12</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>29</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 0, 3 ]<br />
+<strong>Characteristic:</strong> 5<br />
+<strong>Dimension:</strong> 5280</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>46</td><td>[ 1, 0, 0, 0, 3 ]</td><td>1</td><td>160</td></tr>
+<tr><td>44</td><td>[ 1, 0, 0, 1, 1 ]</td><td>1</td><td>640</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>36</td><td>[ 1, 0, 0, 0, 2 ]</td><td>4</td><td>160</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>4</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>10</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>20</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 1, 0, 0, 0 ]<br />
+<strong>Characteristic:</strong>  not 2,3,5,7<br />
+<strong>Dimension:</strong> 5280</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>44</td><td>[ 1, 1, 0, 0, 0 ]</td><td>1</td><td>160</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>2</td><td>320</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>5</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>12</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>30</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 6 ]<br />
+<strong>Characteristic:</strong> 19<br />
+<strong>Dimension:</strong> 6072</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>61</td><td>[ 0, 0, 0, 0, 6 ]</td><td>1</td><td>10</td></tr>
+<tr><td>59</td><td>[ 0, 0, 0, 1, 4 ]</td><td>1</td><td>80</td></tr>
+<tr><td>57</td><td>[ 0, 0, 0, 2, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>55</td><td>[ 0, 0, 1, 0, 3 ]</td><td>1</td><td>240</td></tr>
+<tr><td>55</td><td>[ 0, 0, 0, 3, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>53</td><td>[ 0, 0, 1, 1, 1 ]</td><td>1</td><td>480</td></tr>
+<tr><td>51</td><td>[ 0, 0, 0, 0, 5 ]</td><td>1</td><td>10</td></tr>
+<tr><td>49</td><td>[ 0, 1, 0, 0, 2 ]</td><td>1</td><td>320</td></tr>
+<tr><td>49</td><td>[ 0, 0, 2, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>49</td><td>[ 0, 0, 0, 1, 3 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 1, 0, 1, 0 ]</td><td>1</td><td>480</td></tr>
+<tr><td>47</td><td>[ 0, 0, 0, 2, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>1</td><td>160</td></tr>
+<tr><td>41</td><td>[ 0, 0, 0, 0, 4 ]</td><td>4</td><td>10</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>4</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>4</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>4</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>4</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>4</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>4</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>4</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>10</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>10</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>10</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>20</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 2, 1 ]<br />
+<strong>Characteristic:</strong> 3<br />
+<strong>Dimension:</strong> 6248</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>47</td><td>[ 0, 0, 0, 2, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>2</td><td>240</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>3</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>2</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>3</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>4</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>3</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>4</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>11</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>15</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>11</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>14</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>35</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>30</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 2, 0, 0 ]<br />
+<strong>Characteristic:</strong> 7<br />
+<strong>Dimension:</strong> 6721</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>49</td><td>[ 0, 0, 2, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 1, 0, 1, 0 ]</td><td>1</td><td>480</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>2</td><td>160</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>2</td><td>320</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>2</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>5</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>5</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>11</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>5</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>12</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>11</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>22</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>25</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>41</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 2, 2 ]<br />
+<strong>Characteristic:</strong> 5<br />
+<strong>Dimension:</strong> 6885</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>57</td><td>[ 0, 0, 0, 2, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>55</td><td>[ 0, 0, 1, 0, 3 ]</td><td>1</td><td>240</td></tr>
+<tr><td>55</td><td>[ 0, 0, 0, 3, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>53</td><td>[ 0, 0, 1, 1, 1 ]</td><td>1</td><td>480</td></tr>
+<tr><td>49</td><td>[ 0, 1, 0, 0, 2 ]</td><td>1</td><td>320</td></tr>
+<tr><td>49</td><td>[ 0, 0, 2, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>49</td><td>[ 0, 0, 0, 1, 3 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 1, 0, 1, 0 ]</td><td>1</td><td>480</td></tr>
+<tr><td>47</td><td>[ 0, 0, 0, 2, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>1</td><td>160</td></tr>
+<tr><td>41</td><td>[ 0, 0, 0, 0, 4 ]</td><td>4</td><td>10</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>5</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>5</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>5</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>5</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>5</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>15</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>15</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>14</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>33</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 6 ]<br />
+<strong>Characteristic:</strong> 17<br />
+<strong>Dimension:</strong> 6942</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>61</td><td>[ 0, 0, 0, 0, 6 ]</td><td>1</td><td>10</td></tr>
+<tr><td>59</td><td>[ 0, 0, 0, 1, 4 ]</td><td>1</td><td>80</td></tr>
+<tr><td>57</td><td>[ 0, 0, 0, 2, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>55</td><td>[ 0, 0, 1, 0, 3 ]</td><td>1</td><td>240</td></tr>
+<tr><td>55</td><td>[ 0, 0, 0, 3, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>53</td><td>[ 0, 0, 1, 1, 1 ]</td><td>1</td><td>480</td></tr>
+<tr><td>51</td><td>[ 0, 0, 0, 0, 5 ]</td><td>1</td><td>10</td></tr>
+<tr><td>49</td><td>[ 0, 1, 0, 0, 2 ]</td><td>1</td><td>320</td></tr>
+<tr><td>49</td><td>[ 0, 0, 2, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>49</td><td>[ 0, 0, 0, 1, 3 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 1, 0, 1, 0 ]</td><td>1</td><td>480</td></tr>
+<tr><td>47</td><td>[ 0, 0, 0, 2, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>1</td><td>160</td></tr>
+<tr><td>41</td><td>[ 0, 0, 0, 0, 4 ]</td><td>5</td><td>10</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>5</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>5</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>5</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>5</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>5</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>14</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>14</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>14</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>30</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 1, 0, 2 ]<br />
+<strong>Characteristic:</strong> 13<br />
+<strong>Dimension:</strong> 6963</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>3</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>3</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>6</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>4</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>6</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>11</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>20</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>12</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>21</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>48</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>51</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 0, 6 ]<br />
+<strong>Characteristic:</strong>  not 2,3,5,17,19<br />
+<strong>Dimension:</strong> 7007</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>61</td><td>[ 0, 0, 0, 0, 6 ]</td><td>1</td><td>10</td></tr>
+<tr><td>59</td><td>[ 0, 0, 0, 1, 4 ]</td><td>1</td><td>80</td></tr>
+<tr><td>57</td><td>[ 0, 0, 0, 2, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>55</td><td>[ 0, 0, 0, 3, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>55</td><td>[ 0, 0, 1, 0, 3 ]</td><td>1</td><td>240</td></tr>
+<tr><td>53</td><td>[ 0, 0, 1, 1, 1 ]</td><td>1</td><td>480</td></tr>
+<tr><td>51</td><td>[ 0, 0, 0, 0, 5 ]</td><td>1</td><td>10</td></tr>
+<tr><td>49</td><td>[ 0, 0, 2, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>49</td><td>[ 0, 1, 0, 0, 2 ]</td><td>1</td><td>320</td></tr>
+<tr><td>49</td><td>[ 0, 0, 0, 1, 3 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 1, 0, 1, 0 ]</td><td>1</td><td>480</td></tr>
+<tr><td>47</td><td>[ 0, 0, 0, 2, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>1</td><td>160</td></tr>
+<tr><td>41</td><td>[ 0, 0, 0, 0, 4 ]</td><td>5</td><td>10</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>1</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>5</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>5</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>5</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>1</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>5</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>5</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>15</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>15</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>15</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>35</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 0, 3 ]<br />
+<strong>Characteristic:</strong> 13<br />
+<strong>Dimension:</strong> 7008</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>46</td><td>[ 1, 0, 0, 0, 3 ]</td><td>1</td><td>160</td></tr>
+<tr><td>44</td><td>[ 1, 0, 0, 1, 1 ]</td><td>1</td><td>640</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>36</td><td>[ 1, 0, 0, 0, 2 ]</td><td>5</td><td>160</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>5</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>15</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>34</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 1, 0, 0, 0, 3 ]<br />
+<strong>Characteristic:</strong>  not 2,3,5,13<br />
+<strong>Dimension:</strong> 7040</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>46</td><td>[ 1, 0, 0, 0, 3 ]</td><td>1</td><td>160</td></tr>
+<tr><td>44</td><td>[ 1, 0, 0, 1, 1 ]</td><td>1</td><td>640</td></tr>
+<tr><td>40</td><td>[ 1, 0, 1, 0, 0 ]</td><td>1</td><td>320</td></tr>
+<tr><td>36</td><td>[ 1, 0, 0, 0, 2 ]</td><td>5</td><td>160</td></tr>
+<tr><td>34</td><td>[ 1, 0, 0, 1, 0 ]</td><td>5</td><td>320</td></tr>
+<tr><td>26</td><td>[ 1, 0, 0, 0, 1 ]</td><td>15</td><td>160</td></tr>
+<tr><td>16</td><td>[ 1, 0, 0, 0, 0 ]</td><td>35</td><td>32</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 1, 0, 2 ]<br />
+<strong>Characteristic:</strong>  not 2,5,13<br />
+<strong>Dimension:</strong> 7128</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>3</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>1</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>3</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>6</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>4</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>6</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>11</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>21</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>12</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>22</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>52</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>56</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 2, 1 ]<br />
+<strong>Characteristic:</strong>  not 2,3<br />
+<strong>Dimension:</strong> 7150</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>47</td><td>[ 0, 0, 0, 2, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>1</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>2</td><td>240</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>3</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>1</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>2</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>3</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>5</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>4</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>5</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>12</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>19</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>12</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>19</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>50</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>50</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 0, 1, 3 ]<br />
+<strong>Characteristic:</strong>  not 2,3,5<br />
+<strong>Dimension:</strong> 7293</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>49</td><td>[ 0, 0, 0, 1, 3 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 0, 0, 2, 1 ]</td><td>1</td><td>80</td></tr>
+<tr><td>45</td><td>[ 0, 0, 1, 0, 2 ]</td><td>2</td><td>240</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>2</td><td>240</td></tr>
+<tr><td>41</td><td>[ 0, 0, 0, 0, 4 ]</td><td>1</td><td>10</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>3</td><td>320</td></tr>
+<tr><td>39</td><td>[ 0, 0, 0, 1, 2 ]</td><td>2</td><td>80</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>2</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>3</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>4</td><td>32</td></tr>
+<tr><td>31</td><td>[ 0, 0, 0, 0, 3 ]</td><td>9</td><td>10</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>4</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>13</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>17</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>13</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>17</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>45</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>45</td><td>1</td></tr>
+</table>
+<hr />
+<p><strong>Highest weight:</strong> [ 0, 0, 2, 0, 0 ]<br />
+<strong>Characteristic:</strong>  not 2,3,7<br />
+<strong>Dimension:</strong> 7865</p>
+<table class="wmtab" style="text-align:right;">
+<tr><th>Level&nbsp;</th>
+<th>&nbsp;dominant weight&nbsp;</th>
+<th>&nbsp;weight multiplicity&nbsp;</th>
+<th>&nbsp;length of W-orbit&nbsp;</th></tr>
+<tr><td>49</td><td>[ 0, 0, 2, 0, 0 ]</td><td>1</td><td>80</td></tr>
+<tr><td>47</td><td>[ 0, 1, 0, 1, 0 ]</td><td>1</td><td>480</td></tr>
+<tr><td>43</td><td>[ 0, 0, 1, 1, 0 ]</td><td>1</td><td>240</td></tr>
+<tr><td>41</td><td>[ 2, 0, 0, 0, 1 ]</td><td>2</td><td>160</td></tr>
+<tr><td>39</td><td>[ 0, 1, 0, 0, 1 ]</td><td>2</td><td>320</td></tr>
+<tr><td>37</td><td>[ 0, 0, 0, 2, 0 ]</td><td>3</td><td>40</td></tr>
+<tr><td>35</td><td>[ 0, 0, 1, 0, 1 ]</td><td>6</td><td>240</td></tr>
+<tr><td>31</td><td>[ 2, 0, 0, 0, 0 ]</td><td>5</td><td>32</td></tr>
+<tr><td>29</td><td>[ 0, 1, 0, 0, 0 ]</td><td>13</td><td>80</td></tr>
+<tr><td>29</td><td>[ 0, 0, 0, 1, 1 ]</td><td>6</td><td>80</td></tr>
+<tr><td>25</td><td>[ 0, 0, 1, 0, 0 ]</td><td>14</td><td>80</td></tr>
+<tr><td>21</td><td>[ 0, 0, 0, 0, 2 ]</td><td>15</td><td>10</td></tr>
+<tr><td>19</td><td>[ 0, 0, 0, 1, 0 ]</td><td>30</td><td>40</td></tr>
+<tr><td>11</td><td>[ 0, 0, 0, 0, 1 ]</td><td>33</td><td>10</td></tr>
+<tr><td>1</td><td>[ 0, 0, 0, 0, 0 ]</td><td>65</td><td>1</td></tr>
+</table>
+
+</body>
+</html>
