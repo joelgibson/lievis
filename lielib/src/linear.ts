@@ -1102,6 +1102,30 @@ export namespace mat {
         // A is det * detU.
         return {adj: mat.multMat(B, U), det: (detU > 0) ? det : 0 - det}
     }
+
+    /** Calculate the Cholesky decomposition of a positive-definite symmetric matrix, M = LL^T,
+     * where L is lower triangular.
+     */
+    export function cholesky(A: Mat): Mat {
+        if (!isSquare(A))
+            throw new Error("Matrix must be square to calculate Cholesky decomposition.")
+
+        // Calculate column-by-column using https://en.wikipedia.org/wiki/Cholesky_decomposition#The_Cholesky%E2%80%93Banachiewicz_and_Cholesky%E2%80%93Crout_algorithms
+        let L = mat.zero(A.nrows, A.ncols)
+        for (let i = 0; i < A.nrows; i++) {
+            for (let j = 0; j <= i; j++) {
+                let sum = 0
+                for (let k = 0; k < j; k++)
+                    sum += L.get(i, k) * L.get(j, k)
+
+                L.data[L.ncols * i + j] = (i == j)
+                    ? Math.sqrt(A.get(i, i) - sum)
+                    : (1 / L.get(j, j)) * (A.get(i, j) - sum)
+            }
+        }
+
+        return L
+    }
 }
 
 /** These functions all overwrite their first argument. The amount they overwrite is

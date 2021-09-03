@@ -101,6 +101,8 @@ header h1, article h1, article h2, article h3, article h4, article h5, article h
 article ul { list-style-type: disc; list-style-position: outside; margin-left: 2rem; }
 article ol { list-style-type: decimal; list-style-position: outside; margin-left: 2rem; }
 
+article blockquote { margin-left: 2em; font-style: italic;}
+
 /** The equations have a habit of overflowing the viewport on mobile. */
 article .math-display { overflow: auto; }
 
