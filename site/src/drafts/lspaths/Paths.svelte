@@ -2,31 +2,22 @@
     import { aff, mat, cartan, rtsys, draw, rt2d, lspath } from 'lielib'
     import Rank2Background from './Rank2Background.svelte'
     import InteractiveMap from '../../rank2reps/InteractiveMap.svelte'
+    import Latex from '$lib/components/Latex.svelte'
 
-    let cartanMat = cartan.cartanMat('G', 2)
-    let rs = rtsys.createRootSystem(cartanMat)
+    let typeName: 'A' | 'B' | 'C' | 'G' = 'A'
+    $: cartanMat = cartan.cartanMat(typeName, 2)
+    $: rs = rtsys.createRootSystem(cartanMat)
     let userPort = {width: 0, height: 0, aff: aff.Aff2.id}
-    let proj = mat.transpose(mat.cholesky([mat.transpose(mat.inverse(cartanMat)), cartan.symmetrise(cartanMat), mat.inverse(cartanMat)].reduce(mat.multMat)))
-    let sect = mat.inverse(proj)
+    $: proj = mat.transpose(mat.cholesky([mat.transpose(mat.inverse(cartanMat)), cartan.symmetrise(cartanMat), mat.inverse(cartanMat)].reduce(mat.multMat)))
+    $: sect = mat.inverse(proj)
     let D = new draw.NewCoords(draw.viewPort(0, 0, 0, 0), aff.Aff2.id)
     $: D = new draw.NewCoords(
         draw.viewPort(0, 0, userPort.width, userPort.height),
         aff.Aff2.fromLinear(proj, sect).then(userPort.aff),
     )
 
-    const INIT_PATH =  [[0, 0],  [10, 1]]
+    const INIT_PATH =  [[0, 0],  [1, 0]]
     let path = INIT_PATH
-    // let f1path = lspath.f(rs, path, 1)
-    // let f0path = lspath.f(rs, path, 0)
-    // let f0f0path = lspath.f(rs, path, 0)
-    // let f1f0f0path = lspath.f(rs, f0f0path, 1)
-    // let f1f1f0f0path = lspath.f(rs, f1f0f0path, 1)
-    // let f0f1path = lspath.f(rs, f1path, 0)
-    // let f1f1path = lspath.f(rs, f1path, 1)
-    // let f0f1f1path = lspath.f(rs, f1f1path, 0)
-    // let f0f0f1f1path = lspath.f(rs, f0f1f1path, 0)
-    // console.log('f1f1f0f0', f1f1f0f0path)
-    // console.log(lspath.f(rs, f1path2, 1))
 
     function reset() {
         path = INIT_PATH
@@ -61,12 +52,27 @@
         <path d={D.path(f0f1f1path)} stroke-width="3" stroke="orange" fill="none"/>
         <path d={D.path(f0f0f1f1path)} stroke-width="3" stroke="purple" fill="none"/> -->
     </g>
+    <div slot="overlay">
+        {#each rs.posRoots.slice(0, 2) as simpRoot, i}
+            <div style={D.absPosition(simpRoot.wt, 'vector')}>
+                <Latex markup={`\\alpha_${i+1}`} />
+            </div>
+        {/each}
+    </div>
     <div slot="controls">
         <table>
             <tr>
+                <select bind:value={typeName}>
+                    <option value="A">A2</option>
+                    <option value="B">B2</option>
+                    <option value="C">C2</option>
+                    <option value="G">G2</option>
+                </select>
+            </tr>
+            <tr>
                 <button type="button" on:click={reset}>Reset</button>
-                <button type="button" on:click={() => f(0)}>f<sub>0</sub></button>
-                <button type="button" on:click={() => f(1)}>f<sub>1</sub></button>
+                <button type="button" on:click={() => f(0)}>f<sub>1</sub></button>
+                <button type="button" on:click={() => f(1)}>f<sub>2</sub></button>
             </tr>
             <!-- <tr>
                 <td><label for="root-system">Root system:</label></td>

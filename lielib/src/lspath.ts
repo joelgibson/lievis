@@ -59,29 +59,75 @@ export function rebase(path: number[][]): number[][] {
     return path.map(pt => vec.sub(pt, path[0]))
 }
 
+/** Remove adjacent points which are sufficiently close together. */
+export function removeRepeated(path: number[][]): number[][] {
+    const EPS = 1e-4
+    let result: number[][] = [path[0]]
+
+    for (let i = 1; i < path.length; i++)
+        if (vec.dist(result[result.length - 1], path[i]) > EPS)
+            result.push(path[i])
+
+    return result
+}
+
+/** Remove points which appear as a convex combination of adjacent points. */
+export function removeRedundant(path: number[][]): number[][] {
+    const EPS = 1e-4
+    let result: number[][] = []
+
+    for (let i = 0; i < path.length; i++) {
+        result.push(path[i])
+        if (result.length < 3)
+            continue
+
+        // [a, b, c] are colinear if the unit vector a->b is approx the same as the unit vector b->c.
+        let a = result[result.length - 3]
+        let b = result[result.length - 2]
+        let c = result[result.length - 1]
+        let ab = vec.scaleToNorm(vec.sub(b, a), 1)
+        let bc = vec.scaleToNorm(vec.sub(c, b), 1)
+        if (vec.dist(ab, bc) < EPS)
+            result.splice(result.length-2, 1)
+    }
+
+    return result
+}
+
+/** Round points which are close to integers. */
+export function roundNearIntegralPoints(path: number[][]): number[][] {
+    const EPS = 1e-4
+    for (let i = 0; i < path.length; i++) {
+        for (let j = 0; j < path[i].length; j++) {
+            let x = path[i][j]
+            let rx = Math.round(x)
+            if (Math.abs(x - rx) < EPS)
+                path[i][j] = rx
+        }
+    }
+
+    return path
+}
+
+/** Concatenate multiple paths starting at the origin, and simplify them. */
 export function concat(...paths: number[][][]): number[][] {
     // Ensure all paths start with the origin.
     for (let k = 0; k < paths.length; k++)
         if (paths[k].length == 0 || !vec.isZero(paths[k][0]))
             throw new Error("All paths must contain at least one point, and start with the origin")
 
-    let result: number[][] = [paths[0][0]]
+    let base = paths[0][0]
+    let result: number[][] = []
     for (let k = 0; k < paths.length; k++) {
-        let base = result[result.length - 1]
-        for (let i = 0; i < paths[k].length; i++) {
-            let pt = vec.add(base, paths[k][i])
-            if (!vec.equal(pt, result[result.length - 1]))
-                result.push(pt)
-        }
+        for (let i = 0; i < paths[k].length; i++)
+            result.push(vec.add(base, paths[k][i]))
+
+        base = result[result.length - 1]
     }
 
-    // Try to correct numbers that are very close to integers
-    const EPS = 1e-4
-    for (let i = 0; i < result.length; i++)
-        for (let j = 0; j < result[i].length; j++)
-            if (Math.abs(result[i][j] - Math.round(result[i][j])) < EPS)
-                result[i][j] = Math.round(result[i][j])
-
+    result = removeRepeated(result)
+    result = removeRedundant(result)
+    result = roundNearIntegralPoints(result)
     return result
 }
 

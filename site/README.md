@@ -26,6 +26,11 @@ The build options (minification and so on) can be edited in `vite.config.js`, fo
 When I build the site I mount it to the subdirectory `/lievis/` at my website: <https://www.jgibson.id.au/lievis/>. This subdirectory can be changed by modifying the `base_url` file, and re-running the build process.
 
 
+# TODO
+
+Make root systems also store all roots, not just positive roots.
+
+
 
 # Technical internals
 

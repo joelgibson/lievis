@@ -21,10 +21,6 @@ or to run tests only from one file, something like
 They use the [Intern](https://theintern.io/) testing library, with [Chai](https://www.chaijs.com/) as an assertion library.
 
 
-## Running scripts from the command line
-
-
-
 ## Benchmarking
 
 This looks like a good article on how to actually get down to the guts of V8 somewhat: <https://mrale.ph/blog/2018/02/03/maybe-you-dont-need-rust-to-speed-up-your-js.html>.
