@@ -16,7 +16,7 @@
         aff.Aff2.fromLinear(proj, sect).then(userPort.aff),
     )
 
-    const INIT_PATH =  [[0, 0],  [1, 0]]
+    const INIT_PATH =  [[0, 0],  [2, 0], [2, 1]]
     let path = INIT_PATH
 
     function reset() {

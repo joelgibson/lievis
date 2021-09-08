@@ -134,6 +134,9 @@ export function concat(...paths: number[][][]): number[][] {
 export function f(rs: rtsys.IRootSystem, path: number[][], s: number): null | number[][] {
     assertPathNormalised(path)
 
+    // We are following "A Littlewood-Richardson rule for symmetrizable Kac-Moody algebras", Littelmann, 1994.
+    // The description in "Paths and Root Operators in Representation Theory" by Littelmann, 1995, is slightly different.
+
     // First we need to find the maximal integer Q attained by the sth coordinate of the path, and the point along
     // the path at which Q is first attained. Since we are evaluating a covector on a piecewise-linear path, the
     // global minimum must be at a corner point. Since all paths start with the origin, Q <= 0.
