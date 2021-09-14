@@ -1,8 +1,9 @@
 <script lang="ts">
-    import { aff, mat, cartan, rtsys, draw, rt2d, lspath } from 'lielib'
+    import { aff, mat, cartan, rtsys, draw, rt2d, lspath, fmt } from 'lielib'
     import Rank2Background from './Rank2Background.svelte'
     import InteractiveMap from '../../rank2reps/InteractiveMap.svelte'
     import Latex from '$lib/components/Latex.svelte'
+import { init } from 'svelte/internal';
 
     let typeName: 'A' | 'B' | 'C' | 'G' = 'A'
     $: cartanMat = cartan.cartanMat(typeName, 2)
@@ -16,11 +17,26 @@
         aff.Aff2.fromLinear(proj, sect).then(userPort.aff),
     )
 
-    const INIT_PATH =  [[0, 0],  [2, 0], [2, 1]]
-    let path = INIT_PATH
+    // typeName argument is only here to force a reset upon type change, down in the reactive assignment.
+    function createPath(typeName: string, [a, b]: number[], pathStyle: 'monomial' | 'straight') {
+        return (pathStyle == 'straight')
+            ? lspath.concat([[0, 0], [a, b]])
+            : lspath.concat([[0, 0], [a, 0], [a, b]])
+    }
+
+    function selectPoint(pt: number[]) {
+        let wt = D.fromPixelsClosestLatticePoint(pt)
+        if (wt[0] >= 0 && wt[1] >= 0)
+            initPoint = wt
+    }
+
+    let pathStyle: 'monomial' | 'straight' = 'straight'
+    let initPoint = [2, 2]
+
+    $: path = createPath(typeName, initPoint, pathStyle)
 
     function reset() {
-        path = INIT_PATH
+        path = createPath(typeName, initPoint, pathStyle)
     }
     function f(s: number) {
         let newPath = lspath.f(rs, path, s)
@@ -34,6 +50,7 @@
     initScale={50}
     maxScale={100}
     bind:userPort
+    on:pointSelected={(e) => selectPoint(e.detail)}
     >
     <g slot="svg">
         <Rank2Background
@@ -68,6 +85,18 @@
                     <option value="C">C2</option>
                     <option value="G">G2</option>
                 </select>
+            </tr>
+            <tr>
+                <select on:change={function () {
+                    pathStyle = this.value
+                }}>
+                    <option value="straight">Straight</option>
+                    <option value="monomial">Monomial</option>
+                </select>
+            </tr>
+            <tr>
+                <td>Initial weight:</td>
+                <td>{@html fmt.linComb(initPoint, 'ϖ')}</td>
             </tr>
             <tr>
                 <button type="button" on:click={reset}>Reset</button>
