@@ -1,4 +1,4 @@
-import { mat, cartan, maps, hecke, lpoly } from 'lielib'
+import { mat, cartan, maps, hecke, lpoly, bits } from 'lielib'
 
 // An object mapping file names to promises, which will resolve to the json when requested.
 const menu = import.meta.glob('./*.json')
@@ -60,7 +60,7 @@ export interface PcanConfig {
     type: string
     rank: number
     aff: number
-    parabolic: number[]
+    paraBits: number
     char: number
 }
 
@@ -71,11 +71,12 @@ function parseMenuItem(name: string, promise: () => Promise<{default: MagmaJson}
     let rank = +magmaType.match(/[0-9]+/)
     let aff = (magmaType.indexOf('~') >= 0) ? 1 : 0
     let parabolic = magmaParabolic.split('').map(c => +c - 1)
+    let paraBits = bits.toMask(parabolic)
     let char = +magmaChar
 
     let niceName = `${(aff == 1) ? 'Affine ' : ''}${type}${rank} p=${char} ${(parabolic.length > 0) ? 'AS ' : ''} can basis`
 
-    return {promise, niceName, type, rank, aff, parabolic, char}
+    return {promise, niceName, type, rank, aff, paraBits, char}
 }
 
 function buildConfigs(): PcanConfig[] {

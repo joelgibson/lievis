@@ -13,16 +13,19 @@ point, but certain operations were just too hard to specify.
     import InteractiveMap from '../rank2reps/InteractiveMap.svelte'
 
     import type { Vec, Mat, CoxElt } from 'lielib'
-    import { bits, maps, vec, arr, cartan, draw, EnumCox, mat, rt2d, rtsys, digraph, hecke as hk, aff, lpoly } from 'lielib'
+    import { maps, vec, arr, cartan, draw, EnumCox, mat, rt2d, rtsys, digraph, hecke as hk, aff, lpoly } from 'lielib'
     import type { MagmaJson } from './pcans/pcan'
     import { pcanConfigs, readToHeckeAlg } from './pcans/pcan'
     import {colour} from './colour'
+    import { rison } from '$lib/rison';
 
     const MAX_LENGTH = 80
 
     type Rank2Type = 'A' | 'B' | 'C' | 'G'
 
     let userPort = {width: 0, height: 0, aff: aff.Aff2.id}
+    let fullscreen = false
+    let controlsShown = true
 
     // const vertexColours = ['blue', 'green', 'red']
 	const vertexColours = [
@@ -241,6 +244,97 @@ point, but certain operations were just too hard to specify.
     type TreeConfig = 'none' | 'shortLex' | 'invshortlex'
     let treeConfig: TreeConfig = 'none'
 
+    let pDialation = 5
+    let pDialationEnabled = false
+
+    type PCanConfig = {
+        char: number
+        paraBits: number
+    }
+
+    type UserConfig = {
+        controls: boolean
+        fullscreen: boolean
+        type: Rank2Type
+        labels: LabelConfig
+        labelShade: boolean
+        shade: ShadeConfig
+        cells: CellConfig
+        nfTree: TreeConfig
+        pDialation: number
+        pDialationEnabled: boolean
+        pCan: string
+    }
+
+    const defaultUserConfig: UserConfig = {
+        controls: true,
+        fullscreen: false,
+        type: 'A',
+        labels: 'none',
+        labelShade: false,
+        shade: 'none',
+        cells: 'none',
+        nfTree: 'none',
+        pDialation: 5,
+        pDialationEnabled: false,
+        pCan: 'none',
+    }
+
+    function configChanges<T>(base: T, modified: T): Partial<T> {
+        let result: Partial<T> = {}
+        for (let key in base)
+            if (base[key] != modified[key])
+                result[key] = modified[key]
+
+        return result
+    }
+
+    let userConfig: UserConfig
+    $: userConfig = {
+        controls: controlsShown,
+        fullscreen,
+        type: inputType,
+        labels: labelConfig,
+        labelShade: shadeLabels,
+        shade: shadeConfig,
+        cells: cellConfig,
+        nfTree: treeConfig,
+        pDialation,
+        pDialationEnabled,
+        pCan: pcanIndex,
+    }
+
+    function loadFromHash(fragment: string) {
+        let delta: Partial<UserConfig>
+        try {
+            delta = rison.decode(fragment)
+        } catch (e) {
+            console.log("Error while trying to decode", fragment, e)
+            return
+        }
+
+        let newConfig: UserConfig = {...defaultUserConfig, ...delta}
+        pushUserConfig(newConfig)
+    }
+
+    // replaceState changes the URL without triggering a hashchange event.
+    $: history.replaceState(null, null, document.location.pathname + '#' + rison.encode(configChanges(defaultUserConfig, userConfig)))
+
+    /** Completely reset the state from a config. */
+    function pushUserConfig(config: UserConfig) {
+        controlsShown = config.controls
+        fullscreen = config.fullscreen
+        inputType = config.type
+        labelConfig = config.labels
+        shadeLabels = config.labelShade
+        shadeConfig = config.shade
+        cellConfig = config.cells
+        treeConfig = config.nfTree
+        pDialation = config.pDialation
+        pDialationEnabled = config.pDialationEnabled
+        pcanIndex = config.pCan
+    }
+
     type DisplayConfig = {
         selCoxElt: number | null
         shownCoxElts: number[]
@@ -445,8 +539,6 @@ point, but certain operations were just too hard to specify.
     }
 
     /** Showing p-dilated subgroup. */
-    let pDialation = 5
-    let pDialationEnabled = false
     let pDialatedGenerator: number
     $: pDialatedGenerator = rtDat.pDialatedGenerator(pDialation)
     function setPDialation(p: null | number, magmaJson: MagmaJson | null) {
@@ -793,6 +885,10 @@ point, but certain operations were just too hard to specify.
 
     let frame: number = 0
     $: if (canvasElt != null) { drawCanvas(canvasElt, D, rtDat, pDialation, pDialationEnabled, pDialatedGenerator, pxDialatedAlcoves, selCoxElt, shownLabels, shadedSet, cellColours, treeEdges, viewportGeometry, frame, userPort) }
+
+    // Perhaps load from the hash
+    if (document.location.hash.substr(0, 2) == '#(')
+        loadFromHash(document.location.hash.substr(1))
 </script>
 
 <style>
@@ -813,11 +909,15 @@ point, but certain operations were just too hard to specify.
     td:nth-child(2) { width: 100%; text-align: right; }
 </style>
 
+<svelte:window on:hashchange={(e) => loadFromHash(document.location.hash.substr(1))} />
+
 <InteractiveMap
     minScale={10}
     maxScale={200}
     initScale={120}
+    bind:fullscreen
     bind:userPort
+    bind:controlsShown
     on:pointHovered={(e) => hoverPoint(e.detail)}
     >
     <svelte:fragment slot="other">

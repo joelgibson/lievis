@@ -22,10 +22,10 @@
     export let userPort: {width: number, height: number, aff: aff.Aff2}
 
     // In fullscreen mode?
-    let fullscreen = false
+    export let fullscreen = false
 
     // Controls shown
-    let controlsShown = true
+    export let controlsShown = true
 
     // On touch devices, which movement mode?
     let panMode: 'frozen' | 'pan-zoom' | 'free' = 'pan-zoom'
