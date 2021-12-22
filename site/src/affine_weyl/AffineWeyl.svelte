@@ -913,7 +913,7 @@ point, but certain operations were just too hard to specify.
 
 <InteractiveMap
     minScale={10}
-    maxScale={200}
+    maxScale={400}
     initScale={120}
     bind:fullscreen
     bind:userPort
