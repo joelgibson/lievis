@@ -15,23 +15,23 @@ export namespace cartan {
      export function isGCM(mat: Mat): boolean {
         if (mat.nrows != mat.ncols)
             return false
-        
+
         for (let i = 0; i < mat.nrows; i++) {
             for (let j = 0; j < mat.ncols; j++) {
                 if (!num.isInteger(mat.get(i, j)))
                     return false
-                
+
                 if (i == j && mat.get(i, j) != 2)
                     return false
-                
+
                 if (i != j && mat.get(i, j) > 0)
                     return false
-                
+
                 if (i != j && mat.get(i, j) == 0 && mat.get(j, i) != 0)
                     return false
             }
         }
-        
+
         return true
     }
 
@@ -44,16 +44,16 @@ export namespace cartan {
     export function isCoxeterMat(M: Mat): boolean {
         if (!mat.isSymmetric(M) || !mat.isIntegral(M))
             return false
-        
+
         for (let i = 0; i < M.nrows; i++)
             if (M.get(i, i) != 1)
                 return false
-        
+
         for (let i = 0; i < M.nrows; i++)
             for (let j = i + 1; j < M.nrows; j++)
                 if (M.get(i, j) == 1 || M.get(i, j) < 0)
                     return false
-        
+
         return true
     }
 
@@ -61,12 +61,12 @@ export namespace cartan {
     export function cartanMatToCoxeterMat(cartan: Mat): Mat {
         if (!isGCM(cartan))
             throw new Error("Matrix was not a generalised Cartan matrix.")
-        
+
         return mat.fromEntries(cartan.nrows, cartan.ncols, (i, j) => {
             // The Coxeter matrix has 1's down the diagonal, since (ss)^1 = 1.
             if (i == j)
                 return 1
-            
+
             // Otherwise, the entry is determined by A_ij A_ji, via the mapping
             //   a = 0    =>    m_st = 2
             //   a = 1    =>    m_st = 3
@@ -83,7 +83,7 @@ export namespace cartan {
      * normalised so that the short roots have square length 2. If d[i] is the ith entry returned, then
      * scaling each row of the Cartan by d[i] / 2 makes the Cartan into a symmetric positive-definite
      * matrix.
-     * 
+     *
      * This algorithm is very dumb, and goes over the Cartan matrix a bunch of times until it "converges".
      * Perhaps we should switch to something less dumb?
      */
@@ -105,7 +105,7 @@ export namespace cartan {
                     let aji = cartan.get(j, i)
                     if (aij == 0)
                         continue
-                    
+
                     let r = aji / aij
                     let impliednormi =
                         (r == 1) ? norm[j] :
@@ -125,10 +125,10 @@ export namespace cartan {
         let B = mat.copy(cartan)
         for (let i = 0; i < B.nrows; i++)
             matmut.erScale(B, i, d[i] / 2)
-        
+
         return B
     }
-    
+
     /** Convert a Cartan datum to a Cartan matrix: a[i, j] = 2 c[i, j] / c[i, i]. */
     export function datumToCartanMat(dat: Mat): Mat {
         if (!datumIsValid(dat)) {
@@ -148,7 +148,7 @@ export namespace cartan {
     export function connectedComponents(A: Mat): number[][] {
         if (!mat.isSquare(A))
             throw new Error("Connected components only applies to square matrices.")
-        
+
         // Special case the empty matrix: an empty connected component.
         if (A.nrows == 0)
             return [[]]
@@ -160,7 +160,7 @@ export namespace cartan {
         for (let start = 0; start < rank; start++) {
             if (seen[start])
                 continue
-            
+
             let comp = [start]
             stack.push(start)
             while (stack.length > 0) {
@@ -168,7 +168,7 @@ export namespace cartan {
                 for (let j = 0; j < rank; j++) {
                     if (seen[j] || A.get(i, j) == 0 && A.get(j, i) == 0)
                         continue
-                    
+
                     stack.push(j)
                     comp.push(j)
                     seen[j] = true
@@ -196,7 +196,7 @@ export namespace cartan {
             for (let j = 0; j < A.nrows; j++)
                 if (((1 << j) & mask) != 0 && A.get(i, j) != 0)
                     deg += 1
-            
+
             // Return deg - 1 since we counted ourselves.
             return deg - 1
         }
@@ -209,11 +209,11 @@ export namespace cartan {
             for (let i = 0; i < rank; i++) {
                 if ((mask & (1 << i)) == 0 || deg(mask, i) != 1)
                     continue
-                
+
                 let newMask = mask & (~(1 << i))
                 if (masks.has(newMask))
                     continue
-                
+
                 masks.add(newMask)
                 stack.push(newMask)
             }
@@ -264,10 +264,10 @@ export namespace cartan {
     export function cartanDat(type: string, rank: number, aff?: number) {
         if (aff === undefined)
             return datumFin(type, rank)
-        
+
         if (aff < 1 || aff > 3)
             throw new Error("Affine twists are 1, 2, or 3.")
-        
+
         return (aff == 1) ? datumAff1(type, rank) : (aff == 2) ? datumAff2(type, rank) : datumAff3(type, rank)
     }
 
@@ -277,9 +277,9 @@ export namespace cartan {
     function datumFin(type: string, rank: number): Mat {
         if (rank < 1)
             throw new Error(`Rank must be positive: was given ${rank}`)
-        
+
         switch (type) {
-        
+
         // A: Simply-laced path.
         case 'A':
         return mat.fromEntries(rank, rank, (i, j) => {
@@ -363,7 +363,7 @@ export namespace cartan {
     function datumAff1(type: string, rank: number): Mat {
         if (rank < 1)
             throw new Error(`Rank must be positive: was given ${rank}`)
-        
+
         const finDatum = datumFin(type, rank)
         function addAffine(diag: number, offdiag: (i: number) => number): Mat {
             return mat.fromEntries(rank + 1, rank + 1, (i, j) => {
@@ -373,29 +373,29 @@ export namespace cartan {
                 return finDatum.get(i, j)
             })
         }
-        
+
         switch (type) {
             case 'A':
                 if (rank == 1)
                     return addAffine(2, () => -2)
-                
+
                 return addAffine(2, (i) => (i == 0 || i == rank - 1) ? -1 : 0)
 
             case 'B':
                 if (rank == 2)
                     return addAffine(4, (i) => (i == 1) ? -2 : 0)
-                
+
                 return addAffine(4, (i) => (i == 1) ? -2 : 0)
-        
+
             case 'C':
                 return addAffine(4, (i) => (i == 0) ? -2 : 0)
-            
+
             case 'D':
                 if (rank == 3)
                     return addAffine(2, (i) => (i == 1 || i == 2) ? -1 : 0)
-                
+
                 return addAffine(2, (i) => (i == 1) ? -1 : 0)
-            
+
             case 'E':
                 if (rank == 6)
                     return addAffine(2, (i) => (i == rank - 1) ? -1 : 0)
@@ -403,15 +403,15 @@ export namespace cartan {
                     return addAffine(2, (i) => (i == 0) ? -1 : 0)
                 if (rank == 8)
                     return addAffine(2, (i) => (i == 0) ? -1 : 0)
-                
+
                 throw new Error('Unreachable')
-            
+
             case 'F':
                 return addAffine(4, (i) => (i == 0) ? -2 : 0)
-            
+
             case 'G':
                 return addAffine(6, (i) => (i == 0) ? -3 : 0)
-            
+
             default:
                 throw new Error('Unreachable')
         }
@@ -420,7 +420,7 @@ export namespace cartan {
     function datumAff2(type: string, rank: number) {
         if (rank < 1)
             throw new Error(`Rank must be positive: was given ${rank}`)
-        
+
 
         function addAffine(finDatum: Mat, scale: number, diag: number, offdiag: (i: number) => number): Mat {
             let rank = finDatum.nrows
@@ -431,7 +431,7 @@ export namespace cartan {
                 return finDatum.get(i, j) * scale
             })
         }
-        
+
         switch (type) {
         case 'A':
             if (rank == 2)
@@ -455,7 +455,7 @@ export namespace cartan {
                 )
             }
             throw new Error(`Type A_${rank}^{(2)} undefined.`)
-        
+
         case 'D':
             return addAffine(
                 datumFin('B', rank - 1),
@@ -463,11 +463,11 @@ export namespace cartan {
                 2,
                 (i) => (i == 0) ? -2 : 0
             )
-        
+
         case 'E':
             if (rank != 6)
                 throw new Error("There is no Aff 2 for type E except in E6")
-            
+
             return addAffine(
                 datumFin('F', 4),
                 1,
@@ -482,7 +482,7 @@ export namespace cartan {
     function datumAff3(type: string, rank: number) {
         if (type != 'D' || rank != 4)
             throw new Error("The only Aff 3 datum is D4^(3)")
-        
+
         return mat.fromRows([
             [2, -3, -1],
             [-3, 6, 0],
@@ -519,7 +519,7 @@ export namespace cartan {
             for (let j = i + 1; j < rank; j++)
                 if (cartanMat.get(i, j) != 0)
                     edges.push({i, j, aij: cartanMat.get(i, j), aji: cartanMat.get(j, i)})
-        
+
         const width = (Math.max(...xs) - Math.min(...xs)) * settings.horizDist
         const height = (Math.max(...ys) - Math.min(...ys)) * settings.vertDist
 
@@ -538,7 +538,7 @@ export namespace cartan {
         return {nodes, edges, width, height, nodeX, nodeY, edge}
     }
 
-    
+
     function arrowDirection(aij: number, aji: number): 'none' | 'forward' | 'backward' | 'both' {
         if (aij < -1 && aji < -1)
             return 'both'
@@ -546,7 +546,7 @@ export namespace cartan {
             return 'backward'
         if (aji < -1)
             return 'forward'
-        
+
         return 'none'
     }
 
@@ -602,9 +602,14 @@ export namespace cartan {
      function layoutDynkinXY(A: Mat): {xs: number[], ys: number[]} {
         if (!isGCM(A))
             throw new Error("Provided matrix was not a GCM")
-        
+
         let rank = A.nrows
-        
+
+        // Special case of two vertices
+        if (rank == 2 && A.get(0, 1) == 0) {
+            return {xs: [0, 1], ys: [0, 0]}
+        }
+
         // Run all-pairs shortest paths, which we can use variously to extract paths and
         // connected components. This is an O(n^3) algorithm, but straightforward.
         let inf_dist = rank + 1
@@ -632,12 +637,12 @@ export namespace cartan {
         // For now, only deal with the connected case.
         if (dists.some(ds => ds.some(d => d == inf_dist)))
             throw new Error("layout only implemented for indecomposable Cartan matrices currently.")
-        
+
         /** Return a shortest path from i to j in the graph. */
         let shortestPath = function(i: number, j: number): number[] {
             if (dists[i][j] == inf_dist)
                 throw new Error(`There is no path from ${i} to ${j}.`)
-            
+
             let path = [i]
             while (i != j) {
                 i = nexts[i][j]
@@ -652,7 +657,7 @@ export namespace cartan {
             for (let j = 0; j < A.ncols; j++)
                 if (A.get(i, j) < 0)
                     count++
-            
+
             return count
         }
         let neigh = function(i: number): number[] {

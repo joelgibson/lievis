@@ -5,7 +5,11 @@
     import Latex from '$lib/components/Latex.svelte'
 
     let rows = [
-        //{kind: 'A_1 \\times A_1', cartanMat: mat.fromRows([[2, 0], [0, 2]])},
+        {
+            kind: 'A_1 \\times A_1', a: 0, m: 2,
+            cartanMat: mat.fromRows([[2, 0], [0, 2]]),
+            cartanDat: mat.fromRows([[2, 0], [0, 2]]),
+        },
         {
             kind: 'A_2', a: 1, m: 3,
             cartanMat: mat.fromRows([[2, -1], [-1, 2]]),

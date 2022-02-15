@@ -20,7 +20,10 @@ title: Tables _Fin_ and _Aff_
     }
 </style>
 
-Chapter 4 of the book _Infinite dimensional Lie algebras_ by Kac classifies the Cartan matrices of finite and affine type. Each Cartan matrix of finite type defines a crystallographic root system and finite Weyl group, and each is listed in _Table Fin_. Tables _Aff 1_, _Aff 2_, and _Aff 3_ list the Cartan matrices of affine type. [See here](cartan_matrices.html) for a reminder on how to read Dynkin diagrams.
+Chapter 4 of the book _Infinite dimensional Lie algebras_ by Kac classifies the Cartan matrices of finite and affine type. Each Cartan matrix of finite type defines a crystallographic root system and finite Weyl group, and each is listed in _Table Fin_. Tables _Aff 1_, _Aff 2_, and _Aff 3_ list the Cartan matrices of affine type.
+
+See also: [how to read Dynkin diagrams](cartan_matrices.html)
+
 
 ## Table _Fin_
 

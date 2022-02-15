@@ -1,9 +1,11 @@
 ---
-title: How to read Cartan matrices
+title: How to read Dynkin diagrams
 ---
 
-<script>
+<script type="module">
     import CartanMatrices from './_CartanMatrices.svelte'
+
+    new CartanMatrices({target: document.getElementById('CartanMatrices')})
 </script>
 
 Dynkin diagrams are a compact method of encoding Cartan matrices, but it can be challenging to try to remember which way around the arrows go. This is not usually an issue when working theoretically, but in examples or programming where everything has to be explicit, getting things around the right way is important.
@@ -11,15 +13,21 @@ Dynkin diagrams are a compact method of encoding Cartan matrices, but it can be 
 ## 5 kinds of junctions
 
 The convention used here is that the Cartan matrix $A = [a_{ij}]$ associates rows with _coroots_ and columns with _roots_, so we have $a_{ij} = \innprod{\alpha_i^\vee, \alpha_j}$. Equivalently, in some Weyl-invariant symmetric bilinear form $(-, -)$ we have $a_{ij} = 2 \frac{(\alpha_i, \alpha_j)}{(\alpha_i, \alpha_i)}$.
-As far as I am aware, this convention is standard throughout the Kac-Moody and quantum groups literature.
+As far as I am aware, this convention is standard throughout the Kac-Moody and quantum groups literature, though sometimes differs from the conventions used in the literature on Coxeter groups.
 
 In the table below, we consider to have fixed the ordering $i < j$, so that $i$ is the left vertex in the Dynkin diagram, and
 $$
-[a_{ij}] = \begin{pmatrix} a_{ii} & a_{ij} \\ a_{ji} & a_{jj} \end{pmatrix}.
+[a_{ij}]
+= \begin{pmatrix} a_{ii} & a_{ij} \\ a_{ji} & a_{jj} \end{pmatrix}
+= \begin{pmatrix}
+    \innprod{\alpha_i^\vee, \alpha_i} & \innprod{\alpha_i^\vee, \alpha_j} \\
+    \innprod{\alpha_j^\vee, \alpha_i} & \innprod{\alpha_j^\vee, \alpha_j}
+\end{pmatrix}.
 $$
-The other columns are explained below.
 
-<CartanMatrices />
+The following table lists the 5 kinds of junctions (6, if we include $A_1 \times A_1$ as a junction) which are found in the finite and affine type Dynkin diagrams.
+
+<figure id="CartanMatrices" class="row"></figure>
 
 - The column $a_{ij} a_{ji}$ records the product of the off-diagonal entries, which determines $m_{ij}$.
 - The number $m_{ij}$ is the order of $(s_i s_j)$ in the Weyl group, so that $(s_i s_j)^{m_{ij}} = 1$.
@@ -41,4 +49,3 @@ The books I know of that use the same $a_{ij} = \innprod{\alpha_i^\vee, \alpha_j
 6. Kashiwara's papers on crystals and quantized enveloping algebras.
 
 A very notable exception which uses the opposite convention is Bourbaki, who sets $n(\alpha, \beta) = 2 (\alpha | \beta) / (\beta | \beta)$ (VI, Section 1, part 5, definition 3).
-
