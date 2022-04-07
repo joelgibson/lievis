@@ -26,6 +26,13 @@ The build options (minification and so on) can be edited in `vite.config.js`, fo
 When I build the site I mount it to the subdirectory `/lievis/` at my website: <https://www.jgibson.id.au/lievis/>. This subdirectory can be changed by modifying the `base_url` file, and re-running the build process.
 
 
+# To-do list
+
+Next I'll be working on:
+
+- Displaying elements in the affine Weyl visualisation, both as words, and as the finite group semidirect product the root lattice.
+- Implement the periodic Hecke module for the affine Weyl visualisation.
+
 
 # Technical internals
 

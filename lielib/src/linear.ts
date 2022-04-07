@@ -386,6 +386,11 @@ export namespace mat {
         if (vectors.length == 0)
             return new Matrix(0, 0, [])
 
+        let ncols = vectors[0].length
+        for (let i = 1; i < vectors.length; i++)
+            if (vectors[i].length != ncols)
+                throw new Error(`fromRows called with non-uniform vectors of lengths ${vectors.map(v => v.length)}`)
+
         return fromEntries(vectors.length, vectors[0].length, (i, j) => vectors[i][j])
     }
 
@@ -903,7 +908,10 @@ export namespace mat {
     }
 
     export function debugPrint(A: Mat): void {
-        console.log(mat.toRows(A).map(row => row.map(x => (x.toFixed(3)).padStart(7)).join('')).join('\n'))
+        let integral = isIntegral(A)
+        let decimals = (integral) ? 0 : 3
+        let padding = (integral) ? 3 : 7
+        console.log(mat.toRows(A).map(row => row.map(x => (x.toFixed(decimals)).padStart(padding)).join('')).join('\n'))
     }
 
     /** Put an integral matrix A into Hermite normal form, returning H, U such that
@@ -917,7 +925,7 @@ export namespace mat {
      *
      * The matrix A has a unique Hermite form H.
      */
-    export function hermiteForm(A: Mat): {H: Mat, U: Mat, detU: number} {
+    export function hermiteForm(A: Mat): {H: Mat, U: Mat, detU: number, pivots: number[]} {
         if (!mat.isIntegral(A))
             throw new Error(`Hermite form only applies to integral matrices.`)
 
@@ -961,6 +969,7 @@ export namespace mat {
 
         // Now we proceed to echelonise the matrix, column by column.
         let pivotRow = 0
+        let pivots: number[] = []
         for (let j = 0; j < H.ncols; j++) {
             // Find the first nonzero entry in this column, below where we have already cleared.
             let firstNonempty = firstNonzeroInCol(H, j, pivotRow, nonzeroRows)
@@ -1026,13 +1035,76 @@ export namespace mat {
             }
 
             // Finally, our next pivot must be found in a new row.
+            pivots.push(j)
             pivotRow += 1
         }
 
         let detU = (detUparity % 2 == 0) ? 1 : -1
 
-        return {H, U, detU}
+        return {H, U, detU, pivots}
     }
+
+    /** Given an (n x k) integral matrix A of k >= n vectors in Z^n, extract n columns which form
+     * a basis of Z^n, or report that none exist. Returns an (n x n) submatrix Asub, as well as
+     * an (n x n) matrix U such that Asub * U = identity. */
+    export function integralColumnBasis(A: Mat) {
+        if (!isIntegral(A))
+            throw new Error(`integralColumnBasis may only be called on integral matrices.`)
+
+        if (A.ncols < A.nrows)
+            throw new Error(`integralColumnBasis: fewer columns than rows`)
+
+        // The system Ax = b has a solution for integral x if and only if the system AU(inv U)x = b
+        // has a solution, for any U invertible over the integers. In particular, we should choose
+        // a U such that AU is lower-triangular, since then it should look like AU = [V | 0] for
+        // some square lower-triangular matrix V. The system AUy = b has a solution for all y if
+        // and only if V is invertible over the integers (the product of its main diagonal is ±1).
+        //
+        // In fact we will transpose-hermite-transpose to find V and U, so the Hermite condition on
+        // V tells us that we are looking exactly for the identity matrix.
+
+        // Find H and U such that AU = H and H is Hermite-lower-triangular.
+        let result = hermiteForm(transpose(A))
+        let H = transpose(result.H)
+        let U = transpose(result.U)
+
+        // If the main diagonal of H is all 1s, then we are all good: H looks like [identity | 0].
+        for (let i = 0; i < A.nrows; i++)
+            if (H.get(i, i) != 1)
+                throw new Error(`integralColumnBasis: Columns do not span Z^${A.nrows}`)
+
+
+    }
+
+    // /** Solve the linear system AX = B over the integers, returning X. When A is (n x m) then B
+    //  * must be (n x k), and the solution X will be (m x k). */
+    // export function integralSolveLinear(A: Mat, B: Mat) {
+    //     if (!isIntegral(A) || !isIntegral(B))
+    //         throw new Error(`integralSolveLinear may only be called on integral matrices.`)
+
+    //     if (A.nrows != B.nrows)
+    //         throw new Error(`A and B have incompatible shapes`)
+
+
+    //     //
+    //     // The Hermite normal form function returns an upper-triangular matrix H = UA, so applying
+    //     // it to A^T and taking the transpose we get H^T = A U^T where H^T is lower-triangular.
+    //     let {H, U} = hermiteForm(transpose(A))
+    //     H = transpose(H)
+    //     U = transpose(H)
+
+    //     submatrix()
+
+    //     // Create the matrix
+    //     // [A |  B]
+    //     // [0 | id]
+    //     // and return its HNF.
+    //     let block = blockMatrix([
+    //         [A, B],
+    //         [zero(B.ncols, A.ncols), id(B.ncols)]
+    //     ])
+    //     return hermiteForm(block)
+    // }
 
     /** Returns the determinant of an integral matrix, exactly. */
     export function integralDet(A: Mat): number {

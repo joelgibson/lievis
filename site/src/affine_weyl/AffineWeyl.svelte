@@ -232,7 +232,7 @@ point, but certain operations were just too hard to specify.
     let labelConfig: LabelConfig = 'none'
     let shadeLabels: boolean = false
 
-    type ShadeConfig = 'none' | 'bruhat' | 'rightweak' | 'leftweak' | 'conetype' | 'dihedral'
+    type ShadeConfig = 'none' | 'bruhat' | 'rightweak' | 'leftweak' | 'conetype' | 'dihedral' | 'doublecoset'
     let shadeConfig: ShadeConfig = 'none'
     let shadeCoveringRel = false
 
@@ -466,6 +466,15 @@ point, but certain operations were just too hard to specify.
             }
 
             return map
+        }
+
+        if (displayConfig.shadeConfig == 'doublecoset') {
+            let para = (1<<3) | (1<<4) | (1<<0) | (1<<1)
+            return maps.fromKeysValFn(
+                maps.FlatIntMap,
+                displayConfig.shownCoxElts.filter(w => rtDat.cox.isMinimal(para, w)),
+                w => '#00000022',
+            )
         }
 
         let lower = rtDat.cox.bruhatLower(displayConfig.selCoxElt, displayConfig.shadeConfig)
@@ -975,6 +984,7 @@ point, but certain operations were just too hard to specify.
                         <option value="leftweak">Left weak</option>
                         <option value="conetype">Cone type</option>
                         <option value="dihedral">Dihedral elements</option>
+                        <option value="doublecoset">Minimal double coset reps</option>
                     </select>
                 </td>
             </tr>
