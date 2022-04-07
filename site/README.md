@@ -30,7 +30,6 @@ When I build the site I mount it to the subdirectory `/lievis/` at my website: <
 
 Next I'll be working on:
 
-- Squash the bug to do with zeros showing up as orange dots in characters.
 - Switch the characters over to using true integers.
 - Displaying elements in the affine Weyl visualisation, both as words, and as the finite group semidirect product the root lattice.
 - Implement the periodic Hecke module for the affine Weyl visualisation.

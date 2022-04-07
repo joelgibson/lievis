@@ -52,18 +52,20 @@
 
 {#if showText}
     {#each character.toPairs() as [[u, v], mult]}
-        <circle
-            cx={D.aff2.x(u, v)}
-            cy={D.aff2.y(u, v)}
-            r={10}
-            fill-opacity="40%"
-            stroke-width=0
-            class={(mult > 0) ? 'positivedim' : 'negativedim'}
-            />
-        <text
-            x={D.aff2.x(u, v)}
-            y={D.aff2.y(u, v)}
-            text-anchor="middle"
-            dominant-baseline="middle">{mult}</text>
+        {#if mult != 0}
+            <circle
+                cx={D.aff2.x(u, v)}
+                cy={D.aff2.y(u, v)}
+                r={10}
+                fill-opacity="40%"
+                stroke-width=0
+                class={(mult > 0) ? 'positivedim' : 'negativedim'}
+                />
+            <text
+                x={D.aff2.x(u, v)}
+                y={D.aff2.y(u, v)}
+                text-anchor="middle"
+                dominant-baseline="middle">{mult}</text>
+        {/if}
     {/each}
 {/if}
