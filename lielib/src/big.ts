@@ -13,4 +13,14 @@ export function factorial(n: number): bigint {
     return prod
 }
 
+/** Absolute value. */
+export function abs(n: bigint): bigint {
+    return (n >= 0) ? n : -n
+}
+
+/** Maximum. */
+export function max(n: bigint, m: bigint): bigint {
+    return (n >= m) ? n : m
+}
+
 }

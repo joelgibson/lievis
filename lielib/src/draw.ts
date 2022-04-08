@@ -739,7 +739,7 @@ export namespace draw {
 
         }
 
-        circlesFromEntries(entries: {key: number[], value: number}[], r: (value: number) => number): string {
+        circlesFromEntries(entries: {key: number[], value: bigint}[], r: (value: bigint) => number): string {
             let builder = new PathBuilder()
             let projected = [0, 0]
             for (let i = 0; i < entries.length; i++) {

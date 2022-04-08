@@ -4,9 +4,13 @@ importers:
 
   lielib:
     specifiers:
+      '@types/node': ^17.0.23
       intern: ^4.9.0
+      typescript: ^4.6.3
     devDependencies:
-      intern: 4.10.0
+      '@types/node': 17.0.23
+      intern: 4.10.0_ee885bc7281b682b6adbed6ae09ee090
+      typescript: 4.6.3
 
   site:
     specifiers:
@@ -343,7 +347,7 @@ packages:
     resolution: {integrity: sha512-a6bTJ21vFOGIkwM0kzh9Yr89ziVxq4vYH2fQ6N8AeipEzai/cFK6aGMArIkUeIdRIgpwQa+2bXiLuUJCpSf2Cg==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 16.7.2
+      '@types/node': 17.0.23
     dev: true
 
   /@types/chai/4.2.21:
@@ -353,19 +357,19 @@ packages:
   /@types/charm/1.0.2:
     resolution: {integrity: sha512-8nrGGRpu/OZKpDxpuloLlZ6g9t4+DZW057RgpWrzOHiqt/1kbPvSiMDJa5G8Z635By9fMXEoGvWZ5bO/A6dv/w==}
     dependencies:
-      '@types/node': 16.7.2
+      '@types/node': 17.0.23
     dev: true
 
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 16.7.2
+      '@types/node': 17.0.23
     dev: true
 
   /@types/express-serve-static-core/4.17.24:
     resolution: {integrity: sha512-3UJuW+Qxhzwjq3xhwXm2onQcFHn76frIYVbTu+kn24LFxI+dEhdfISDFovPB8VpEgW8oQCTpRuCe+0zJxB7NEA==}
     dependencies:
-      '@types/node': 16.7.2
+      '@types/node': 17.0.23
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
     dev: true
@@ -416,6 +420,11 @@ packages:
 
   /@types/node/16.7.2:
     resolution: {integrity: sha512-TbG4TOx9hng8FKxaVrCisdaxKxqEwJ3zwHoCWXZ0Jw6mnvTInpaB99/2Cy4+XxpXtjNv9/TgfGSvZFyfV/t8Fw==}
+    dev: false
+
+  /@types/node/17.0.23:
+    resolution: {integrity: sha512-UxDxWn7dl97rKVeVS61vErvw086aCYhDLyvRQZ5Rk65rZKepaFdm53GeqXaKBuOhED4e9uWq34IC3TdSdJJ2Gw==}
+    dev: true
 
   /@types/pug/2.0.5:
     resolution: {integrity: sha512-LOnASQoeNZMkzexRuyqcBBDZ6rS+rQxUMkmj5A0PkhhiSZivLIuz6Hxyr1mkGoEZEkk66faROmpMi4fFkrKsBA==}
@@ -439,13 +448,13 @@ packages:
     resolution: {integrity: sha512-nCkHGI4w7ZgAdNkrEu0bv+4xNV/XDqW+DydknebMOQwkpDGx8G+HTlj7R7ABI8i8nKxVw0wtKPi1D+lPOkh4YQ==}
     dependencies:
       '@types/mime': 1.3.2
-      '@types/node': 16.7.2
+      '@types/node': 17.0.23
     dev: true
 
   /@types/ws/7.4.6:
     resolution: {integrity: sha512-ijZ1vzRawI7QoWnTNL8KpHixd2b2XVb9I9HAqI3triPsh1EC0xH0Eg6w2O3TKbDCgiNNlJqfrof6j4T2I+l9vw==}
     dependencies:
-      '@types/node': 16.7.2
+      '@types/node': 17.0.23
     dev: true
 
   /accepts/1.3.7:
@@ -1158,7 +1167,7 @@ packages:
   /inherits/2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
-  /intern/4.10.0:
+  /intern/4.10.0_ee885bc7281b682b6adbed6ae09ee090:
     resolution: {integrity: sha512-2DhW54XrG/ga9PINbdny5u8vW8umvXVe0kYsXu0jX5BqUL5iMYaroE91Xnwu++KdCXlWYHOyKRfHlMueqWN0rg==}
     hasBin: true
     dependencies:
@@ -1197,7 +1206,7 @@ packages:
       resolve: 1.20.0
       shell-quote: 1.7.2
       source-map: 0.6.1
-      ts-node: 10.0.0
+      ts-node: 10.0.0_ee885bc7281b682b6adbed6ae09ee090
       tslib: 2.3.1
       ws: 7.5.3
     transitivePeerDependencies:
@@ -1887,7 +1896,7 @@ packages:
     engines: {node: '>=0.6'}
     dev: true
 
-  /ts-node/10.0.0:
+  /ts-node/10.0.0_ee885bc7281b682b6adbed6ae09ee090:
     resolution: {integrity: sha512-ROWeOIUvfFbPZkoDis0L/55Fk+6gFQNZwwKPLinacRl6tsxstTF1DbAcLKkovwnpKMVvOMHP1TIbnwXwtLg1gg==}
     engines: {node: '>=12.0.0'}
     hasBin: true
@@ -1906,11 +1915,13 @@ packages:
       '@tsconfig/node12': 1.0.9
       '@tsconfig/node14': 1.0.1
       '@tsconfig/node16': 1.0.2
+      '@types/node': 17.0.23
       arg: 4.1.3
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
       source-map-support: 0.5.19
+      typescript: 4.6.3
       yn: 3.1.1
     dev: true
 
@@ -1935,6 +1946,12 @@ packages:
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: false
+
+  /typescript/4.6.3:
+    resolution: {integrity: sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==}
+    engines: {node: '>=4.2.0'}
+    hasBin: true
+    dev: true
 
   /unbzip2-stream/1.4.3:
     resolution: {integrity: sha512-mlExGW4w71ebDJviH16lQLtZS32VKqsSfk80GCfUlwT/4/hNRFsoscrF/c++9xinkMzECL1uL9DDwXqFWkruPg==}

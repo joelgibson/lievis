@@ -44,19 +44,19 @@
         let simpleDimension = reduc.trySimpleDimension(datum, P, selectedWt, t) || '???'
         if (showWhat == 'simpsInWeyls') {
             let char = reduc.trySimpleInWeyls(datum, P, selectedWt, t, 0)
-            let dim = (char != null) ? maps.reduce(char, (acc, wt, mult) => acc + mult * reduc.weylDimension(datum, wt), 0) : '?'
+            let dim = (char != null) ? maps.reduce(char, (acc, wt, mult) => acc + mult * reduc.weylDimension(datum, wt), 0n) : '?'
             return {char, dim, simpleDimension}
         }
 
         if (showWhat == 'weylsInSimps') {
             let char = reduc.tryWeylInSimplesInversion(datum, P, selectedWt, t)
-            let dim = (char != null) ? maps.reduce(char, (acc, wt, mult) => acc + mult * reduc.trySimpleDimension(datum, P, wt, t), 0) : '?'
+            let dim = (char != null) ? maps.reduce(char, (acc, wt, mult) => acc + mult * reduc.trySimpleDimension(datum, P, wt, t), 0n) : '?'
             return {char, dim, simpleDimension}
         }
 
         if (showWhat == 'simpsInStd') {
             let char = reduc.trySimpleInWeyls(datum, P, selectedWt, t, 0)
-            let dim = (char != null) ? maps.reduce(char, (acc, wt, mult) => acc + mult * reduc.weylDimension(datum, wt), 0) : '?'
+            let dim = (char != null) ? maps.reduce(char, (acc, wt, mult) => acc + mult * reduc.weylDimension(datum, wt), 0n) : '?'
             if (char != null)
                 char = datum.charAlg.tryApplyLinear(char, x => reduc.weylCharacter(datum, x))
             return {char, dim, simpleDimension}

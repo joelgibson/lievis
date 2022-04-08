@@ -32,14 +32,14 @@ tables.forEach(({group, weight, dim, primes, domWtMults}) => {
             let simpleInWeyls = reduc.trySimpleInWeyls(datum, prime, weight, reduc.createTracker(datum, 10), 0)
             assert.isNotNull(simpleInWeyls)
 
-            let dimension = maps.reduce(simpleInWeyls!, (acc, wt, coeff) => acc + coeff * reduc.weylDimension(datum, wt), 0)
-            assert.deepEqual(dimension, dim)
+            let dimension = maps.reduce(simpleInWeyls!, (acc, wt, coeff) => acc + coeff * reduc.weylDimension(datum, wt), 0n)
+            assert.deepEqual(dimension, BigInt(dim))
 
             let simpleChar = datum.charAlg.tryApplyLinear(simpleInWeyls!, wt => reduc.weylCharacter(datum, wt))?.zerosRemoved()
             assert.isNotNull(simpleChar)
 
             let domCharPairs = simpleChar!.toPairs().filter(([wt, _]) => reduc.isDominant(datum, wt))
-            assert.deepEqual(domCharPairs, domWtMults)
+            assert.deepEqual(domCharPairs, domWtMults.map(([wt, mult]) => [wt, BigInt(mult)]))
         }
     })
 })

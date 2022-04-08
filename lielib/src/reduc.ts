@@ -1,3 +1,4 @@
+import {big} from './big'
 import {Vec, Mat, vec, vecmut, mat} from './linear'
 import {char} from './char'
 import {maps} from './maps'
@@ -126,15 +127,17 @@ export namespace reduc {
     }
 
     /** (Φ, λ) ↦ dim Δ(λ), the Weyl dimension formula. */
-    export function weylDimension(datum: BasedRootDatum, lambda: Vec): number {
+    export function weylDimension(datum: BasedRootDatum, lambda: Vec): bigint {
         // The product of 〈α^, λ + ρ〉/ 〈α^, ρ〉where α^ ranges over all positive coroots.
         const lambdaRho = vec.add(lambda, datum.rho)
-        let product = 1
+        let numer = 1n
+        let denom = 1n
         for (let i = 0; i < datum.copositives.length; i++) {
             let coroot = datum.copositives[i]
-            product *= vec.dot(coroot, lambdaRho) / vec.dot(coroot, datum.rho)
+            numer *= BigInt(vec.dot(coroot, lambdaRho))
+            denom *= BigInt(vec.dot(coroot, datum.rho))
         }
-        return Math.round(product) | 0
+        return numer / denom
     }
 
     /** (Φ, λ) ↦ true if λ is a dominant weight, otherwise false. */
@@ -233,7 +236,7 @@ export namespace reduc {
         makeDominantMut(datum, domWt)
 
         let last = new char.CharElt()
-        last.set(domWt, 1)
+        last.set(domWt, 1n)
         f(domWt)
 
         let tmp: Vec = []
@@ -247,7 +250,7 @@ export namespace reduc {
                     if (evaluation > 0) {
                         vecmut.addScaled(tmp, entry.key, datum.simples[i], 0-evaluation)
                         if (!next.contains(tmp)) {
-                            next.set(tmp, 1)
+                            next.set(tmp, 1n)
                             f(tmp)
                         }
                     }
@@ -345,7 +348,7 @@ export namespace reduc {
             vecmut.copy(tmp, weight)
             let sign = makeDominantDotMut(datum, tmp)
             if (sign != 0)
-                result.askEntry(tmp).value += sign * coeff
+                result.askEntry(tmp).value += BigInt(sign) * coeff
         })
         return result.zerosRemoved()
     }
@@ -364,16 +367,16 @@ export namespace reduc {
 
     /** ν_p(a) for a prime p and positive integer a is the exponent of the largest power
      *  of p dividing a. (The p-adic valuation of a). */
-    export function nu(p: number, a: number): number {
+    export function nu(p: bigint, a: bigint): bigint {
         if (p < 2)
             throw new Error("p must be at least 2 for the p-adic valuation.")
-        if (a == 0)
+        if (a == 0n)
             throw new Error("a = 0 gives a valuation of infinity.")
 
-        let count = 0
-        while (a % p == 0) {
+        let count = 0n
+        while (a % p == 0n) {
             a = a / p
-            count += 1
+            count += 1n
         }
         return count
     }
@@ -409,7 +412,7 @@ export namespace reduc {
                 vecmut.addScaled(tmp, weight, datum.positives[i], 0 - (evaluation - m*p))
 
                 // Compute the coefficient ν(p, mp) and save the term.
-                terms.askEntry(tmp).value += nu(p, m*p)
+                terms.askEntry(tmp).value += nu(BigInt(p), BigInt(m*p))
             }
         }
 
@@ -468,8 +471,6 @@ export namespace reduc {
         let chis = datum.charAlg.basis(lambda)
         let simps = datum.charAlg.zero()
 
-        const MAX_SAFE_INTEGER = 0x7fffffff
-
         while (chis.size() != 0) {
             // For each χ(μ) in chis, find L(μ) = χ(μ) + χ(...). This tells us that we can add L(μ) to our simples,
             // as long as we subtract χ(...) from our chis.
@@ -480,11 +481,6 @@ export namespace reduc {
 
             simps = datum.charAlg.add(simpContrib, simps)
             chis = datum.charAlg.sub(chis, chiContrib).zerosRemoved()
-            let maxCoeff = maps.reduce(chis, (acc, key, val) => Math.max(acc, Math.abs(val)), 0)
-            if (maxCoeff >= MAX_SAFE_INTEGER) {
-                console.log("Bailing out because we saw a coefficient with magnitude", maxCoeff)
-                return null
-            }
         }
 
         return simps
@@ -542,7 +538,7 @@ export namespace reduc {
         // Tactic 1: if the summation in the Jantzen filtration is multiplicity-free when expanded into
         // simple characters, then we must have V^2 = 0 and hence ch V(λ) = ch L(λ) + ch V(λ, 1), where
         // ch V(λ, 1) is given by the Jantzen summation.
-        if (maps.every(jantzenInSimples, (wt, mult) => mult == 1)) {
+        if (maps.every(jantzenInSimples, (wt, mult) => mult == 1n)) {
             // Since we have a multiplicity-free decomposition, we have the equation
             // ch V(λ) = ch L(λ) + (jantzen sum).
             let result = datum.charAlg.add(datum.charAlg.basis(lambda), jantzenInSimples).zerosRemoved()
@@ -558,16 +554,16 @@ export namespace reduc {
 
         // "Transpose" the jantzenInSimples expansion so it is in the form
         //    multiplicity => [list of weights occuring with that multiplicity]
-        const maxMult = maps.reduce(jantzenInSimples, (acc, wt, mult) => Math.max(acc, mult), 0)
+        const maxMult = maps.reduce(jantzenInSimples, (acc, wt, mult) => big.max(acc, mult), 0n)
         const coeffMults: Vec[][] = []
         for (let i = 0; i <= maxMult; i++)
             coeffMults[i] = []
 
         // TODO: Fix annoying bugs like this where I forget to slice! We should probably introduce
         // a different interface where forPairs() does not need slicing, but forPairsMut() does or something.
-        jantzenInSimples.forEach((wt, mult) => coeffMults[mult].push(wt.slice()))
+        jantzenInSimples.forEach((wt, mult) => coeffMults[Number(mult)].push(wt.slice()))
 
-        if (maxMult == 2 && coeffMults[2].length == 1) {
+        if (maxMult == 2n && coeffMults[2].length == 1) {
             // If the multiplicity-2 weight is in (ch V1/V2), it is counted correctly by the Jantzen sum.
             // If the multiplicity-2 weight is in (ch V2/V3), it is overcounted once by the Jantzen sum.
 
@@ -586,7 +582,7 @@ export namespace reduc {
         }
 
         // If we were not so lazy, we could extend the above strategy very easy to this case:
-        if (maxMult == 3 && coeffMults[2].length == 0 && coeffMults[3].length == 1) {
+        if (maxMult == 3n && coeffMults[2].length == 0 && coeffMults[3].length == 1) {
             console.log(lambda, coeffMults)
         }
 
@@ -666,7 +662,7 @@ export namespace reduc {
         let weylInSimples = tryWeylToSimple(datum, p, lambda, t, d+1)
         if (weylInSimples != null) {
             // It worked! So we have V(λ) = Demazure(λ) = weylInSimples
-            if (weylInSimples.get(lambda) != 1)
+            if (weylInSimples.get(lambda) != 1n)
                 throw new Error("Something went wrong, the simple should have multiplicity 1 here.")
             let remainder = datum.charAlg.sub(weylInSimples, datum.charAlg.basis(lambda))
             let remainderWeyl = datum.charAlg.tryApplyLinear(remainder, wt => trySimpleInWeyls(datum, p, wt, t, d+1))
@@ -682,7 +678,7 @@ export namespace reduc {
     }
 
     /** Attempt to compute the dimension of a simple module. */
-    export function trySimpleDimension(datum: BasedRootDatum, p: number, lambda: Vec, t?: Tracker): number | null {
+    export function trySimpleDimension(datum: BasedRootDatum, p: number, lambda: Vec, t?: Tracker): bigint | null {
         let tracker = t || createTracker(datum, 5)
         let simpleInWeyl = trySimpleInWeyls(datum, p, lambda, tracker, 0)
         return (simpleInWeyl != null)

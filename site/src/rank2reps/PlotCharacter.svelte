@@ -1,13 +1,13 @@
 <!-- Plot an element of Z[X(T)]. -->
 
 <script lang="ts">
-    import { draw, vec } from 'lielib'
+    import { draw, vec, char } from 'lielib'
 
     // A coordinate system which accepts whatever basis the character is.
     export let D: draw.NewCoords
 
     // The character.
-    export let character
+    export let character: char.CharElt
 
     // Show bubbles or text?
     export let showText = false
@@ -18,8 +18,8 @@
     // Scaling factor so that when we zoom out stuff doesn't look too stupid.
     $: scaleFactor = Math.sqrt(vec.norm(D.aff2.xyLin([1, 0]))) / 4
 
-    function elementRadius(coeff, radius) {
-        return radius * Math.sqrt(Math.abs(coeff)) * scaleFactor
+    function elementRadius(coeff: bigint, radius: number) {
+        return radius * Math.sqrt(Math.abs(Number(coeff))) * scaleFactor
     }
 
     // Separate the character into its positive and negative parts.
@@ -52,7 +52,7 @@
 
 {#if showText}
     {#each character.toPairs() as [[u, v], mult]}
-        {#if mult != 0}
+        {#if mult != 0n}
             <circle
                 cx={D.aff2.x(u, v)}
                 cy={D.aff2.y(u, v)}

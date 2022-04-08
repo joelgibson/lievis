@@ -16,9 +16,9 @@ export namespace char {
 
 type Vec = number[]
 
-export class CharElt extends maps.AbstractEntryHashTableFactory()<Vec, number> implements maps.IEntryMap<Vec, number> {
-    protected defaultValue() { return 0 }
-    protected appendPair(key: Vec, value: number) { this.entries.push({key: key.slice(), value}) }
+export class CharElt extends maps.AbstractEntryHashTableFactory()<Vec, bigint> implements maps.IEntryMap<Vec, bigint> {
+    protected defaultValue() { return 0n }
+    protected appendPair(key: Vec, value: bigint) { this.entries.push({key: key.slice(), value}) }
     protected hash(key: Vec) { return hash.ivec(key) }
     protected equal(key1: Vec, key2: Vec) {
         if (key1.length != key2.length)
@@ -32,14 +32,14 @@ export class CharElt extends maps.AbstractEntryHashTableFactory()<Vec, number> i
     }
     protected cmp = maps.EntryVecMap.prototype.cmp
 
-    mutScale(s: number): this {
+    mutScale(s: bigint): this {
         for (let i = 0; i < this.entries.length; i++)
             this.entries[i].value *= s
 
         return this
     }
 
-    mutAddScaled(X: CharElt, scalar: number): this {
+    mutAddScaled(X: CharElt, scalar: bigint): this {
         for (let i = 0; i < X.entries.length; i++) {
             let x = X.entries[i]
             this.askEntry(x.key).value += x.value * scalar
@@ -51,7 +51,7 @@ export class CharElt extends maps.AbstractEntryHashTableFactory()<Vec, number> i
         // Are there any zero values?
         let hasZeros = false
         for (let i = 0; i < this.entries.length; i++) {
-            if (this.entries[i].value == 0) {
+            if (this.entries[i].value == 0n) {
                 hasZeros = true
                 break
             }
@@ -62,7 +62,7 @@ export class CharElt extends maps.AbstractEntryHashTableFactory()<Vec, number> i
 
         let char = new CharElt()
         for (let i = 0; i < this.entries.length; i++)
-            if (this.entries[i].value != 0)
+            if (this.entries[i].value != 0n)
                 char.set(this.entries[i].key, this.entries[i].value)
 
         return char
@@ -81,16 +81,16 @@ export class CharAlg {
     constructor(readonly nvars: number) {}
 
     /** Unit map, which inserts scalars into scalar multiples of the identity. */
-    unit(scalar: number) {
+    unit(scalar: bigint) {
         let elt = new CharElt()
-        if (scalar != 0)
+        if (scalar != 0n)
             elt.set(Array(this.nvars).fill(0), scalar)
 
         return elt
     }
 
-    zero() { return this.unit(0) }
-    one() { return this.unit(1) }
+    zero() { return this.unit(0n) }
+    one() { return this.unit(1n) }
 
     /** Lifts a Vec to a monomial, eg [1, 0, 4] => xz^4. */
     basis(vec: Vec) {
@@ -98,7 +98,7 @@ export class CharAlg {
             throw new Error("Vector length incompatible with number of variables.")
 
         let elt = new CharElt()
-        elt.set(vec, 1)
+        elt.set(vec, 1n)
         return elt
     }
 
@@ -112,13 +112,13 @@ export class CharAlg {
         return this.basis(v)
     }
 
-    private readonly _zero = this.unit(0)
-    protected ax_by(a: number, x:CharElt, b: number, y: CharElt) {
-        if (a == 0 && b == 0)
-            return this.unit(0)
-        else if (a == 0)
+    private readonly _zero = this.unit(0n)
+    protected ax_by(a: bigint, x:CharElt, b: bigint, y: CharElt) {
+        if (a == 0n && b == 0n)
+            return this.unit(0n)
+        else if (a == 0n)
             x = this._zero
-        else if (b == 0)
+        else if (b == 0n)
             y = this._zero
 
         let result = new CharElt()
@@ -135,9 +135,9 @@ export class CharAlg {
         return result
     }
 
-    scale(x: CharElt, s: number): CharElt { return this.ax_by(s, x, 0, this._zero) }
-    add(x: CharElt, y: CharElt): CharElt { return this.ax_by(1, x, 1, y) }
-    sub(x: CharElt, y: CharElt): CharElt { return this.ax_by(1, x, -1, y) }
+    scale(x: CharElt, s: bigint): CharElt { return this.ax_by(s, x, 0n, this._zero) }
+    add(x: CharElt, y: CharElt): CharElt { return this.ax_by(1n, x, 1n, y) }
+    sub(x: CharElt, y: CharElt): CharElt { return this.ax_by(1n, x, -1n, y) }
 
     mul(X: CharElt, Y: CharElt): CharElt {
         let result = new CharElt()
@@ -153,8 +153,8 @@ export class CharAlg {
         return result
     }
 
-    applyFunctional(X: CharElt, f: (basis: Vec) => number): number {
-        let result = 0
+    applyFunctional(X: CharElt, f: (basis: Vec) => bigint): bigint {
+        let result = 0n
         for (let i = 0; i < X.entries.length; i++) {
             let x = X.entries[i]
             result += f(x.key) * x.value
@@ -185,7 +185,7 @@ export class CharAlg {
         for (let i = 0; i < X.entries.length; i++) {
             let x = X.entries[i]
 
-            if (x.value == 0)
+            if (x.value == 0n)
                 continue
 
             let fElt = f(x.key)

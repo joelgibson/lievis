@@ -10,6 +10,10 @@ Very short functions are sometimes copied rather than being imported, in the sak
 
 ## Testing
 
+Firstly the code should typecheck:
+
+    pnpm run typecheck
+
 Some tests present to identify regressions and validate some basic assumptions about how data structures behave: these tests are not exhaustive (nor are they indended to be). They can be run using
 
     pnpm run test

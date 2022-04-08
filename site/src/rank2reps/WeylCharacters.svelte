@@ -233,7 +233,7 @@
 
             <tr>
                 <td>Dim V{#if characterType == 'demazure'}<sub>{demazureWord}</sub>{/if}(λ)</td>
-                <td>{datum.charAlg.applyFunctional(character, (wt) => 1).toLocaleString()}</td>
+                <td>{datum.charAlg.applyFunctional(character, (wt) => 1n).toLocaleString()}</td>
                 <td>
                     <InfoTooltip>
                         <p>The dimension of the module as computed via the sum of dimensions of its weight spaces.</p>

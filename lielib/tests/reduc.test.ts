@@ -198,11 +198,11 @@ registerSuite('reduc', {
 
     'Weyl dimension for SL2'() {
         let SL2 = reduc.baseBySimples({rank: 1, roots: [[2], [-2]], coroots: [[1], [-1]]}, [0])
-        assert.deepEqual(reduc.weylDimension(SL2, [2]), 3)
-        assert.deepEqual(reduc.weylDimension(SL2, [1]), 2)
-        assert.deepEqual(reduc.weylDimension(SL2, [0]), 1)
-        assert.deepEqual(reduc.weylDimension(SL2, [-1]), 0)
-        assert.deepEqual(reduc.weylDimension(SL2, [-2]), -1)
+        assert.deepEqual(reduc.weylDimension(SL2, [2]), 3n)
+        assert.deepEqual(reduc.weylDimension(SL2, [1]), 2n)
+        assert.deepEqual(reduc.weylDimension(SL2, [0]), 1n)
+        assert.deepEqual(reduc.weylDimension(SL2, [-1]), 0n)
+        assert.deepEqual(reduc.weylDimension(SL2, [-2]), -1n)
     },
 
     'Weyl dimension for GL4 and SL4'() {
@@ -210,23 +210,23 @@ registerSuite('reduc', {
         let SL4 = groups.SL(4)
 
         // The trivial representation is one dimensional.
-        assert.deepEqual(reduc.weylDimension(GL4, [0, 0, 0, 0]), 1)
-        assert.deepEqual(reduc.weylDimension(SL4, [0, 0, 0]), 1)
+        assert.deepEqual(reduc.weylDimension(GL4, [0, 0, 0, 0]), 1n)
+        assert.deepEqual(reduc.weylDimension(SL4, [0, 0, 0]), 1n)
 
         // The natural representation (or first wedge of it) is four dimensional.
-        assert.deepEqual(reduc.weylDimension(GL4, [1, 0, 0, 0]), 4)
-        assert.deepEqual(reduc.weylDimension(SL4, [1, 0, 0]), 4)
+        assert.deepEqual(reduc.weylDimension(GL4, [1, 0, 0, 0]), 4n)
+        assert.deepEqual(reduc.weylDimension(SL4, [1, 0, 0]), 4n)
 
         // The second wedge power of the natural representation is (4 choose 2) = 6 dimensional.
-        assert.deepEqual(reduc.weylDimension(GL4, [1, 1, 0, 0]), 6)
-        assert.deepEqual(reduc.weylDimension(SL4, [0, 1, 0]), 6)
+        assert.deepEqual(reduc.weylDimension(GL4, [1, 1, 0, 0]), 6n)
+        assert.deepEqual(reduc.weylDimension(SL4, [0, 1, 0]), 6n)
 
         // The dual of the natural representation is four dimensional.
-        assert.deepEqual(reduc.weylDimension(GL4, [1, 1, 1, 0]), 4)
-        assert.deepEqual(reduc.weylDimension(SL4, [0, 0, 1]), 4)
+        assert.deepEqual(reduc.weylDimension(GL4, [1, 1, 1, 0]), 4n)
+        assert.deepEqual(reduc.weylDimension(SL4, [0, 0, 1]), 4n)
 
         // The determinant representation is one dimensional.
-        assert.deepEqual(reduc.weylDimension(GL4, [1, 1, 1, 1]), 1)
+        assert.deepEqual(reduc.weylDimension(GL4, [1, 1, 1, 1]), 1n)
     },
 
     'Long words of some Weyl groups'() {
@@ -296,27 +296,27 @@ registerSuite('reduc', {
 
     'Weyl character for SL2'() {
         let SL2 = reduc.baseBySimples({rank: 1, roots: [[2], [-2]], coroots: [[1], [-1]]}, [0])
-        assert.deepEqual(reduc.weylCharacter(SL2, [2]).toPairs(), [[[-2], 1], [[0], 1], [[2], 1]])
-        assert.deepEqual(reduc.weylCharacter(SL2, [1]).toPairs(), [[[-1], 1], [[1], 1]])
-        assert.deepEqual(reduc.weylCharacter(SL2, [0]).toPairs(), [[[0], 1]])
+        assert.deepEqual(reduc.weylCharacter(SL2, [2]).toPairs(), [[[-2], 1n], [[0], 1n], [[2], 1n]])
+        assert.deepEqual(reduc.weylCharacter(SL2, [1]).toPairs(), [[[-1], 1n], [[1], 1n]])
+        assert.deepEqual(reduc.weylCharacter(SL2, [0]).toPairs(), [[[0], 1n]])
         assert.deepEqual(reduc.weylCharacter(SL2, [-1]).toPairs(), [])
-        assert.deepEqual(reduc.weylCharacter(SL2, [-2]).toPairs(), [[[0], -1]])
+        assert.deepEqual(reduc.weylCharacter(SL2, [-2]).toPairs(), [[[0], -1n]])
     },
 
     'Weyl character for SL3'() {
         let SL3 = groups.SL(3)
 
-        assert.deepEqual(reduc.weylCharacter(SL3, [0, 0]).toPairs(), [[[0, 0], 1]])
-        assert.deepEqual(reduc.weylCharacter(SL3, [1, 0]).toPairs(), [[[-1, 1], 1], [[0, -1], 1], [[1, 0], 1]])
-        assert.deepEqual(reduc.weylCharacter(SL3, [0, 1]).toPairs(), [[[-1, 0], 1], [[0, 1], 1], [[1, -1], 1]])
+        assert.deepEqual(reduc.weylCharacter(SL3, [0, 0]).toPairs(), [[[0, 0], 1n]])
+        assert.deepEqual(reduc.weylCharacter(SL3, [1, 0]).toPairs(), [[[-1, 1], 1n], [[0, -1], 1n], [[1, 0], 1n]])
+        assert.deepEqual(reduc.weylCharacter(SL3, [0, 1]).toPairs(), [[[-1, 0], 1n], [[0, 1], 1n], [[1, -1], 1n]])
         assert.deepEqual(reduc.weylCharacter(SL3, [1, 1]).toPairs(), [
-            [[-2, 1], 1],
-            [[-1, -1], 1],
-            [[-1, 2], 1],
-            [[0, 0], 2],
-            [[1, -2], 1],
-            [[1, 1], 1],
-            [[2, -1], 1],
+            [[-2, 1], 1n],
+            [[-1, -1], 1n],
+            [[-1, 2], 1n],
+            [[0, 0], 2n],
+            [[1, -2], 1n],
+            [[1, 1], 1n],
+            [[2, -1], 1n],
         ])
     },
 
@@ -335,19 +335,19 @@ registerSuite('reduc', {
 
     'Normalise linear combination of Weyl characters for SL2'() {
         let SL2 = reduc.baseBySimples({rank: 1, roots: [[2], [-2]], coroots: [[1], [-1]]}, [0])
-        assert.deepEqual(reduc.weylCharacterNormalise(SL2, SL2.charAlg.basis([0])).toPairs(), [[[0], 1]])
-        assert.deepEqual(reduc.weylCharacterNormalise(SL2, SL2.charAlg.basis([1])).toPairs(), [[[1], 1]])
+        assert.deepEqual(reduc.weylCharacterNormalise(SL2, SL2.charAlg.basis([0])).toPairs(), [[[0], 1n]])
+        assert.deepEqual(reduc.weylCharacterNormalise(SL2, SL2.charAlg.basis([1])).toPairs(), [[[1], 1n]])
         assert.deepEqual(reduc.weylCharacterNormalise(SL2, SL2.charAlg.basis([-1])).toPairs(), [])
-        assert.deepEqual(reduc.weylCharacterNormalise(SL2, SL2.charAlg.basis([-2])).toPairs(), [[[0], -1]])
+        assert.deepEqual(reduc.weylCharacterNormalise(SL2, SL2.charAlg.basis([-2])).toPairs(), [[[0], -1n]])
     },
 
     'Tensor product multiplicities of Weyl modules for SL2'() {
         let SL2 = reduc.baseBySimples({rank: 1, roots: [[2], [-2]], coroots: [[1], [-1]]}, [0])
-        assert.deepEqual(reduc.tensorWeyls(SL2, [0], [0]).toPairs(), [[[0], 1]])
-        assert.deepEqual(reduc.tensorWeyls(SL2, [0], [1]).toPairs(), [[[1], 1]])
-        assert.deepEqual(reduc.tensorWeyls(SL2, [1], [0]).toPairs(), [[[1], 1]])
-        assert.deepEqual(reduc.tensorWeyls(SL2, [1], [1]).toPairs(), [[[0], 1], [[2], 1]])
-        assert.deepEqual(reduc.tensorWeyls(SL2, [2], [2]).toPairs(), [[[0], 1], [[2], 1], [[4], 1]])
+        assert.deepEqual(reduc.tensorWeyls(SL2, [0], [0]).toPairs(), [[[0], 1n]])
+        assert.deepEqual(reduc.tensorWeyls(SL2, [0], [1]).toPairs(), [[[1], 1n]])
+        assert.deepEqual(reduc.tensorWeyls(SL2, [1], [0]).toPairs(), [[[1], 1n]])
+        assert.deepEqual(reduc.tensorWeyls(SL2, [1], [1]).toPairs(), [[[0], 1n], [[2], 1n]])
+        assert.deepEqual(reduc.tensorWeyls(SL2, [2], [2]).toPairs(), [[[0], 1n], [[2], 1n], [[4], 1n]])
     },
 
     'Tensor product multiplicities in GL4 and SL4'() {
@@ -362,33 +362,33 @@ registerSuite('reduc', {
         // would be [3, 0, 1]
 
         assert.deepEqual(reduc.tensorWeyls(groups.GL(4), [1, 1, 0, 0], [1, 1, 0, 0]).toPairs(), [
-            [[1, 1, 1, 1], 1],
-            [[2, 1, 1, 0], 1],
-            [[2, 2, 0, 0], 1]
+            [[1, 1, 1, 1], 1n],
+            [[2, 1, 1, 0], 1n],
+            [[2, 2, 0, 0], 1n]
         ])
         assert.deepEqual(reduc.tensorWeyls(groups.basedRootSystemByName('A3'), [0, 1, 0], [0, 1, 0]).toPairs(), [
-            [[0, 0, 0], 1],
-            [[0, 2, 0], 1],
-            [[1, 0, 1], 1],
+            [[0, 0, 0], 1n],
+            [[0, 2, 0], 1n],
+            [[1, 0, 1], 1n],
         ])
 
         assert.deepEqual(reduc.tensorWeyls(groups.GL(4), [2, 1, 0, 0], [3, 2, 1, 1]).toPairs(), [
-            [[3, 3, 2, 2], 1],
-            [[3, 3, 3, 1], 1],
-            [[4, 2, 2, 2], 1],
-            [[4, 3, 2, 1], 2],
-            [[4, 4, 1, 1], 1],
-            [[5, 2, 2, 1], 1],
-            [[5, 3, 1, 1], 1]
+            [[3, 3, 2, 2], 1n],
+            [[3, 3, 3, 1], 1n],
+            [[4, 2, 2, 2], 1n],
+            [[4, 3, 2, 1], 2n],
+            [[4, 4, 1, 1], 1n],
+            [[5, 2, 2, 1], 1n],
+            [[5, 3, 1, 1], 1n]
         ])
         assert.deepEqual(reduc.tensorWeyls(groups.basedRootSystemByName('A3'), [1, 1, 0], [1, 1, 0]).toPairs(), [
-            [[0, 0, 2], 1], // 3 3 3 1
-            [[0, 1, 0], 1], // 3 3 2 2
-            [[0, 3, 0], 1], // 4 4 1 1
-            [[1, 1, 1], 2], // 4 3 2 1
-            [[2, 0, 0], 1], // 4 2 2 2
-            [[2, 2, 0], 1], // 5 3 1 1
-            [[3, 0, 1], 1], // 5 2 2 1
+            [[0, 0, 2], 1n], // 3 3 3 1
+            [[0, 1, 0], 1n], // 3 3 2 2
+            [[0, 3, 0], 1n], // 4 4 1 1
+            [[1, 1, 1], 2n], // 4 3 2 1
+            [[2, 0, 0], 1n], // 4 2 2 2
+            [[2, 2, 0], 1n], // 5 3 1 1
+            [[3, 0, 1], 1n], // 5 2 2 1
         ])
     },
 
@@ -453,19 +453,19 @@ registerSuite('reduc', {
     },
 
     'P-adic valuation'() {
-        assert.deepEqual(reduc.nu(2, 1), 0)
-        assert.deepEqual(reduc.nu(2, 2), 1)
-        assert.deepEqual(reduc.nu(2, 3), 0)
-        assert.deepEqual(reduc.nu(2, 4), 2)
-        assert.deepEqual(reduc.nu(2, 5), 0)
-        assert.deepEqual(reduc.nu(2, 6), 1)
-        assert.deepEqual(reduc.nu(2, 7), 0)
-        assert.deepEqual(reduc.nu(2, 8), 3)
+        assert.deepEqual(reduc.nu(2n, 1n), 0n)
+        assert.deepEqual(reduc.nu(2n, 2n), 1n)
+        assert.deepEqual(reduc.nu(2n, 3n), 0n)
+        assert.deepEqual(reduc.nu(2n, 4n), 2n)
+        assert.deepEqual(reduc.nu(2n, 5n), 0n)
+        assert.deepEqual(reduc.nu(2n, 6n), 1n)
+        assert.deepEqual(reduc.nu(2n, 7n), 0n)
+        assert.deepEqual(reduc.nu(2n, 8n), 3n)
 
-        assert.deepEqual(reduc.nu(3, 45), 2)
+        assert.deepEqual(reduc.nu(3n, 45n), 2n)
 
-        assert.throws(() => reduc.nu(1, 6))
-        assert.throws(() => reduc.nu(3, 0))
+        assert.throws(() => reduc.nu(1n, 6n))
+        assert.throws(() => reduc.nu(3n, 0n))
     },
 
     'Steinberg decomposing weights'() {
@@ -490,7 +490,7 @@ registerSuite('reduc', {
         // 63 = 1x0 + 3x0 + 9x1 + 27x2
         // 76 = 1x1 + 3x1 + 9x2 + 27x2
         let decomp = [[0, 1], [0, 1], [1, 2], [2, 2]]
-        let expectedDimension = decomp.reduce((acc, wt) => acc * <number>reduc.trySimpleDimension(A2, p, wt, reduc.createTracker(A2, 10)), 1)
+        let expectedDimension = decomp.reduce((acc, wt) => acc * <bigint>reduc.trySimpleDimension(A2, p, wt, reduc.createTracker(A2, 10)), 1n)
         assert.deepEqual(simpleDimension, expectedDimension)
     },
 })
