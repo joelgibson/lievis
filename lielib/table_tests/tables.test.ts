@@ -29,7 +29,7 @@ tables.forEach(({group, weight, dim, primes, domWtMults}) => {
                 return
 
             let datum = groups.basedRootSystemByName(group)
-            let simpleInWeyls = reduc.trySimpleInWeyls(datum, prime, weight, reduc.createTracker(datum, 10), 0)
+            let simpleInWeyls = reduc.trySimpleInWeyls(datum, prime, weight, reduc.createTracker(datum, 10, prime), 0)
             assert.isNotNull(simpleInWeyls)
 
             let dimension = maps.reduce(simpleInWeyls!, (acc, wt, coeff) => acc + coeff * reduc.weylDimension(datum, wt), 0n)

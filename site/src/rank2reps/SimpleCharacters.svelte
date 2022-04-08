@@ -30,6 +30,10 @@
         aff.Aff2.fromLinear(proj, sect).then(userPort.aff),
     )
 
+    // The tracker caches local state, and needs to depend on the prime.
+    let tracker: reduc.Tracker
+    $: tracker = reduc.createTracker(datum, 20, P)
+
     let cursorWt = [0, 0]
     let frozenWt: null | number[] = null
 
@@ -39,23 +43,22 @@
     $: selectedWt = [frozenWt, cursorWt, selectedWt, vec.zero(datum.rank)].filter(maySelectWt)[0]
 
 
-    function computeChar(datum, P, selectedWt, showWhat) {
-        let t = reduc.createTracker(datum, 20)
-        let simpleDimension = reduc.trySimpleDimension(datum, P, selectedWt, t) || '???'
+    function computeChar(datum, P, selectedWt, showWhat, tracker) {
+        let simpleDimension = reduc.trySimpleDimension(datum, P, selectedWt, tracker) || '???'
         if (showWhat == 'simpsInWeyls') {
-            let char = reduc.trySimpleInWeyls(datum, P, selectedWt, t, 0)
+            let char = reduc.trySimpleInWeyls(datum, P, selectedWt, tracker, 0)
             let dim = (char != null) ? maps.reduce(char, (acc, wt, mult) => acc + mult * reduc.weylDimension(datum, wt), 0n) : '?'
             return {char, dim, simpleDimension}
         }
 
         if (showWhat == 'weylsInSimps') {
-            let char = reduc.tryWeylInSimplesInversion(datum, P, selectedWt, t)
-            let dim = (char != null) ? maps.reduce(char, (acc, wt, mult) => acc + mult * reduc.trySimpleDimension(datum, P, wt, t), 0n) : '?'
+            let char = reduc.tryWeylInSimplesInversion(datum, P, selectedWt, tracker)
+            let dim = (char != null) ? maps.reduce(char, (acc, wt, mult) => acc + mult * reduc.trySimpleDimension(datum, P, wt, tracker), 0n) : '?'
             return {char, dim, simpleDimension}
         }
 
         if (showWhat == 'simpsInStd') {
-            let char = reduc.trySimpleInWeyls(datum, P, selectedWt, t, 0)
+            let char = reduc.trySimpleInWeyls(datum, P, selectedWt, tracker, 0)
             let dim = (char != null) ? maps.reduce(char, (acc, wt, mult) => acc + mult * reduc.weylDimension(datum, wt), 0n) : '?'
             if (char != null)
                 char = datum.charAlg.tryApplyLinear(char, x => reduc.weylCharacter(datum, x))
@@ -65,7 +68,7 @@
         throw new Error("unreachable")
     }
 
-    $: ({char: character, dim: dimension, simpleDimension} = computeChar(datum, P, selectedWt, showWhat))
+    $: ({char: character, dim: dimension, simpleDimension} = computeChar(datum, P, selectedWt, showWhat, tracker))
 </script>
 
 <style>

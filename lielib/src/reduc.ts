@@ -451,14 +451,16 @@ export namespace reduc {
 
     type BasisChange = maps.IMap<Vec, char.CharElt>
     export interface Tracker {
+        prime: number,
         depthLimit: number
         simpsInWeyls: BasisChange
         weylsInSimps: BasisChange
         jantzMults: BasisChange
     }
 
-    export function createTracker(datum: BasedRootDatum, depthLimit: number): Tracker {
+    export function createTracker(datum: BasedRootDatum, depthLimit: number, prime: number): Tracker {
         return {
+            prime,
             depthLimit,
             simpsInWeyls: new maps.EntryVecMap(),
             weylsInSimps: new maps.EntryVecMap(),
@@ -467,23 +469,33 @@ export namespace reduc {
     }
 
     export function tryWeylInSimplesInversion(datum: BasedRootDatum, p: number, lambda: Vec, t: Tracker): char.CharElt | null {
-        // Invariant: chis + simps = χ(λ).
-        let chis = datum.charAlg.basis(lambda)
-        let simps = datum.charAlg.zero()
+        // Have we cached the result already?
+        if (t.weylsInSimps.contains(lambda))
+            return t.weylsInSimps.get(lambda)
 
-        while (chis.size() != 0) {
-            // For each χ(μ) in chis, find L(μ) = χ(μ) + χ(...). This tells us that we can add L(μ) to our simples,
-            // as long as we subtract χ(...) from our chis.
-            let simpContrib = chis
-            let chiContrib = datum.charAlg.tryApplyLinear(chis, wt => trySimpleInWeyls(datum, p, wt, t, 0))
-            if (chiContrib == null)
+        // We want to end up with χ(λ) = L(λ) + (lower order L terms).
+        // What we know is L(λ) = χ(λ) + (lower order χ terms).
+        let result = datum.charAlg.basis(lambda)
+        let chis = trySimpleInWeyls(datum, p, lambda, t, 0)
+        if (chis == null)
+            return null
+
+        for (let i = 0; i < chis.entries.length; i++) {
+            let wt = chis.entries[i].key
+            let mult = chis.entries[i].value
+            if (vec.equal(lambda, wt))
+                continue
+
+            let simples = tryWeylInSimplesInversion(datum, p, wt, t)
+            if (simples == null)
                 return null
 
-            simps = datum.charAlg.add(simpContrib, simps)
-            chis = datum.charAlg.sub(chis, chiContrib).zerosRemoved()
+            result.mutAddScaled(simples, -mult)
         }
 
-        return simps
+        result = result.zerosRemoved()
+        t.weylsInSimps.set(lambda, result)
+        return result
     }
 
     /** Turn a weight in the Weyl basis into the simple basis. */
@@ -679,7 +691,7 @@ export namespace reduc {
 
     /** Attempt to compute the dimension of a simple module. */
     export function trySimpleDimension(datum: BasedRootDatum, p: number, lambda: Vec, t?: Tracker): bigint | null {
-        let tracker = t || createTracker(datum, 5)
+        let tracker = t || createTracker(datum, 5, p)
         let simpleInWeyl = trySimpleInWeyls(datum, p, lambda, tracker, 0)
         return (simpleInWeyl != null)
             ? datum.charAlg.applyFunctional(simpleInWeyl, wt => weylDimension(datum, wt))

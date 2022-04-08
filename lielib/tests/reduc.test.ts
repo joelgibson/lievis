@@ -486,11 +486,11 @@ registerSuite('reduc', {
         let A2 = groups.simplyConn(groups.rootSystems['A2'])
         let p = 3
         let weight = [63, 76]
-        let simpleDimension = reduc.trySimpleDimension(A2, p, weight, reduc.createTracker(A2, 10))
+        let simpleDimension = reduc.trySimpleDimension(A2, p, weight, reduc.createTracker(A2, 10, p))
         // 63 = 1x0 + 3x0 + 9x1 + 27x2
         // 76 = 1x1 + 3x1 + 9x2 + 27x2
         let decomp = [[0, 1], [0, 1], [1, 2], [2, 2]]
-        let expectedDimension = decomp.reduce((acc, wt) => acc * <bigint>reduc.trySimpleDimension(A2, p, wt, reduc.createTracker(A2, 10)), 1n)
+        let expectedDimension = decomp.reduce((acc, wt) => acc * <bigint>reduc.trySimpleDimension(A2, p, wt, reduc.createTracker(A2, 10, p)), 1n)
         assert.deepEqual(simpleDimension, expectedDimension)
     },
 })
