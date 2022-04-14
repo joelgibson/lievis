@@ -894,6 +894,16 @@ export namespace mat {
         return true
     }
 
+    /** Predicate testing whether a matrix is upper-triangular, i.e. if (i > j) implies M[i, j] = 0. */
+    export function isUpperTriangular(M: Mat): boolean {
+        for (let i = 1; i < M.nrows; i++)
+            for (let j = 0; j < i; j++)
+                if (M.get(i, j) != 0)
+                    return false
+
+        return true
+    }
+
     export function multAff(M: Mat, v: Vec): Vec {
         let u: number[] = v.map(() => 0)
         matmut.multAff(u, M, v)
@@ -1174,6 +1184,50 @@ export namespace mat {
         // A is det * detU.
         return {adj: mat.multMat(B, U), det: (detU > 0) ? det : 0 - det}
     }
+
+    /** Invert a square upper-triangular matrix. This preserves integral unitriangular matrices. */
+    export function invertUpperTriangular(M: Mat): Mat {
+        if (!mat.isSquare(M) || !mat.isUpperTriangular(M))
+            throw new Error("Matrix must be square and upper-triangular.")
+
+        // Build the inverse from left to right, bottom to top.
+        let size = M.nrows
+        let N = mat.zero(size, size)
+
+        for (let j = 0; j < size; j++) {
+            matmut.set(N, j, j, 1 / M.get(j, j))
+
+            for (let i = j - 1; i >= 0; i--) {
+                let sum = 0
+                for (let k = j; i < k; k--)
+                    sum += M.get(i, k) * N.get(k, j)
+
+                matmut.set(N, i, j, 0-sum*M.get(j, j))
+            }
+        }
+
+        return N
+    }
+
+    /** Multiply two upper-triangular matrices. For square matrices this should be 6x faster. */
+    export function multUpperTriangular(M: Mat, N: Mat) {
+        if (M.ncols != N.nrows)
+            throw new Error(`Matrix dimensions incompatible`)
+
+        if (!isUpperTriangular(M) || !isUpperTriangular(N))
+            throw new Error(`This method requires upper-triangular matrices for correctness.`)
+
+        let data: number[] = []
+        for (let i = 0; i < M.nrows * N.ncols; i++)
+            data[i] = 0
+
+        for (let i = 0; i < M.nrows; i++)
+            for (let k = i; k < M.ncols; k++)
+                for (let j = i; j < N.ncols; j++)
+                    data[i * N.ncols + j] += M.data[M.ncols * i + k] * N.data[N.ncols * k + j]
+
+        return new Matrix(M.nrows, N.ncols, data)
+    }
 }
 
 /** These functions all overwrite their first argument. The amount they overwrite is
@@ -1218,6 +1272,11 @@ export namespace vecmut {
 }
 
 export namespace matmut {
+    /** Set the (i, j) entry of the matrix. */
+    export function set(M: Mat, i: number, j: number, x: number) {
+        M.data[i * M.ncols + j] = x
+    }
+
     /** u ← M v. This only accesses the top left |u| x |v| submatrix of M. */
     export function multVec(u: Vec, M: Mat, v: Vec): void {
         for (let i = 0; i < u.length; i++) {

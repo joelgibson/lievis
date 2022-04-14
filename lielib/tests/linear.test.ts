@@ -1,6 +1,6 @@
 import {vec, vecmut, mat} from '../src/linear'
 
-const { assert } = intern.getPlugin('chai')
+const { assert, config } = intern.getPlugin('chai')
 const { registerSuite } = intern.getPlugin('interface.object')
 
 export {}
@@ -11,6 +11,8 @@ declare global {
         }
     }
 }
+
+config.truncateThreshold = 0
 
 // Fuzzy matcher for vectors, since floating-point is a thing.
 // expect.extend({
@@ -163,5 +165,31 @@ registerSuite('mat', {
         assert.deepEqual(mat.inverse(mat.fromRows([[2, 0], [0, 3]])), mat.fromRows([[1/2, 0], [0, 1/3]]))
 
         assert.deepEqual(mat.inverse(mat.fromRows([[1, 7], [0, 1]])), mat.fromRows([[1, -7], [0, 1]]))
+    },
+
+    'Upper-triangular inverse'() {
+        assert.deepEqual(mat.invertUpperTriangular(mat.id(0)), mat.id(0))
+        assert.deepEqual(mat.invertUpperTriangular(mat.id(1)), mat.id(1))
+        assert.deepEqual(mat.invertUpperTriangular(mat.id(2)), mat.id(2))
+
+        assert.deepEqual(mat.invertUpperTriangular(mat.fromRows([
+            [1, 1],
+            [0, 1],
+        ])), mat.fromRows([
+            [1, -1],
+            [0, 1],
+        ]))
+
+        assert.deepEqual(mat.invertUpperTriangular(mat.fromRows([
+            [1, 2, 3, 4],
+            [0, 1, 5, 6],
+            [0, 0, 1, 7],
+            [0, 0, 0, 1],
+        ])), mat.fromRows([
+            [1, -2, 7, -41],
+            [0, 1, -5, 29],
+            [0, 0, 1, -7],
+            [0, 0, 0, 1],
+        ]))
     },
 })

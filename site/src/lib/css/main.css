@@ -63,7 +63,7 @@ h3 { font-size: 1.4rem; }
     .controls button:hover { background-color: #E5E7EB; }
 }
 .controls button.selected {
-    background-color: #E5E7EB;
+    background-color: #e1fdfe;
 }
 
 
