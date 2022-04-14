@@ -280,6 +280,7 @@ point, but certain operations were just too hard to specify.
         pCan: 'none',
     }
 
+    /** Return the delta of changes against the default settings. */
     function configChanges<T>(base: T, modified: T): Partial<T> {
         let result: Partial<T> = {}
         for (let key in base)

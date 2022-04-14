@@ -37,7 +37,17 @@
         }
     }
 
-    function draw(canvasElt: HTMLCanvasElement | null, source: string, target: string, prime: number, graph: BasisGraph, globalScale: number, hoveredPoint: {x: number, y: number}, resizeCount: number) {
+    function draw(
+        canvasElt: HTMLCanvasElement | null,
+        source: string,
+        target: string,
+        prime: number,
+        graph: BasisGraph,
+        globalScale: number,
+        hoveredPoint: {x: number, y: number},
+        crosshairEnabled: boolean,
+        resizeCount: number,
+    ) {
         if (canvasElt == null)
             return
 
@@ -62,12 +72,6 @@
                 ctx.fillText('' + Math.floor(i / 10), sx(i), sy(-2))
             ctx.fillText('' + (i % 10), sx(i), sy(-1))
         }
-
-        // for (let lam of WpOrbit(uptoN, prime, 10 + 1)) {
-        //     ctx.beginPath()
-        //     ctx.arc(sx(lam - 1), sy(-1), 5, 0, 2*Math.PI)
-        //     ctx.stroke()
-        // }
 
 
         let trans = graph.getTransition(source, target)
@@ -98,20 +102,20 @@
                     star(ctx, 5, sx(i), sy(j), size)
                     ctx.fill()
                 }
-                //star(ctx, 5, sx(i), sy(j), 5)
             }
         }
 
         // Draw the hover crosshair.
-        ctx.strokeStyle = '#ddd'
-        ctx.beginPath()
-        ctx.moveTo(hoveredPoint.x, 0)
-        ctx.lineTo(hoveredPoint.x, height)
-        ctx.moveTo(0, hoveredPoint.y),
-        ctx.lineTo(width, hoveredPoint.y)
-        ctx.stroke()
+        if (crosshairEnabled) {
+            ctx.strokeStyle = '#ddd'
+            ctx.beginPath()
+            ctx.moveTo(hoveredPoint.x, 0)
+            ctx.lineTo(hoveredPoint.x, height)
+            ctx.moveTo(0, hoveredPoint.y),
+            ctx.lineTo(width, hoveredPoint.y)
+            ctx.stroke()
+        }
     }
-
 
     let options = [
         {text: 'Monomial', value: 'monomial'},
@@ -119,10 +123,11 @@
         {text: 'Simple', value: 'simple'},
         {text: 'Tilting', value: 'tilting'},
     ]
-    let source = 'simple'
-    let target = 'monomial'
+    let source = 'tilting'
+    let target = 'weyl'
+    let crosshairEnabled = false
 
-    $: draw(canvasElt, source, target, prime, graph, globalScale, hoveredPoint, resizeCount)
+    $: draw(canvasElt, source, target, prime, graph, globalScale, hoveredPoint, crosshairEnabled, resizeCount)
 </script>
 
 <style>
@@ -177,6 +182,10 @@
             <input type="range" min={0} max={primes.length - 1} bind:value={primeIdx} />
         </div>
         <div class="control-group">
+            <label for="crosshair">Crosshair</label>
+            <input type="checkbox" id="crosshair" bind:checked={crosshairEnabled} />
+        </div>
+        <div class="control-group">
             <ButtonGroupVertical {options} bind:value={source} />
             <div class="vert">
                 <span>In</span>
@@ -184,21 +193,5 @@
             </div>
             <ButtonGroupVertical {options} bind:value={target} />
         </div>
-        <!-- <fieldset>
-            From:
-            {#each bases as basis}
-                <input type="radio" name="source" id={`source-${basis}`} value={basis} bind:group={source}>
-                <label for={`source-${basis}`}>{basis}</label>
-                <br>
-            {/each}
-        </fieldset>
-        <fieldset>
-            Into:
-            {#each bases as basis}
-                <input type="radio" name="target" id={`target-${basis}`} value={basis} bind:group={target}>
-                <label for={`target-${basis}`}>{basis}</label>
-                <br>
-            {/each}
-        </fieldset> -->
     </div>
 </FullscreenableContainer>

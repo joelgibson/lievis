@@ -1,5 +1,5 @@
 ---
-title: Bases of $\SL_2$ characters
+title: Modular $\SL_2$ characters
 ---
 
 <script type="module">
@@ -79,7 +79,7 @@ where $\rho = 1$ is the sum of the fundamental weights.
 
 The simple module $L(n)$ depends on the characteristic $p$, and can be defined as the head of the Weyl module $\Delta(n)$, or as the socle of the induced module $\nabla(n)$.
 It is usually difficult to write down the characters of the simple modules in characteristic $p > 0$, but for $\SL_2$ we can do it.
-The simple characters $\ch L(n)$ are determined by the residues of binomial coefficients modulo $p$: we have that $v^{n - i \alpha}$ appears in $\ch L(n)$ if and only if $\binom{n}{i}$ is nonzero modulo $p$.
+The simple characters $\ch L(n)$ are determined by the residues of binomial coefficients modulo $p$: we have that $v^{n - i \alpha}$ appears in $\ch L(n)$ if and only if $\binom{n}{i}$ is nonzero modulo $p$. I have [a visualisation of these residues](/simple_sl2_characters/).
 
 One way to see this is to calculate the Shapovalov form on the highest-weight module $\Delta(n)$: on the $n - i\alpha$ weight space, the form evaluates as $\binom{n}{i}$.
 The radical of this form gives the maximal submodule of $\Delta(n)$ (this is not obvious!), and the result follows.

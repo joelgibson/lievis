@@ -52,6 +52,12 @@ Table Fin contains data for the crystallographic root systems, including number 
 
 A picture of the root system of Ã₂, showing the affine root system in the geometric representation, and the chamber geometry in its dual.
 
+## [Modular $\SL_2$ characters](/modular_sl2_characters/)
+
+![Modular SL2 Characters](./thumbnails/modular_sl2_characters_thumb.png)
+
+Compare four bases of characters for the modular representations of $\SL_2$: the monomial symmetric functions, Weyl characters, simple characters, and tilting characters.
+
 
 ## [Simple $\SL_2$ characters](/simple_sl2_characters/)
 
