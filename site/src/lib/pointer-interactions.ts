@@ -3,40 +3,40 @@
  * change for the drag, and each is also passed the event that triggered it (for the
  * purposes of checking preventDefault etc).
  */
-type InteractionHandlers = {
+type InteractionHandlers<T> = {
     /** Mouse hovering over the point (x, y). This is mutually exclusive with drag/pinch etc,
      * ie if we are in a drag or pinch this hover will not fire. */
-    hover(x: number, y: number, e: PointerEvent): void
+    hover(x: number, y: number, e: PointerEvent, args?: T): void
 
     /** Mouse hovering over the point (x, y), even during a drag. This event will still not
      * fire during a pinch. (This allows two fingers to be used for moving...). */
-    hoverUnconditional(x: number, y: number, e: PointerEvent): void
+    hoverUnconditional(x: number, y: number, e: PointerEvent, args?: T): void
 
     /** Click or touch once the point (x, y). */
-    click(x: number, y: number, e: PointerEvent): void
+    click(x: number, y: number, e: PointerEvent, args?: T): void
 
     /** Click-and-drag or touch-and-drag by a delta (dx, dy).  */
-    drag(dx: number, dy: number, e: PointerEvent): void
+    drag(dx: number, dy: number, e: PointerEvent, args?: T): void
 
     /** Multitouch pinch (or other two-pointer movement) with fixed point (fx, fy) being the pointer
      * that has not moved, and the moving pointer moved from old coordinate (ox, oy) to new coordinate
      * (nx, ny). */
-    pinch(fx: number, fy: number, ox: number, oy: number, nx: number, ny: number, e: PointerEvent): void
+    pinch(fx: number, fy: number, ox: number, oy: number, nx: number, ny: number, e: PointerEvent, args?: T): void
 
     /** A mouse wheel event, translated into a "delta scale" (i.e. something you multiply
      * onto a scale factor. */
-    wheel(cx: number, cy: number, ds: number, e: WheelEvent): void
+    wheel(cx: number, cy: number, ds: number, e: WheelEvent, args?: T): void
 }
 
 /** Function to make it more convenient to declare a svelte action. */
-export function createInteractionHandlers(handlers: Partial<InteractionHandlers>) {
-    return (elt) => attachInteractionHandlers(elt, handlers)
+export function createInteractionHandlers<T>(handlers: Partial<InteractionHandlers<T>>) {
+    return (elt, args?: T) => attachInteractionHandlers(elt, handlers, args)
 }
 
 /** Turn on to log a bunch of stuff to the console. */
 const DEBUG = false
 
-export function attachInteractionHandlers(elt: HTMLBaseElement, handlers: Partial<InteractionHandlers>) {
+export function attachInteractionHandlers<T>(elt: HTMLBaseElement, handlers: Partial<InteractionHandlers<T>>, args?: T) {
     // Maintain a stack of currently active pointers, their ids, and their last known positions.
     // We also record the number of times a pointer has moved, so we can distinguish a touch from a drag.
     let stack: {id: number, x: number, y: number, moves: number}[] = []
@@ -85,7 +85,7 @@ export function attachInteractionHandlers(elt: HTMLBaseElement, handlers: Partia
 
     function pointerMove(event: PointerEvent) {
         if (handlers.hoverUnconditional && stack.length <= 1)
-            handlers.hoverUnconditional(event.offsetX, event.offsetY, event)
+            handlers.hoverUnconditional(event.offsetX, event.offsetY, event, args)
 
         let index = stack.findIndex(({id}) => event.pointerId == id)
 
@@ -93,15 +93,15 @@ export function attachInteractionHandlers(elt: HTMLBaseElement, handlers: Partia
         // A hover is happening when there are no active pointers (an empty stack).
         // A pan is happening if there is only a single active, a pinch involves two (or more ignored) pointers.
         if (stack.length == 0 && handlers.hover) {
-            handlers.hover(event.offsetX, event.offsetY, event)
+            handlers.hover(event.offsetX, event.offsetY, event, args)
         } else if (stack.length == 1 && handlers.drag) {
-            handlers.drag(event.offsetX - stack[0].x, event.offsetY - stack[0].y, event)
+            handlers.drag(event.offsetX - stack[0].x, event.offsetY - stack[0].y, event, args)
         } else if (index <= 1 && handlers.pinch) {
             // We will only use the first two pointers. Whatever pointer is currently moving (the one we are in
             // the handler for) is 'index', the other is 'fixPt'.
             let fixPt = 1 - index
 
-            handlers.pinch(stack[fixPt].x, stack[fixPt].y, stack[index].x, stack[index].y, event.offsetX, event.offsetY, event)
+            handlers.pinch(stack[fixPt].x, stack[fixPt].y, stack[index].x, stack[index].y, event.offsetX, event.offsetY, event, args)
         }
 
         if (index >= 0) {
@@ -117,7 +117,7 @@ export function attachInteractionHandlers(elt: HTMLBaseElement, handlers: Partia
     function pointerUp(event: PointerEvent) {
         let index = stack.findIndex(({id}) => event.pointerId == id)
         if (index >= 0 && event.isPrimary && stack[index].moves <= 2 && handlers.click)
-                handlers.click(event.offsetX, event.offsetY, event)
+                handlers.click(event.offsetX, event.offsetY, event, args)
 
         removeId(event.pointerId)
 
@@ -138,7 +138,7 @@ export function attachInteractionHandlers(elt: HTMLBaseElement, handlers: Partia
         // and scrolling with a mouse changes deltaY. (!?) Add them both together to hopefully be safe.
         if (handlers.wheel) {
             let scale = Math.pow(2, - (event.deltaY + event.deltaX) / 100)
-            handlers.wheel(event.offsetX, event.offsetY, scale, event)
+            handlers.wheel(event.offsetX, event.offsetY, scale, event, args)
         }
     }
 }

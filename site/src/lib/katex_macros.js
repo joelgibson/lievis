@@ -286,6 +286,7 @@ export default {
   "\\Ob": "\\operatorname{Ob}",
   "\\Aut": "\\operatorname{Aut}",
   "\\Aff": "\\operatorname{Aff}",
+  "\\ord": "\\operatorname{ord}",
   "\\Map": "\\operatorname{Map}",
   "\\ev": "\\operatorname{ev}",
   "\\rank": "\\operatorname{rank}",

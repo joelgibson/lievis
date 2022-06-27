@@ -67,6 +67,9 @@ def simple_macros():
         # Category theory
         'id', 'Hom', 'End', 'Ob', 'Aut', 'Aff',
 
+        # Group theory
+        'ord',
+
         # Maps between sets
         'Map',
 

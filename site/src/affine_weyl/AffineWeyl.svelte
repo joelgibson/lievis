@@ -228,7 +228,7 @@ point, but certain operations were just too hard to specify.
         return {pcanBasis: new maps.FlatIntMap<hk.HeckeElt>(), shownCoxElts}
     }
 
-    type LabelConfig = 'none' | 'length' | 'numrex' | 'klpoly' | 'mucoeff' | 'klpoly1' | 'asklpoly' | 'asklpoly1' | 'pmixedbasis' | 'aspmixedbasis' | 'pcanincan' | 'pcanincan1' | 'pcanmag' | 'pcaninstd' | 'pcaninstd1' | 'pcaninmixed'
+    type LabelConfig = 'none' | 'rex' | 'length' | 'numrex' | 'klpoly' | 'mucoeff' | 'klpoly1' | 'asklpoly' | 'asklpoly1' | 'pmixedbasis' | 'aspmixedbasis' | 'pcanincan' | 'pcanincan1' | 'pcanmag' | 'pcaninstd' | 'pcaninstd1' | 'pcaninmixed'
     let labelConfig: LabelConfig = 'none'
     let shadeLabels: boolean = false
 
@@ -247,6 +247,22 @@ point, but certain operations were just too hard to specify.
     let pDialation = 5
     let pDialationEnabled = false
 
+    type SimpLabelConfig = 'zero' | 'one' | 'stu'
+    let simpLabelConfig: SimpLabelConfig = 'stu'
+    let simpLabelFn = {
+        'zero'(s: number) { return '012'[s] },
+        'one'(s: number) { return '123'[s] },
+        'stu'(s: number) { return 'stu'[s] },
+    }
+
+    function shorten(word: string, limit: number) {
+        const HALF = limit >> 1
+        if (word.length >= limit + 3) {
+            return word.slice(0, HALF) + '...' + word.slice(word.length - HALF)
+        }
+        return word
+    }
+
     type PCanConfig = {
         char: number
         paraBits: number
@@ -264,6 +280,7 @@ point, but certain operations were just too hard to specify.
         pDialation: number
         pDialationEnabled: boolean
         pCan: string
+        simples: SimpLabelConfig
     }
 
     const defaultUserConfig: UserConfig = {
@@ -278,6 +295,7 @@ point, but certain operations were just too hard to specify.
         pDialation: 5,
         pDialationEnabled: false,
         pCan: 'none',
+        simples: 'stu',
     }
 
     /** Return the delta of changes against the default settings. */
@@ -303,6 +321,7 @@ point, but certain operations were just too hard to specify.
         pDialation,
         pDialationEnabled,
         pCan: pcanIndex,
+        simples: simpLabelConfig,
     }
 
     function loadFromHash(fragment: string) {
@@ -334,6 +353,7 @@ point, but certain operations were just too hard to specify.
         pDialation = config.pDialation
         pDialationEnabled = config.pDialationEnabled
         pcanIndex = config.pCan
+        simpLabelConfig = config.simples
     }
 
     type DisplayConfig = {
@@ -345,16 +365,25 @@ point, but certain operations were just too hard to specify.
         shadeCoveringRel: boolean
         cellConfig: CellConfig
         treeConfig: TreeConfig
+        simpLabelConfig: SimpLabelConfig
     }
 
     let displayConfig: DisplayConfig
-    $: displayConfig = {selCoxElt, shownCoxElts, labelConfig, shadeLabels, shadeConfig, shadeCoveringRel, cellConfig, treeConfig}
+    $: displayConfig = {selCoxElt, shownCoxElts, labelConfig, shadeLabels, shadeConfig, shadeCoveringRel, cellConfig, treeConfig, simpLabelConfig}
 
     // A label function returns a function giving each Coxeter element a label. The label can be a string or a number,
     // empty strings and zeros are completely ignored.
     type LabelFn = (rtDat: RootData, displayConfig: DisplayConfig, pcanBasis: maps.IMap<number, hk.HeckeElt>, pDialatedGenerator: number) => ((w: CoxElt) => string | number)
     const labelFns: {[name in LabelConfig]: LabelFn} = {
         none() { return () => 0 },
+        rex({type, cox}, {simpLabelConfig}) {
+            return w => {
+                if (cox.length(w) >= 9 || (cox.length(w) >= 7 && type == 'G')) {
+                    return ''
+                }
+                return cox.shortLex(w).map(simpLabelFn[simpLabelConfig]).join('')
+            }
+        },
         length({cox}) { return (w) => cox.length(w) },
         numrex({cox}) { let rexes = cox.countReducedExpressions(); return w => rexes[w] },
         klpoly({cox, hecke}, {selCoxElt}) {
@@ -436,7 +465,7 @@ point, but certain operations were just too hard to specify.
         for (let i = 0; i < displayConfig.shownCoxElts.length; i++) {
             let w = displayConfig.shownCoxElts[i]
             let s = fn(w)
-            if (s == 0 || s == '')
+            if (s === 0 || s == '')
                 continue
             map.set(w, '' + s)
         }
@@ -935,8 +964,10 @@ point, but certain operations were just too hard to specify.
     </svelte:fragment>
     <div slot="controls">
         <div style="height: 5px;"></div>
-        <DynkinDiagram cartanMat={rtDat.affCartanMat} colours={vertexColours}/>
         <table>
+            <tr>
+                <td><DynkinDiagram cartanMat={rtDat.affCartanMat} colours={vertexColours}/></td>
+            </tr>
             <tr>
                 <td><label for="inputType">Type:</label></td>
                 <td>
@@ -953,6 +984,7 @@ point, but certain operations were just too hard to specify.
                 <td>
                     <select id="labelConfig" bind:value={labelConfig}>
                         <option value="none">None</option>
+                        <option value="rex">Rex</option>
                         <option value="length">Length</option>
                         <option value="numrex"># Reduced expressions</option>
                         <option value="klpoly">KL polynomials</option>
@@ -1033,11 +1065,29 @@ point, but certain operations were just too hard to specify.
                     </select>
                 </td>
             </tr>
+            <tr>
+                <td><label for="simpLabel">Simples</label></td>
+                <td>
+                    <select id="simpLabel" bind:value={simpLabelConfig}>
+                        <option value="zero">012</option>
+                        <option value="one">123</option>
+                        <option value="stu">stu</option>
+                    </select>
+                </td>
+            </tr>
         </table>
 
         <div class="row">
             {#if selCoxElt !== null}
-                Left/Right descents: {rtDat.cox.leftDescentSet(selCoxElt)}/{rtDat.cox.rightDescentSet(selCoxElt)}
+                Left/Right descents:
+                {`{`}{rtDat.cox.leftDescentSet(selCoxElt).map(simpLabelFn[simpLabelConfig])}{`}`}
+                /
+                {`{`}{rtDat.cox.rightDescentSet(selCoxElt).map(simpLabelFn[simpLabelConfig])}{`}`}
+            {/if}
+        </div>
+        <div class="row">
+            {#if selCoxElt !== null}
+                ShortLex Rex: {shorten(rtDat.cox.shortLex(selCoxElt).map(simpLabelFn[simpLabelConfig]).join(''), 20)}
             {/if}
         </div>
 
