@@ -816,6 +816,20 @@ export namespace draw {
             builder.Z()
             return builder.build()
         }
+
+        /** A piecewise-linear path. */
+        path(points: Vec[]): string {
+            let builder = new PathBuilder()
+            let tmp: number[] = []
+            for (let i = 0; i < points.length; i++) {
+                let pt = [this.aff2.x(points[i][0], points[i][1]), this.aff2.y(points[i][0], points[i][1])]
+                if (i == 0)
+                    builder.M(pt)
+                else
+                    builder.L(pt)
+            }
+            return builder.build()
+        }
     }
 }
 

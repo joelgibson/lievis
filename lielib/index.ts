@@ -24,6 +24,9 @@ export { draw } from './src/draw'
 // Graph layout
 export { digraph } from './src/digraph'
 
+// Paths
+export { lspath } from './src/lspath'
+
 // Lie theory
 export { cartan } from './src/cartan'
 export { EnumCox } from './src/enumcox'
