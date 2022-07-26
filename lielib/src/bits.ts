@@ -51,4 +51,14 @@ export function fromMask(mask: number): number[] {
 /** Return true if the bitmask a is a subset of the bitmask b. */
 export function isSubset(a: number, b: number) { return (a & b) == a }
 
+/** Return all bitmasks representing a k-element subset of [0, ..., n). */
+export function nCk(n: number, k: number): number[] {
+    let results = []
+    for (let i = 0; (i >>> n) == 0; i++)
+        if (popCount(i) == k)
+            results.push(i)
+
+    return results
+}
+
 }
