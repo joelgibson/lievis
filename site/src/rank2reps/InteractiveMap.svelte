@@ -27,6 +27,9 @@
     // Controls shown
     export let controlsShown = true
 
+    // SVG Element
+    export let svgElem: null | SVGElement = null
+
     // On touch devices, which movement mode?
     let panMode: 'frozen' | 'pan-zoom' | 'free' = 'pan-zoom'
 
@@ -171,6 +174,7 @@
     <svg
         width={userPort.width}
         height={userPort.height}
+        bind:this={svgElem}
         >
 
         <!-- Slot in svg contents here. -->

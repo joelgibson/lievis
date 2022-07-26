@@ -5,15 +5,55 @@ updated: 2021-07-01
 ---
 
 <script type="module">
+    import {rison} from '$lib/rison'
+
     import WeylCharacters from './WeylCharacters.svelte'
     import WeylOrbits from './WeylOrbits.svelte'
     import JantzenFiltration from './JantzenFiltration.svelte'
     import SimpleCharacters from './SimpleCharacters.svelte'
 
-    new WeylCharacters({target: document.getElementById('WeylCharacters')})
-    new WeylOrbits({target: document.getElementById('WeylOrbits')})
-    new JantzenFiltration({target: document.getElementById('JantzenFiltration')})
-    new SimpleCharacters({target: document.getElementById('SimpleCharacters')})
+    let visualisations = [
+        {id: 'WeylCharacters', klass: WeylCharacters},
+        {id: 'WeylOrbits', klass: WeylOrbits},
+        {id: 'JantzenFiltration', klass: JantzenFiltration},
+        {id: 'SimpleCharacters', klass: SimpleCharacters},
+    ]
+    let components = {}
+    for (let {id, klass} of visualisations) {
+        let component = new klass({target: document.getElementById(id)})
+        components[id] = component
+        component.$on('newState', ({detail}) => {
+            let obj = {anchor: id, ...detail}
+            history.replaceState(null, null, document.location.pathname + '#' + rison.encode(obj))
+        })
+    }
+
+    function loadFromHash(hashString) {
+        let obj
+        try {
+            obj = rison.decode(hashString)
+        } catch (e) {
+            console.log('Could not decode rison object', hashString)
+            return
+        }
+
+        if (!('anchor' in obj)) {
+            console.log('No anchor found in object', obj)
+            return
+        }
+
+        let {anchor, ...rest} = obj
+        if (!(anchor in components)) {
+            console.log('No component found for anchor', anchor)
+            return
+        }
+
+        document.getElementById(anchor).scrollIntoView()
+        components[anchor].restoreState({...components[anchor].defaultBigState, ...rest})
+    }
+
+    if (document.location.hash.substring(0, 2) == '#(')
+        loadFromHash(document.location.hash.substring(1))
 </script>
 
 <style>

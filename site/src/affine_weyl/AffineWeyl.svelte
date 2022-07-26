@@ -926,8 +926,8 @@ point, but certain operations were just too hard to specify.
     $: if (canvasElt != null) { drawCanvas(canvasElt, D, rtDat, pDialation, pDialationEnabled, pDialatedGenerator, pxDialatedAlcoves, selCoxElt, shownLabels, shadedSet, cellColours, treeEdges, viewportGeometry, frame, userPort) }
 
     // Perhaps load from the hash
-    if (document.location.hash.substr(0, 2) == '#(')
-        loadFromHash(document.location.hash.substr(1))
+    if (document.location.hash.substring(0, 2) == '#(')
+        loadFromHash(document.location.hash.substring(1))
 </script>
 
 <style>

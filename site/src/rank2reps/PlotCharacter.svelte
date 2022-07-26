@@ -15,6 +15,11 @@
     // Scale so that +/- 1 is this radius
     export let radius = 1
 
+    // Colours for positive and negative coefficients. We can't style these using CSS if we want to have
+    // an easy path to downloading the SVG.
+    const posColour = 'powderblue'
+    const negColour = 'sandybrown'
+
     // Scaling factor so that when we zoom out stuff doesn't look too stupid.
     $: scaleFactor = Math.sqrt(vec.norm(D.aff2.xyLin([1, 0]))) / 4
 
@@ -27,26 +32,16 @@
     $: characterNeg = character.entries.filter(e => e.value < 0)
 </script>
 
-<style>
-    .positivedim {
-        fill: powderblue;
-        stroke: black;
-    }
-    .negativedim {
-        fill: sandybrown;
-        stroke: black;
-    }
-</style>
-
-
 <path
     d={D.circlesFromEntries(characterPos, c => elementRadius(c, radius))}
-    class="positivedim"
+    fill={posColour}
+    stroke="black"
     stroke-width={scaleFactor}
     />
 <path
     d={D.circlesFromEntries(characterNeg, c => elementRadius(c, radius))}
-    class="negativedim"
+    fill={negColour}
+    stroke="black"
     stroke-width={scaleFactor}
     />
 
@@ -59,7 +54,8 @@
                 r={10}
                 fill-opacity="40%"
                 stroke-width=0
-                class={(mult > 0) ? 'positivedim' : 'negativedim'}
+                stroke="black"
+                fill={(mult > 0) ? posColour : negColour}
                 />
             <text
                 x={D.aff2.x(u, v)}
