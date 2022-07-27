@@ -10,7 +10,7 @@ import { readFileSync } from 'fs';
 
 const base_url = readFileSync('./base_url', 'utf-8').match(/^\/.*$/m)[0]
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const current_dir = dirname(fileURLToPath(import.meta.url));
 
 // Find all .md files under src/, except those inside src/lib.
 let markdownFiles = {}
@@ -33,7 +33,7 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      '$lib': path.resolve(__dirname, 'src/lib'),
+      '$lib': path.resolve(current_dir, 'src/lib'),
     }
   },
 
