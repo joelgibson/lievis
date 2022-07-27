@@ -134,6 +134,7 @@
 
         /** Disable default touch actions, make unselectable. */
         touch-action: none;
+        user-select: none;
         -webkit-user-select: none;
     }
     div.controls {

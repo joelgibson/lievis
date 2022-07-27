@@ -29,11 +29,14 @@
     type GroupName = 'T2' | 'A1xA1' | 'GL2' | 'SL3' | 'B2' | 'G2'
     type State = {
         showShiftedWalls: boolean
-        showDimensions: 'dots' | 'numbers'
+        charDisplay: 'dots' | 'numbers'
         showOrbit: 'none' | 'regular' | 'dot'
         characterType: 'weyl' | 'demazure'
         demazureWord: string,
-        showCharacter: boolean
+        charText: boolean
+
+        controls: boolean
+        fullscreen: boolean
     }
     type FrozenWt = number[] | null
 
@@ -45,11 +48,14 @@
         groupName: 'SL3',
 
         showShiftedWalls: false,
-        showDimensions: 'dots',
+        charDisplay: 'dots',
         showOrbit: 'none',
         characterType: 'weyl',
         demazureWord: '1',
-        showCharacter: false,
+        charText: false,
+
+        controls: true,
+        fullscreen: false,
 
         frozenWt: null,
     }
@@ -87,8 +93,6 @@
 
     let svgElem: null | SVGElement
     let svgList: string[] = []
-
-
     function addSnapshot() {
         let url = createSVGSnapshot(svgElem, {hideSelector: 'path.cursor'})
         if (url != null)
@@ -102,9 +106,6 @@
     }
 
 
-
-
-    // Form inputs
     let userPort = {width: 0, height: 0, aff: aff.Aff2.id}
     let datum: reduc.BasedRootDatum & groups.EucEmbedding & groups.LatticeLabel
 
@@ -138,6 +139,8 @@
     maxScale={80}
     bind:userPort
     bind:svgElem={svgElem}
+    bind:controlsShown={state.controls}
+    bind:fullscreen={state.fullscreen}
     on:pointSelected={(e) => frozenWt = D.fromPixelsClosestLatticePoint(e.detail)}
     on:pointHovered={(e) => cursorWt = D.fromPixelsClosestLatticePoint(e.detail)}
     on:pointDeselected={(e) => frozenWt = null}>
@@ -151,8 +154,8 @@
         <PlotCharacter
             {D}
             {character}
-            radius={(state.showDimensions == 'dots') ? 2.5 : 0}
-            showText={state.showDimensions == 'numbers'}
+            radius={(state.charDisplay == 'dots') ? 2.5 : 0}
+            showText={state.charDisplay == 'numbers'}
             />
 
         {#each [
@@ -201,14 +204,14 @@
                             {text: 'Dots', value: 'dots'},
                             {text: 'Numbers', value: 'numbers'},
                         ]}
-                        bind:value={state.showDimensions}
+                        bind:value={state.charDisplay}
                         />
                 </td>
                 <td>
                     <InfoTooltip>
                         <p>
-                            <button class="button" on:click={() => state.showDimensions = 'dots'}>Dots</button> shows the dimension of a weight space as a circle whose area is proportional to <Latex markup={`\\abs{\\dim V_\\nu}`} />, with the colour indicating a positive or negative virtual dimension.
-                            <button class="button" on:click={() => state.showDimensions = 'numbers'}>Numbers</button> shows this data explicitly as numbers.
+                            <button class="button" on:click={() => state.charDisplay = 'dots'}>Dots</button> shows the dimension of a weight space as a circle whose area is proportional to <Latex markup={`\\abs{\\dim V_\\nu}`} />, with the colour indicating a positive or negative virtual dimension.
+                            <button class="button" on:click={() => state.charDisplay = 'numbers'}>Numbers</button> shows this data explicitly as numbers.
                         </p>
                     </InfoTooltip>
                 </td>
@@ -259,7 +262,12 @@
             {#if state.characterType == 'demazure'}
                 <tr>
                     <td>Demazure word:</td>
-                    <td><input type="text" bind:value={state.demazureWord} on:input={(e) => state.demazureWord = filterDemazureWord(datum, e.target.value)}></td>
+                    <td><input
+                            type="text"
+                            bind:value={state.demazureWord}
+                            on:input={(e) => state.demazureWord = filterDemazureWord(datum, e.target.value)}
+                            >
+                    </td>
                     <td>
                         <InfoTooltip>
                             <p>Enter a word in the Coxeter generators, for example 122121. A longest word for this group is {reduc.longWord(datum).map(x => x+1).join('')}.</p>
@@ -328,9 +336,9 @@
 
             <tr>
                 <td>Show character?</td>
-                <td><input type="checkbox" id="showterms" bind:checked={state.showCharacter} /></td>
+                <td><input type="checkbox" id="showterms" bind:checked={state.charText} /></td>
             </tr>
-            {#if state.showCharacter}
+            {#if state.charText}
                 <WidgetLinearComb
                     character={character}
                     latticeLabel={datum.latticeLabel}

@@ -30,6 +30,12 @@ When I build the site I mount it to the subdirectory `/lievis/` at my website: <
 
 Next I'll be working on:
 
+- Making all of the Rank2Reps and Affine Weyl visualisations hyperlinkable.
+- Making all of the Rank2Reps visualisations downloadable as SVGs.
+  - Figure out how to get the labels into this SVG - MathJax3 perhaps?
+- Making the Affine Weyl visualisation downloadable as SVG.
+  - A tool that intercepts the canvas drawing?
+- Add tilting regions to the simple characters visualisation.
 - Switch the characters over to using true integers.
 - Displaying elements in the affine Weyl visualisation, both as words, and as the finite group semidirect product the root lattice.
 - Implement the periodic Hecke module for the affine Weyl visualisation.

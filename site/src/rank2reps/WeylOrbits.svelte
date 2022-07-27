@@ -13,6 +13,63 @@
     import Latex from '$lib/components/Latex.svelte'
 
     import { vec, vecmut, mat, draw, reduc, groups, fmt, maps, aff } from 'lielib'
+    import { createEventDispatcher } from 'svelte';
+    import { objectDelta } from '$lib/state';
+    import { createSVGSnapshot } from '$lib/snapshots';
+    import InfoTooltip from '$lib/components/InfoTooltip.svelte';
+
+
+    const allowedGroups = ['A1xA1', 'SL3', 'B2', 'G2']
+
+    type GroupName = 'A1xA1' | 'SL3' | 'B2' | 'G2'
+    type State = {
+        P: number
+        indicatePRestricted: boolean
+        rhoShift: boolean
+        showRootSystem: boolean
+        controls: boolean
+        fullscreen: boolean
+    }
+    type FrozenWt = number[] | null
+
+    type SerialisableState = State & {
+        groupName: GroupName
+        frozenWt: FrozenWt
+    }
+
+    const defaultSerialisableState: SerialisableState = {
+        groupName: 'SL3',
+        P: 0,
+        indicatePRestricted: false,
+        rhoShift: false,
+        showRootSystem: false,
+        frozenWt: null,
+        controls: true,
+        fullscreen: false,
+    }
+    let {groupName, frozenWt, ...state} = defaultSerialisableState
+
+    export function restoreState(delta: Partial<SerialisableState>) {
+        ({groupName, frozenWt, ...state} = {...defaultSerialisableState, ...delta})
+    }
+
+    const dispatch = createEventDispatcher()
+    $: dispatch('newState', objectDelta(defaultSerialisableState, {groupName, frozenWt, ...state}))
+
+
+    let svgElem: null | SVGElement
+    let svgList: string[] = []
+    function addSnapshot() {
+        let url = createSVGSnapshot(svgElem, {hideSelector: 'path.cursor'})
+        if (url != null)
+            svgList = [...svgList, url]
+    }
+    function clearSVGSnapshots() {
+        for (let url of svgList)
+            URL.revokeObjectURL(url)
+
+        svgList = []
+    }
 
 
     function computeOrbit(datum: reduc.BasedRootDatum, wt: number[], rhoShift: boolean, p: number) {
@@ -32,15 +89,7 @@
         return orbit
     }
 
-    const allowedGroups = ['A1xA1', 'SL3', 'B2', 'G2']
-
     // Form inputs
-    let groupName = 'SL3'
-    let P = 0
-    let indicatePRestricted = false
-    let rhoShift = false
-    let showRootSystem = false
-
     let userPort = {width: 0, height: 0, aff: aff.Aff2.id}
     let datum: reduc.BasedRootDatum & groups.EucEmbedding & groups.LatticeLabel
 
@@ -53,7 +102,6 @@
 
     $: ({adj, det} = mat.integralAdjugate(datum.cartan))
 
-    let frozenWt: null | number[] = null
     let cursorWt: number[] = [0, 0]
     $: cursorRt = vec.scale(mat.multVec(adj, cursorWt), 1/det)
 
@@ -63,7 +111,7 @@
     $: selectedWt = [frozenWt, cursorWt, selectedWt, vec.zero(datum.rank)].filter(maySelectWt)[0]
 
     let orbitWts: maps.IMap<number[], number>
-    $: orbitWts = computeOrbit(datum, selectedWt, rhoShift, P)
+    $: orbitWts = computeOrbit(datum, selectedWt, state.rhoShift, state.P)
 </script>
 
 <style>
@@ -82,6 +130,9 @@
     initScale={30}
     maxScale={80}
     bind:userPort
+    bind:controlsShown={state.controls}
+    bind:fullscreen={state.fullscreen}
+    bind:svgElem={svgElem}
     on:pointHovered={(e) => cursorWt = D.fromPixelsClosestLatticePoint(e.detail)}
     on:pointSelected={(e) => frozenWt = D.fromPixelsClosestLatticePoint(e.detail)}
     on:pointDeselected={(e) => frozenWt = null}>
@@ -89,14 +140,14 @@
         <Rank2WeightsDatum
             {D}
             {datum}
-            {P}
-            dominantChamber={rhoShift}
-            wpWalls={P > 0 || rhoShift}
-            rhoShiftWpWalls={rhoShift}
-            pRestricted={indicatePRestricted}
+            P={state.P}
+            dominantChamber={state.rhoShift}
+            wpWalls={state.P > 0 || state.rhoShift}
+            rhoShiftWpWalls={state.rhoShift}
+            pRestricted={state.indicatePRestricted}
             />
 
-        {#if showRootSystem}
+        {#if state.showRootSystem}
             <Rank2Parts
                 {D}
                 origin={true}
@@ -110,12 +161,12 @@
         {/if}
 
         <!-- Vertex labelling -ρ -->
-        {#if rhoShift}
+        {#if state.rhoShift}
             <path
                 d={D.circle(vec.neg(datum.rho), 4)}
                 fill="black"
                 />
-        {/if}
+        {/if}state.
 
         <!-- Vertices in orbit -->
         <path
@@ -128,6 +179,7 @@
             d={D.circle(cursorWt, 7)}
             fill="none"
             stroke="green"
+            style="cursor"
             />
 
         <!-- Show the selection as a red circle. -->
@@ -139,12 +191,12 @@
     </g>
 
     <div slot="overlay">
-        {#if rhoShift}
+        {#if state.rhoShift}
             <div style={D.absPosition(vec.neg(datum.rho))}>
                 <Latex markup={`-\\rho`}></Latex>
             </div>
         {/if}
-        {#if rhoShift && showRootSystem}
+        {#if state.rhoShift && state.showRootSystem}
             {#each datum.simples as root, i}
                 <div style={D.absPosition(root, 'vector')}>
                     <Latex markup={`\\alpha_{${i + 1}}`} />
@@ -167,19 +219,46 @@
             </tr>
             <tr>
                 <td><label for="showRootSystem">Show roots</label></td>
-                <td><input type="checkbox" bind:checked={showRootSystem}></td>
+                <td><input type="checkbox" bind:checked={state.showRootSystem}></td>
             </tr>
             <tr>
-                <td><label for="p"><Latex markup={`p = ${P}`}/></label></td>
-                <td><input type="range" min="0" max="17" step="1" bind:value={P} id="p"></td>
+                <td><label for="p"><Latex markup={`p = ${state.P}`}/></label></td>
+                <td><input type="range" min="0" max="17" step="1" bind:value={state.P} id="p"></td>
             </tr>
             <tr>
                 <td><label for="rhoShift"><Latex markup={`\\rho`} />-shift</label></td>
-                <td><input type="checkbox" bind:checked={rhoShift}></td>
+                <td><input type="checkbox" bind:checked={state.rhoShift}></td>
             </tr>
             <tr>
                 <td><label for="showX1">Show <Latex markup={`X_1(T)`} /></label></td>
-                <td>(requires <Latex markup={`p > 0`}/>) <input type="checkbox" bind:checked={indicatePRestricted} disabled={P == 0}></td>
+                <td>(requires <Latex markup={`p > 0`}/>) <input type="checkbox" bind:checked={state.indicatePRestricted} disabled={state.P == 0}></td>
+            </tr>
+            <tr>
+                <td>Save diagram</td>
+                <td>
+                    <button on:click={addSnapshot}>Create SVG</button>
+                    <button on:click={clearSVGSnapshots}>Clear</button>
+                </td>
+                <td>
+                    <InfoTooltip>
+                        <p>
+                            Clicking the <button on:click={addSnapshot}>Create SVG</button> button will take a snapshot of the visualisation (with the green cursor circle removed), and save it as an SVG file named "Snapshot 1".
+                            This can be opened in a new tab to be viewed, or clicked to be downloaded as an SVG.
+                            The <button on:click={clearSVGSnapshots}>Clear</button> button will clear the list of snapshots.
+                        </p>
+                    </InfoTooltip>
+                </td>
+            </tr>
+            <tr>
+                {#if svgList.length > 0}
+                    <td colspan="2">
+                        <ul>
+                            {#each svgList as url, i}
+                                <li><a href={url} target="_blank" download="WeylCharacters.svg">Snapshot {i+1}</a></li>
+                            {/each}
+                        </ul>
+                    </td>
+                {/if}
             </tr>
             <tr>
                 <td>Cursor (<span style="color: green;">green</span>)</td>

@@ -7,17 +7,61 @@
     import PlotCharacter from './PlotCharacter.svelte'
     import Rank2WeightsDatum from './Rank2WeightsDatum.svelte'
     import InteractiveMap from './InteractiveMap.svelte'
+import { createEventDispatcher } from 'svelte';
+import { objectDelta } from '$lib/state';
+import { createSVGSnapshot } from '$lib/snapshots';
+import InfoTooltip from '$lib/components/InfoTooltip.svelte';
 
-    // Allowed groups for this visualisation.
-    const allowedGroups = ['T2', 'A1xA1', 'GL2', 'SL3', 'B2', 'G2']
+    const allowedGroups = ['T2', 'A1xA1', 'GL2', 'SL3', 'B2', 'G2'] as const
+    type State = {
+        indicatePRestricted: boolean
+        P: number
+        charDisplay: 'dots' | 'numbers'
+        showWhat: 'simpsInWeyls' | 'weylsInSimps' | 'simpsInStd'
+        charText: boolean
 
-    // Form inputs.
-    let groupName = 'SL3'
-    let indicatePRestricted = true
-    let P = 5
-    let characterDisplay: 'bubbles' | 'numbers' = 'bubbles'
-    let showWhat: 'simpsInWeyls' | 'weylsInSimps' | 'simpsInStd' = 'simpsInWeyls'
-    let showCharacter = false
+        controls: boolean
+        fullscreen: boolean
+    }
+    type SerialisableState = State & {
+        groupName: typeof allowedGroups[number]
+        frozenWt: number[] | null
+    }
+    const defaultSerialisableState: SerialisableState = {
+        groupName: 'SL3',
+        indicatePRestricted: true,
+        P: 5,
+        charDisplay: 'dots',
+        showWhat: 'simpsInWeyls',
+        charText: false,
+
+        frozenWt: null,
+
+        controls: true,
+        fullscreen: false,
+    }
+    let {groupName, frozenWt, ...state} = defaultSerialisableState
+
+    export function restoreState(delta: Partial<SerialisableState>) {
+        ({groupName, frozenWt, ...state} = {...defaultSerialisableState, ...delta})
+    }
+
+    const dispatch = createEventDispatcher()
+    $: dispatch('newState', objectDelta(defaultSerialisableState, {groupName, frozenWt, ...state}))
+
+    let svgElem: null | SVGElement
+    let svgList: string[] = []
+    function addSnapshot() {
+        let url = createSVGSnapshot(svgElem, {hideSelector: 'path.cursor'})
+        if (url != null)
+            svgList = [...svgList, url]
+    }
+    function clearSVGSnapshots() {
+        for (let url of svgList)
+            URL.revokeObjectURL(url)
+
+        svgList = []
+    }
 
     // Set up allowed groups, first group, and coordinate systems.
     let userPort = {width: 0, height: 0, aff: aff.Aff2.id}
@@ -32,10 +76,9 @@
 
     // The tracker caches local state, and needs to depend on the prime.
     let tracker: reduc.Tracker
-    $: tracker = reduc.createTracker(datum, 20, P)
+    $: tracker = reduc.createTracker(datum, 20, state.P)
 
     let cursorWt = [0, 0]
-    let frozenWt: null | number[] = null
 
     function maySelectWt(wt) {
         return wt != null && wt.every(x => !isNaN(x)) && reduc.isDominant(datum, wt)
@@ -68,7 +111,7 @@
         throw new Error("unreachable")
     }
 
-    $: ({char: character, dim: dimension, simpleDimension} = computeChar(datum, P, selectedWt, showWhat, tracker))
+    $: ({char: character, dim: dimension, simpleDimension} = computeChar(datum, state.P, selectedWt, state.showWhat, tracker))
 </script>
 
 <style>
@@ -88,6 +131,9 @@
     initScale={20}
     maxScale={40}
     bind:userPort
+    bind:controlsShown={state.controls}
+    bind:fullscreen={state.fullscreen}
+    bind:svgElem={svgElem}
     on:pointHovered={(e) => cursorWt = D.fromPixelsClosestLatticePoint(e.detail)}
     on:pointSelected={(e) => frozenWt = D.fromPixelsClosestLatticePoint(e.detail)}
     on:pointDeselected={(e) => frozenWt = null}>
@@ -95,9 +141,9 @@
         <Rank2WeightsDatum
             {D}
             {datum}
-            {P}
+            P={state.P}
             dominantChamber={true}
-            pRestricted={indicatePRestricted}
+            pRestricted={state.indicatePRestricted}
             wpWalls={true}
             />
 
@@ -106,8 +152,8 @@
             <PlotCharacter
                 {D}
                 {character}
-                radius={(characterDisplay == 'bubbles') ? 4 : 0}
-                showText={characterDisplay == 'numbers'}
+                radius={(state.charDisplay == 'dots') ? 4 : 0}
+                showText={state.charDisplay == 'numbers'}
                 />
         {:else}
             <text x={D.port.centre[0]} y={D.port.centre[1]}>???????</text>
@@ -118,6 +164,7 @@
             d={D.circle(cursorWt, 7)}
             fill="none"
             stroke="green"
+            class="cursor"
             />
 
         <!-- Show the selection as a red circle. -->
@@ -142,12 +189,12 @@
 
         <tr>
             <td><label for="prestricted">Show <Latex markup={`X_1(T)`} /></label></td>
-            <td><input type="checkbox" bind:checked={indicatePRestricted} id="prestricted"></td>
+            <td><input type="checkbox" bind:checked={state.indicatePRestricted} id="prestricted"></td>
         </tr>
 
         <tr>
-            <td><label>p = {P}</label></td>
-            <td><input type="range" min={2} max={23} bind:value={P}></td>
+            <td><label>p = {state.P}</label></td>
+            <td><input type="range" min={2} max={23} bind:value={state.P}></td>
         </tr>
 
         <tr>
@@ -155,25 +202,53 @@
             <td>
                 <ButtonGroup
                     options={[
-                        {text: "Dots", value: 'bubbles'},
+                        {text: "Dots", value: 'dots'},
                         {text: "Numbers", value: 'numbers'},
                     ]}
-                    bind:value={characterDisplay}
+                    bind:value={state.charDisplay}
                 />
             </td>
         </tr>
 
         <tr>
             <td>Simples in Weyls</td>
-            <td><input type="radio" bind:group={showWhat} value="simpsInWeyls"></td>
+            <td><input type="radio" bind:group={state.showWhat} value="simpsInWeyls"></td>
         </tr>
         <tr>
             <td>Weyls in simples</td>
-            <td><input type="radio" bind:group={showWhat} value="weylsInSimps"></td>
+            <td><input type="radio" bind:group={state.showWhat} value="weylsInSimps"></td>
         </tr>
         <tr>
             <td>Simples in weights</td>
-            <td><input type="radio" bind:group={showWhat} value="simpsInStd"></td>
+            <td><input type="radio" bind:group={state.showWhat} value="simpsInStd"></td>
+        </tr>
+
+        <tr>
+            <td>Save diagram</td>
+            <td>
+                <button on:click={addSnapshot}>Create SVG</button>
+                <button on:click={clearSVGSnapshots}>Clear</button>
+            </td>
+            <td>
+                <InfoTooltip>
+                    <p>
+                        Clicking the <button on:click={addSnapshot}>Create SVG</button> button will take a snapshot of the visualisation (with the green cursor circle removed), and save it as an SVG file named "Snapshot 1".
+                        This can be opened in a new tab to be viewed, or clicked to be downloaded as an SVG.
+                        The <button on:click={clearSVGSnapshots}>Clear</button> button will clear the list of snapshots.
+                    </p>
+                </InfoTooltip>
+            </td>
+        </tr>
+        <tr>
+            {#if svgList.length > 0}
+                <td colspan="2">
+                    <ul>
+                        {#each svgList as url, i}
+                            <li><a href={url} target="_blank" download="WeylCharacters.svg">Snapshot {i+1}</a></li>
+                        {/each}
+                    </ul>
+                </td>
+            {/if}
         </tr>
 
         <tr>
@@ -199,14 +274,14 @@
 
         <tr>
             <td>Show character?</td>
-            <td><input type="checkbox" id="showterms" bind:checked={showCharacter} /></td>
+            <td><input type="checkbox" id="showterms" bind:checked={state.charText} /></td>
         </tr>
-        {#if showCharacter}
+        {#if state.charText}
             <WidgetLinearComb
                 character={character}
                 latticeLabel={datum.latticeLabel}
-                A={(showWhat == 'weylsInSimps') ? 'V' : 'L'}
-                B={(showWhat == 'weylsInSimps') ? 'L' : (showWhat == 'simpsInStd') ? 'e' : 'χ'}
+                A={(state.showWhat == 'weylsInSimps') ? 'V' : 'L'}
+                B={(state.showWhat == 'weylsInSimps') ? 'L' : (state.showWhat == 'simpsInStd') ? 'e' : 'χ'}
                 lambda={selectedWt}
                 />
         {/if}

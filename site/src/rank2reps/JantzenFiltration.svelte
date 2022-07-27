@@ -8,16 +8,61 @@
     import Rank2WeightsDatum from './Rank2WeightsDatum.svelte'
 
     import InteractiveMap from './InteractiveMap.svelte'
+    import { createEventDispatcher } from 'svelte';
+    import { objectDelta } from '$lib/state';
+    import { createSVGSnapshot } from '$lib/snapshots';
+    import InfoTooltip from '$lib/components/InfoTooltip.svelte';
 
     const allowedGroups = ['A1xA1', 'SL3', 'B2', 'G2']
 
-    // Form inputs.
-    let groupName = 'SL3'
-    let indicatePRestricted = true
-    let P = 5
-    let reflectWts = true
-    let characterDisplay: 'bubbles' | 'numbers' = 'bubbles'
-    let showCharacter = false
+    type GroupName = 'A1xA1' | 'SL3' | 'B2' | 'G2'
+    type State = {
+        indicatePRestricted: boolean
+        P: number
+        reflectWts: boolean
+        charDisplay: 'dots' | 'numbers'
+        charText: boolean
+
+        controls: boolean
+        fullscreen: boolean
+    }
+    type SerialisableState = State & {
+        groupName: GroupName
+        frozenWt: number[] | null
+    }
+    const defaultSerialisableState: SerialisableState = {
+        groupName: 'SL3',
+        indicatePRestricted: true,
+        P: 5,
+        reflectWts: true,
+        charDisplay: 'dots',
+        charText: false,
+        controls: true,
+        fullscreen: false,
+        frozenWt: null,
+    }
+    let {groupName, frozenWt, ...state} = defaultSerialisableState
+
+    export function restoreState(delta: Partial<SerialisableState>) {
+        ({groupName, frozenWt, ...state} = {...defaultSerialisableState, ...delta})
+    }
+
+    const dispatch = createEventDispatcher()
+    $: dispatch('newState', objectDelta(defaultSerialisableState, {groupName, frozenWt, ...state}))
+
+    let svgElem: null | SVGElement
+    let svgList: string[] = []
+    function addSnapshot() {
+        let url = createSVGSnapshot(svgElem, {hideSelector: 'path.cursor'})
+        if (url != null)
+            svgList = [...svgList, url]
+    }
+    function clearSVGSnapshots() {
+        for (let url of svgList)
+            URL.revokeObjectURL(url)
+
+        svgList = []
+    }
 
     let userPort = {width: 0, height: 0, aff: aff.Aff2.id}
     let datum: reduc.BasedRootDatum & groups.EucEmbedding & groups.LatticeLabel
@@ -32,7 +77,6 @@
     // hoveredPoint is bound from InteractiveMap. cursorWt updates directly from that, and selectedWt takes the
     // first valid weight in its list. Selection and deselection events should set and unset frozenWt.
     let cursorWt = [0, 0]
-    let frozenWt: null | number[] = null
 
     function maySelectWt(wt) {
         return wt != null && wt.every(x => !isNaN(x)) && reduc.isDominant(datum, wt)
@@ -47,7 +91,7 @@
         return character
     }
 
-    $: character = makeCharacter(datum, P, selectedWt, reflectWts)
+    $: character = makeCharacter(datum, state.P, selectedWt, state.reflectWts)
 </script>
 
 
@@ -68,6 +112,9 @@
     initScale={20}
     maxScale={40}
     bind:userPort
+    bind:controlsShown={state.controls}
+    bind:fullscreen={state.fullscreen}
+    bind:svgElem={svgElem}
     on:pointHovered={(e) => cursorWt = D.fromPixelsClosestLatticePoint(e.detail)}
     on:pointSelected={(e) => frozenWt = D.fromPixelsClosestLatticePoint(e.detail)}
     on:pointDeselected={(e) => frozenWt = null}>
@@ -75,17 +122,17 @@
         <Rank2WeightsDatum
             {D}
             {datum}
-            {P}
+            P={state.P}
             dominantChamber={true}
-            pRestricted={true}
+            pRestricted={state.indicatePRestricted}
             wpWalls={true}
             />
 
         <PlotCharacter
             {D}
             {character}
-            radius={(characterDisplay == 'bubbles') ? 4 : 0}
-            showText={characterDisplay == 'numbers'}
+            radius={(state.charDisplay == 'dots') ? 4 : 0}
+            showText={state.charDisplay == 'numbers'}
             />
 
         <!-- Show the cursor as a green circle. -->
@@ -93,6 +140,7 @@
             d={D.circle(cursorWt, 7)}
             fill="none"
             stroke="green"
+            class="cursor"
             />
 
         <!-- Show the selection as a red circle. -->
@@ -117,12 +165,12 @@
 
         <tr>
             <td><label for="prestricted">Show <Latex markup={`X_1(T)`} /></label></td>
-            <td><input type="checkbox" bind:checked={indicatePRestricted} id="prestricted"></td>
+            <td><input type="checkbox" bind:checked={state.indicatePRestricted} id="prestricted"></td>
         </tr>
 
         <tr>
-            <td><label>p = {P}</label></td>
-            <td><input type="range" min={2} max={23} bind:value={P}></td>
+            <td>p = {state.P}</td>
+            <td><input type="range" min={2} max={23} bind:value={state.P}></td>
         </tr>
 
         <tr>
@@ -133,14 +181,42 @@
                         {text: "Dots", value: 'bubbles'},
                         {text: "Numbers", value: 'numbers'},
                     ]}
-                    bind:value={characterDisplay}
+                    bind:value={state.charDisplay}
                 />
             </td>
         </tr>
 
         <tr>
             <td><label for="reflect">Reflect to dominant</label></td>
-            <td><input type="checkbox" id="reflect" bind:checked={reflectWts} /></td>
+            <td><input type="checkbox" id="reflect" bind:checked={state.reflectWts} /></td>
+        </tr>
+
+        <tr>
+            <td>Save diagram</td>
+            <td>
+                <button on:click={addSnapshot}>Create SVG</button>
+                <button on:click={clearSVGSnapshots}>Clear</button>
+            </td>
+            <td>
+                <InfoTooltip>
+                    <p>
+                        Clicking the <button on:click={addSnapshot}>Create SVG</button> button will take a snapshot of the visualisation (with the green cursor circle removed), and save it as an SVG file named "Snapshot 1".
+                        This can be opened in a new tab to be viewed, or clicked to be downloaded as an SVG.
+                        The <button on:click={clearSVGSnapshots}>Clear</button> button will clear the list of snapshots.
+                    </p>
+                </InfoTooltip>
+            </td>
+        </tr>
+        <tr>
+            {#if svgList.length > 0}
+                <td colspan="2">
+                    <ul>
+                        {#each svgList as url, i}
+                            <li><a href={url} target="_blank" download="WeylCharacters.svg">Snapshot {i+1}</a></li>
+                        {/each}
+                    </ul>
+                </td>
+            {/if}
         </tr>
 
         <tr>
@@ -155,9 +231,9 @@
 
         <tr>
             <td>Show character?</td>
-            <td><input type="checkbox" id="showterms" bind:checked={showCharacter} /></td>
+            <td><input type="checkbox" id="showterms" bind:checked={state.charText} /></td>
         </tr>
-        {#if showCharacter}
+        {#if state.charText}
             <WidgetLinearComb
                 character={character}
                 latticeLabel={datum.latticeLabel}
