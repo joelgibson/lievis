@@ -8,6 +8,8 @@
 
     --heading-font-family: 'Libertinus sans', sans-serif;
 
+    --code-font-family: 'Fira Mono', monospace;
+
     --width-fullpage: 90vw;
 
     --colour-link: rgb(3, 102, 214);
@@ -34,6 +36,9 @@ h1 { font-size: 2.2rem; line-height: 2.5rem; }
 h2 { font-size: 1.7rem; }
 h3 { font-size: 1.4rem; }
 
+code, pre { font-family: var(--code-font-family); font-size: 1rem; }
+code { background-color: rgb(255, 248, 230); border: 1px solid #eee; border-radius: 4px;}
+
 
 /* Make the KaTeX inline font a little smaller than it usually is, and force it to not break over lines. */
 .math-inline {
@@ -56,11 +61,12 @@ h3 { font-size: 1.4rem; }
     padding-right: 2px;
     background-color: #F3F4F6;
 }
+.controls select { background-color: #F3F4F6; }
 
 /* This media query only targets devices supporting "hover" (i.e. computers not phones),
    stopping the :hover selector from 'sticking around' */
 @media (hover: hover) {
-    .controls button:hover { background-color: #E5E7EB; }
+    .controls button:hover, .controls select:hover { background-color: #E5E7EB; }
 }
 .controls button.selected {
     background-color: #e1fdfe;
@@ -100,6 +106,7 @@ header p, article p, article ul, article ol { margin-bottom: 1rem; }
 header h1, article h1, article h2, article h3, article h4, article h5, article h6, article figure, article table { margin-bottom: 0.5rem; }
 article ul { list-style-type: disc; list-style-position: outside; margin-left: 2rem; }
 article ol { list-style-type: decimal; list-style-position: outside; margin-left: 2rem; }
+article pre { margin-left: 2rem; margin-bottom: 1rem; }
 
 /** The equations have a habit of overflowing the viewport on mobile. */
 article .math-display { overflow: auto; }

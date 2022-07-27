@@ -176,7 +176,7 @@ s = {
  *    http://json.org/json.js as of 2006-04-28 from json.org
  *
  */
-export function encode(v: any) {
+export function encode(v: any): string {
     return enc(v);
 };
 
@@ -467,5 +467,24 @@ parser.prototype.next = function () {
     this.index = i;
     return c;
 };
+
+const bracketSwap = {'[': '(', '(': '[', ']': ')', ')': ']'}
+const bracketPatt = /[[\]()]/g
+
+/** A modified version of rison which encodes, then swaps () with []. */
+export function brencode(obj: any): string {
+    return encode(obj).replace(bracketPatt, (s) => bracketSwap[s])
+}
+
+/** Inverse to brencode. */
+export function brdecode(data: string): any {
+    return decode(data.replace(bracketPatt, (s) => bracketSwap[s]))
+}
+
+/** Tests for whether the first character is ( or [, and deploys either
+ * decode or brdecode respectively. */
+export function anydecode(data: string): any {
+    return (data.startsWith('[')) ? brdecode(data) : decode(data)
+}
 
 }

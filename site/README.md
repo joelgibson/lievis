@@ -35,6 +35,8 @@ Next I'll be working on:
   - Figure out how to get the labels into this SVG - MathJax3 perhaps?
 - Making the Affine Weyl visualisation downloadable as SVG.
   - A tool that intercepts the canvas drawing?
+- Change the URL encoding to accept `[]` or `()`, and prefer `[]` as this keeps links intact on iOS.
+  - According to <https://stackoverflow.com/questions/40568/are-square-brackets-permitted-in-urls> square brackets are not allowed in URLs, but browsers seem to accept them just fine - perhaps they are happy to just encode them in the HTTP request?
 - Add tilting regions to the simple characters visualisation.
 - Switch the characters over to using true integers.
 - Displaying elements in the affine Weyl visualisation, both as words, and as the finite group semidirect product the root lattice.

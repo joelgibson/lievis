@@ -19,6 +19,8 @@ point, but certain operations were just too hard to specify.
     import {colour} from './colour'
     import { rison } from '$lib/rison';
 
+    import C2S from '$lib/canvas2svg'
+
     const MAX_LENGTH = 80
 
     type Rank2Type = 'A' | 'B' | 'C' | 'G'
@@ -327,7 +329,7 @@ point, but certain operations were just too hard to specify.
     function loadFromHash(fragment: string) {
         let delta: Partial<UserConfig>
         try {
-            delta = rison.decode(fragment)
+            delta = rison.anydecode(fragment)
         } catch (e) {
             console.log("Error while trying to decode", fragment, e)
             return
@@ -338,7 +340,7 @@ point, but certain operations were just too hard to specify.
     }
 
     // replaceState changes the URL without triggering a hashchange event.
-    $: history.replaceState(null, null, document.location.pathname + '#' + rison.encode(configChanges(defaultUserConfig, userConfig)))
+    $: history.replaceState(null, null, document.location.pathname + '#' + rison.brencode(configChanges(defaultUserConfig, userConfig)))
 
     /** Completely reset the state from a config. */
     function pushUserConfig(config: UserConfig) {
@@ -758,6 +760,8 @@ point, but certain operations were just too hard to specify.
         }
     }
 
+
+
     function drawCanvas(
         canvasElt: HTMLCanvasElement,
         D: draw.NewCoords,
@@ -771,7 +775,7 @@ point, but certain operations were just too hard to specify.
         shadedSet: maps.IMap<CoxElt, string>,
         cellColours: maps.FlatIntMap<string>,
         treeEdges: TreeEdge[],
-        {coxEltToIdx, eucVertices, eucIntpts}: ViewportGeometry,
+        viewportGeometry: ViewportGeometry,
         frame: number,
         userPort: {width: number, height: number, aff: aff.Aff2},
     ) {
@@ -783,21 +787,30 @@ point, but certain operations were just too hard to specify.
             canvasElt.height = height
         }
 
-        // D.affProj is taking us from weight space to CSS pixel space. We need to transform CSS pixel space
-        // [0, cssWidth) x [0, cssHeight) back to clip space [-1, 1) x [-1, 1). The other difference between
-        // these spaces is that the origin is at the bottom-left of clip space, but the top-left in CSS space.
-        //
-        // Why do we need to do the vertical flip? The other stuff measuring the screen (finding the mouse
-        // cursor etc) is all happening in CSS space, and has the y-coordinate increasing down the screen.
-
-
-
-        // Show labels
         let ctx = canvasElt.getContext('2d')
         ctx.resetTransform()
         ctx.scale(dpr, dpr)
         ctx.clearRect(0, 0, cssWidth, cssHeight)
 
+        drawContext(ctx, D, rtDat, pDialation, pDialationEnabled, pDialatedGenerator, pxDialatedAlcoves, selCoxElt, shownLabels, shadedSet, cellColours, treeEdges, viewportGeometry, userPort)
+    }
+
+    function drawContext(
+        ctx: CanvasRenderingContext2D,
+        D: draw.NewCoords,
+        rtDat: RootData,
+        pDialation: number,
+        pDialationEnabled: boolean,
+        pDialatedGenerator: number,
+        pxDialatedAlcoves: AlcoveData[],
+        selCoxElt: null | number,
+        shownLabels: maps.IMap<number, string>,
+        shadedSet: maps.IMap<CoxElt, string>,
+        cellColours: maps.FlatIntMap<string>,
+        treeEdges: TreeEdge[],
+        {coxEltToIdx, eucVertices, eucIntpts}: ViewportGeometry,
+        {width, height, aff}: {width: number, height: number, aff: aff.Aff2},
+    ) {
         function fillTriangle(x: CoxElt, fillStyle: string) {
             let i = coxEltToIdx.get(x)
             ctx.fillStyle = fillStyle
@@ -925,8 +938,19 @@ point, but certain operations were just too hard to specify.
     let frame: number = 0
     $: if (canvasElt != null) { drawCanvas(canvasElt, D, rtDat, pDialation, pDialationEnabled, pDialatedGenerator, pxDialatedAlcoves, selCoxElt, shownLabels, shadedSet, cellColours, treeEdges, viewportGeometry, frame, userPort) }
 
+    function createSVG() {
+        let ctx = new C2S(userPort.width, userPort.height)
+        ctx.clearRect(userPort.width, userPort.height)
+        drawContext(ctx, D, rtDat, pDialation, pDialationEnabled, pDialatedGenerator, pxDialatedAlcoves, selCoxElt, shownLabels, shadedSet, cellColours, treeEdges, viewportGeometry, userPort)
+        let svgXml = ctx.getSerializedSvg(true /* Replace any named entities with numbered ones */)
+        let blob = new Blob([svgXml], {type: 'image/svg+xml'})
+        let url = URL.createObjectURL(blob)
+        window.location.assign(url)
+    }
+
     // Perhaps load from the hash
-    if (document.location.hash.substring(0, 2) == '#(')
+    let hashStart = document.location.hash.substring(0, 2)
+    if (hashStart == '#(' || hashStart == '#[')
         loadFromHash(document.location.hash.substring(1))
 </script>
 
@@ -1074,6 +1098,9 @@ point, but certain operations were just too hard to specify.
                         <option value="stu">stu</option>
                     </select>
                 </td>
+            </tr>
+            <tr>
+                <td><button on:click={createSVG}>Create SVG</button></td>
             </tr>
         </table>
 

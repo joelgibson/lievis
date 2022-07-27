@@ -24,14 +24,14 @@ updated: 2021-07-01
         components[id] = component
         component.$on('newState', ({detail}) => {
             let obj = {anchor: id, ...detail}
-            history.replaceState(null, null, document.location.pathname + '#' + rison.encode(obj))
+            history.replaceState(null, null, document.location.pathname + '#' + rison.brencode(obj))
         })
     }
 
     function loadFromHash(hashString) {
         let obj
         try {
-            obj = rison.decode(hashString)
+            obj = rison.anydecode(hashString)
         } catch (e) {
             console.log('Could not decode rison object', hashString)
             return
@@ -52,7 +52,8 @@ updated: 2021-07-01
         components[anchor].restoreState({...components[anchor].defaultBigState, ...rest})
     }
 
-    if (document.location.hash.substring(0, 2) == '#(')
+    let hashStart = document.location.hash.substring(0, 2)
+    if (hashStart == '#(' || hashStart == '#[')
         loadFromHash(document.location.hash.substring(1))
 </script>
 
