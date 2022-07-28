@@ -468,10 +468,15 @@ parser.prototype.next = function () {
     return c;
 };
 
-const bracketSwap = {'[': '(', '(': '[', ']': ')', ')': ']'}
-const bracketPatt = /[[\]()]/g
+const bracketSwap = {
+    '(': '.',
+    '.': '(',
+    ')': '-',
+    '-': ')',
+}
+const bracketPatt = /[.()-]/g
 
-/** A modified version of rison which encodes, then swaps () with []. */
+/** A modified version of rison which encodes, then swaps () with .- */
 export function brencode(obj: any): string {
     return encode(obj).replace(bracketPatt, (s) => bracketSwap[s])
 }
@@ -481,10 +486,10 @@ export function brdecode(data: string): any {
     return decode(data.replace(bracketPatt, (s) => bracketSwap[s]))
 }
 
-/** Tests for whether the first character is ( or [, and deploys either
+/** Tests for whether the first character is ( or ., and deploys either
  * decode or brdecode respectively. */
 export function anydecode(data: string): any {
-    return (data.startsWith('[')) ? brdecode(data) : decode(data)
+    return (data.startsWith('.')) ? brdecode(data) : decode(data)
 }
 
 }

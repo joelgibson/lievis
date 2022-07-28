@@ -53,7 +53,7 @@ updated: 2021-07-01
     }
 
     let hashStart = document.location.hash.substring(0, 2)
-    if (hashStart == '#(' || hashStart == '#[')
+    if (hashStart == '#(' || hashStart == '#.')
         loadFromHash(document.location.hash.substring(1))
 </script>
 

@@ -950,7 +950,7 @@ point, but certain operations were just too hard to specify.
 
     // Perhaps load from the hash
     let hashStart = document.location.hash.substring(0, 2)
-    if (hashStart == '#(' || hashStart == '#[')
+    if (hashStart == '#(' || hashStart == '#.')
         loadFromHash(document.location.hash.substring(1))
 </script>
 
