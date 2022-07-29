@@ -65,7 +65,7 @@
                 on:click={copyURLToClipboard}
                 title="Copy a link to this particular configuration of this visualisation."
             >
-                {#if justCopied}{justCopied.message}{:else}Copy link{/if}
+                {#if justCopied}{justCopied.message}{:else}Copy 🔗{/if}
             </button>
         {/if}
         {#if takeSnapshot}

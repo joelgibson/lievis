@@ -222,6 +222,7 @@
                 >
                 ◎
             </button>
+            <!-- If we have a touch device, show the modes of touch control. -->
             {#if window.navigator.maxTouchPoints}
                 <ButtonGroup
                     options={[
@@ -231,6 +232,11 @@
                     ]}
                     bind:value={panMode}
                     />
+
+            <!-- If we are not on a touch device, add some rotation tools. -->
+            {:else}
+                <button title="Rotate anticlockwise" on:click={() => userPort.aff = aff.Aff2.id.rotate(15*Math.PI/180).then(userPort.aff)}>⟲</button>
+                <button title="Rotate clockwise" on:click={() => userPort.aff = aff.Aff2.id.rotate(-15*Math.PI/180).then(userPort.aff)}>⟳</button>
             {/if}
         </div>
 

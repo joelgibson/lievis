@@ -30,20 +30,30 @@ When I build the site I mount it to the subdirectory `/lievis/` at my website: <
 
 Next I'll be working on:
 
-- Making all of the Rank2Reps and Affine Weyl visualisations hyperlinkable.
 - Making all of the Rank2Reps visualisations downloadable as SVGs.
   - Figure out how to get the labels into this SVG - MathJax3 perhaps?
-  - Bug in the Weyl orbit SVG, make sure the cursor is gone.
-  - Find a better way to present the SVG saving menu.
+- Bug in Affine Weyl to SVG: thick chamber walls.
+- Bug in Affine Weyl to SVG: huge SVG.
+- Fixed mode seems broken on iPad, freezes visualisation?
+- Make Affine Weyl jump to visualisation if there is data in the fragment, and not clobber it on load (use the same strat as Rank2Reps).
+- Remove weird orbit dots in the affine SL2 visualisation.
+- Clean up p-can stuff in Affine Weyl.
+- Make the escape key leave fullscreen, or make it more obvious how to do that.
+- Affine Weyl should support a frozen element.
+- Add tilting regions to the simple characters visualisation.
+- Displaying elements in the affine Weyl visualisation as the finite group semidirect product the root lattice.
+- Implement the periodic Hecke module for the affine Weyl visualisation.
+
+Done:
+- Making all of the Rank2Reps and Affine Weyl visualisations hyperlinkable.
+- Find a better way to present the SVG saving menu.
+- Bug in the Weyl orbit SVG, make sure the cursor is gone.
 - Making the Affine Weyl visualisation downloadable as SVG.
-  - A tool that intercepts the canvas drawing?
 - Change the URL encoding to accept `[]` or `()`, and prefer `[]` as this keeps links intact on iOS.
   - According to <https://stackoverflow.com/questions/40568/are-square-brackets-permitted-in-urls> square brackets are not allowed in URLs, but browsers seem to accept them just fine - perhaps they are happy to just encode them in the HTTP request?
   - Solved by switching `()` to `.-`. Go figure.
-- Add tilting regions to the simple characters visualisation.
 - Switch the characters over to using true integers.
-- Displaying elements in the affine Weyl visualisation, both as words, and as the finite group semidirect product the root lattice.
-- Implement the periodic Hecke module for the affine Weyl visualisation.
+
 
 
 # Technical internals

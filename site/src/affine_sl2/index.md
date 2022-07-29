@@ -15,6 +15,8 @@ The $W$-orbit of the simple roots is the root system $\Phi \subseteq V$, shown b
 
 In the dual space $V^*$, the coroots $\alpha_1^\vee$ and $\alpha_2^\vee$ are linearly dependent ($\alpha_1^\vee + \alpha_2^\vee = 0$) and so the $W$-action does not generate a root system, but instead of roots we have chamber geometry. Define the fundamental chamber $C = \set{\mu \in V^* \mid \innprod{\mu, \alpha_i} > 0 \text{ for } i=1,2}$, then the $W$-orbit of $C$ is a convex cone $\cC$ called the _Tits cone_, which in this case is the upper half-plane. The chamber $C$ is a fundamental domain for the action of $W$ on $\cC$. By intersecting each $wC$ with the hyperplane $\innprod{-, \delta} = 1$ (written as the equation "$\delta = 1$" for short), we obtain the alternative picture of $W$ as a group of affine reflections acting on the line $\delta = 1$.
 
+## Chamber system and root system
+
 The dual space $V^*$ is shown on the left, in the basis dual to $(\alpha_1, \delta)$. Whenever a chamber $wC$ is selected, the root inversion set $\Phi^+(w) = \set{\beta \in \Phi^+ \mid w(\beta) < 0}$ is shown circled on the right on the right. The element $w \alpha_1$ is shown on the right with a light green background. Since every element of $W$ fixes $\bbR \delta$ pointwise, knowing $w \alpha_1$ is enough to determine the action of $w$ on $V$.
 
 <div id="AffineSL2"></div>

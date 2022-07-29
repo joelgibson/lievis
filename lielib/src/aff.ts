@@ -30,6 +30,11 @@ export class Aff2 {
         return new Aff2(liftMat(fwd), liftMat(rev))
     }
 
+    /** The inverse affine transformation. */
+    inv(): Aff2 {
+        return new Aff2(this.rev, this.fwd)
+    }
+
     /** Reversed composition, so that A.then(B) is BA. */
     then(aff: Aff2): Aff2 {
         return new Aff2(mat.multMat(aff.fwd, this.fwd), mat.multMat(this.rev, aff.rev))
@@ -66,6 +71,11 @@ export class Aff2 {
         // Since 1/(a + ib) = (a - ib)/(a^2 + b^2) we'll need this:
         let norm2 = a*a + b*b
         return this.then(new Aff2(complexMat(a, b), complexMat(a/norm2, -b/norm2)))
+    }
+
+    /** Postcompose by an anticlockwise rotation, speficied in radians. */
+    rotate(radians: number): Aff2 {
+        return this.complex(Math.cos(radians), Math.sin(radians))
     }
 
     /** The square root of the absolute value of the determinant of the 2x2 linear part of fwd.

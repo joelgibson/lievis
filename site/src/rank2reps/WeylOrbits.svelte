@@ -168,7 +168,7 @@
             d={D.circle(cursorWt, 7)}
             fill="none"
             stroke="green"
-            style="cursor"
+            class="cursor"
             />
 
         <!-- Show the selection as a red circle. -->
