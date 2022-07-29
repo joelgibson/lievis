@@ -5,7 +5,12 @@ type SVGSnapshotOptions = {
 }
 
 /** Create a snapshot of an SVG element, returning a Blob URL thing. */
-export function createSVGSnapshot(svgElem: SVGElement | null, options: Partial<SVGSnapshotOptions>): string | null {
+export function createSVGSnapshot(svgElem: SVGElement, options: Partial<SVGSnapshotOptions>): string {
+    return URL.createObjectURL(createSVGSnapshotBlob(svgElem, options))
+}
+
+/** Create a snapshot of an SVG element, returning a Blob. */
+export function createSVGSnapshotBlob(svgElem: SVGElement, options: Partial<SVGSnapshotOptions>): Blob {
     if (svgElem == null)
         return null
 
@@ -14,10 +19,9 @@ export function createSVGSnapshot(svgElem: SVGElement | null, options: Partial<S
 
     let svgXml = new XMLSerializer().serializeToString(svgElem)
     let blob = new Blob([svgXml], {type: 'image/svg+xml'})
-    let url = URL.createObjectURL(blob)
 
     if (options.hideSelector)
         document.querySelectorAll(options.hideSelector).forEach((x: HTMLElement) => x.style.display = 'inherit')
 
-    return url
+    return blob
 }

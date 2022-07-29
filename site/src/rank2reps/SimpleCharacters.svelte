@@ -7,10 +7,10 @@
     import PlotCharacter from './PlotCharacter.svelte'
     import Rank2WeightsDatum from './Rank2WeightsDatum.svelte'
     import InteractiveMap from './InteractiveMap.svelte'
-import { createEventDispatcher } from 'svelte';
-import { objectDelta } from '$lib/state';
-import { createSVGSnapshot } from '$lib/snapshots';
-import InfoTooltip from '$lib/components/InfoTooltip.svelte';
+    import { createEventDispatcher } from 'svelte';
+    import { objectDelta } from '$lib/state';
+    import { createSVGSnapshotBlob } from '$lib/snapshots';
+    import InfoTooltip from '$lib/components/InfoTooltip.svelte';
 
     const allowedGroups = ['T2', 'A1xA1', 'GL2', 'SL3', 'B2', 'G2'] as const
     type State = {
@@ -50,18 +50,6 @@ import InfoTooltip from '$lib/components/InfoTooltip.svelte';
     $: dispatch('newState', objectDelta(defaultSerialisableState, {groupName, frozenWt, ...state}))
 
     let svgElem: null | SVGElement
-    let svgList: string[] = []
-    function addSnapshot() {
-        let url = createSVGSnapshot(svgElem, {hideSelector: 'path.cursor'})
-        if (url != null)
-            svgList = [...svgList, url]
-    }
-    function clearSVGSnapshots() {
-        for (let url of svgList)
-            URL.revokeObjectURL(url)
-
-        svgList = []
-    }
 
     // Set up allowed groups, first group, and coordinate systems.
     let userPort = {width: 0, height: 0, aff: aff.Aff2.id}
@@ -136,7 +124,9 @@ import InfoTooltip from '$lib/components/InfoTooltip.svelte';
     bind:svgElem={svgElem}
     on:pointHovered={(e) => cursorWt = D.fromPixelsClosestLatticePoint(e.detail)}
     on:pointSelected={(e) => frozenWt = D.fromPixelsClosestLatticePoint(e.detail)}
-    on:pointDeselected={(e) => frozenWt = null}>
+    on:pointDeselected={(e) => frozenWt = null}
+    takeSnapshot={() => ({downloadName: 'WeylCharacters', blob: createSVGSnapshotBlob(svgElem, {hideSelector: '.cursor'})})}
+>
     <g slot="svg">
         <Rank2WeightsDatum
             {D}
@@ -221,34 +211,6 @@ import InfoTooltip from '$lib/components/InfoTooltip.svelte';
         <tr>
             <td>Simples in weights</td>
             <td><input type="radio" bind:group={state.showWhat} value="simpsInStd"></td>
-        </tr>
-
-        <tr>
-            <td>Save diagram</td>
-            <td>
-                <button on:click={addSnapshot}>Create SVG</button>
-                <button on:click={clearSVGSnapshots}>Clear</button>
-            </td>
-            <td>
-                <InfoTooltip>
-                    <p>
-                        Clicking the <button on:click={addSnapshot}>Create SVG</button> button will take a snapshot of the visualisation (with the green cursor circle removed), and save it as an SVG file named "Snapshot 1".
-                        This can be opened in a new tab to be viewed, or clicked to be downloaded as an SVG.
-                        The <button on:click={clearSVGSnapshots}>Clear</button> button will clear the list of snapshots.
-                    </p>
-                </InfoTooltip>
-            </td>
-        </tr>
-        <tr>
-            {#if svgList.length > 0}
-                <td colspan="2">
-                    <ul>
-                        {#each svgList as url, i}
-                            <li><a href={url} target="_blank" download="WeylCharacters.svg">Snapshot {i+1}</a></li>
-                        {/each}
-                    </ul>
-                </td>
-            {/if}
         </tr>
 
         <tr>

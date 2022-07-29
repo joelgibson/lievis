@@ -14,6 +14,7 @@
     import FullscreenableContainer from '$lib/components/FullscreenableContainer.svelte'
     import {createInteractionHandlers} from '$lib/pointer-interactions'
     import ButtonGroup from '$lib/components/ButtonGroup.svelte'
+    import SnapshotMenu from '$lib/components/SnapshotMenu.svelte';
 
     // Read-only input parameters controlling how much we can zoom.
     export let minScale = 1, maxScale = 80, initScale = 40
@@ -29,6 +30,9 @@
 
     // SVG Element
     export let svgElem: null | SVGElement = null
+
+    // Snapshot function
+    export let takeSnapshot: (() => {downloadName: string, blob: Blob}) | null = null
 
     // On touch devices, which movement mode?
     let panMode: 'frozen' | 'pan-zoom' | 'free' = 'pan-zoom'
@@ -137,11 +141,9 @@
         user-select: none;
         -webkit-user-select: none;
     }
+    .top-left { position: absolute; top: 5px; left: 5px; }
+    .bottom-left { position: absolute; bottom: 5px; left: 5px; }
     div.controls {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-
         border: 1px solid #aaa;
         background-color: white;
 
@@ -195,7 +197,12 @@
         on:dblclick={(e) => dispatch('pointDeselected')}
         />
 
-    <div class="controls">
+
+    <div class="controls bottom-left">
+        <SnapshotMenu {takeSnapshot} />
+    </div>
+
+    <div class="controls top-left">
         <div class="buttons">
             <button
                 on:click={() => controlsShown = !controlsShown}

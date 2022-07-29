@@ -15,7 +15,7 @@
     import { vec, vecmut, mat, draw, reduc, groups, fmt, maps, aff } from 'lielib'
     import { createEventDispatcher } from 'svelte';
     import { objectDelta } from '$lib/state';
-    import { createSVGSnapshot } from '$lib/snapshots';
+    import { createSVGSnapshotBlob } from '$lib/snapshots';
     import InfoTooltip from '$lib/components/InfoTooltip.svelte';
 
 
@@ -58,19 +58,6 @@
 
 
     let svgElem: null | SVGElement
-    let svgList: string[] = []
-    function addSnapshot() {
-        let url = createSVGSnapshot(svgElem, {hideSelector: 'path.cursor'})
-        if (url != null)
-            svgList = [...svgList, url]
-    }
-    function clearSVGSnapshots() {
-        for (let url of svgList)
-            URL.revokeObjectURL(url)
-
-        svgList = []
-    }
-
 
     function computeOrbit(datum: reduc.BasedRootDatum, wt: number[], rhoShift: boolean, p: number) {
         let shift = (rhoShift) ? datum.rho : vec.zero(datum.rank)
@@ -135,7 +122,9 @@
     bind:svgElem={svgElem}
     on:pointHovered={(e) => cursorWt = D.fromPixelsClosestLatticePoint(e.detail)}
     on:pointSelected={(e) => frozenWt = D.fromPixelsClosestLatticePoint(e.detail)}
-    on:pointDeselected={(e) => frozenWt = null}>
+    on:pointDeselected={(e) => frozenWt = null}
+    takeSnapshot={() => ({downloadName: 'WeylOrbits', blob: createSVGSnapshotBlob(svgElem, {hideSelector: '.cursor'})})}
+>
     <g slot="svg">
         <Rank2WeightsDatum
             {D}
@@ -234,37 +223,9 @@
                 <td>(requires <Latex markup={`p > 0`}/>) <input type="checkbox" bind:checked={state.indicatePRestricted} disabled={state.P == 0}></td>
             </tr>
             <tr>
-                <td>Save diagram</td>
-                <td>
-                    <button on:click={addSnapshot}>Create SVG</button>
-                    <button on:click={clearSVGSnapshots}>Clear</button>
-                </td>
-                <td>
-                    <InfoTooltip>
-                        <p>
-                            Clicking the <button on:click={addSnapshot}>Create SVG</button> button will take a snapshot of the visualisation (with the green cursor circle removed), and save it as an SVG file named "Snapshot 1".
-                            This can be opened in a new tab to be viewed, or clicked to be downloaded as an SVG.
-                            The <button on:click={clearSVGSnapshots}>Clear</button> button will clear the list of snapshots.
-                        </p>
-                    </InfoTooltip>
-                </td>
-            </tr>
-            <tr>
-                {#if svgList.length > 0}
-                    <td colspan="2">
-                        <ul>
-                            {#each svgList as url, i}
-                                <li><a href={url} target="_blank" download="WeylCharacters.svg">Snapshot {i+1}</a></li>
-                            {/each}
-                        </ul>
-                    </td>
-                {/if}
-            </tr>
-            <tr>
                 <td>Cursor (<span style="color: green;">green</span>)</td>
                 <td>μ = {@html fmt.linComb(cursorWt, datum.latticeLabel)}</td>
             </tr>
-
             <tr>
                 <td>Selected (<span style="color: red;">red</span>)</td>
                 <td>λ = {@html fmt.linComb(selectedWt, datum.latticeLabel)}</td>

@@ -12,7 +12,7 @@
     import InfoTooltip from '$lib/components/InfoTooltip.svelte'
 
     import { objectDelta } from '$lib/state';
-    import { createSVGSnapshot } from '$lib/snapshots';
+    import { createSVGSnapshotBlob } from '$lib/snapshots';
 
     // State interface. State should be serialisable so that it can be read and restored externally
     // (for example from a hash URL). The interface for this is the following:
@@ -91,20 +91,8 @@
         },
     }
 
-    let svgElem: null | SVGElement
-    let svgList: string[] = []
-    function addSnapshot() {
-        let url = createSVGSnapshot(svgElem, {hideSelector: 'path.cursor'})
-        if (url != null)
-            svgList = [...svgList, url]
-    }
-    function clearSVGSnapshots() {
-        for (let url of svgList)
-            URL.revokeObjectURL(url)
-
-        svgList = []
-    }
-
+    /** The underlying SVG element, bound for snapshotting purposes. */
+    let svgElem: SVGElement
 
     let userPort = {width: 0, height: 0, aff: aff.Aff2.id}
     let datum: reduc.BasedRootDatum & groups.EucEmbedding & groups.LatticeLabel
@@ -131,6 +119,8 @@
     td:not(:first-child) { padding-left: 4px; }
     td:nth-child(1) { white-space: nowrap; }
     td:nth-child(2) { width: 100%; text-align: right; }
+
+    /* #snapshot-menu { position: absolute; left: 5px; bottom: 5px; } */
 </style>
 
 <InteractiveMap
@@ -143,7 +133,9 @@
     bind:fullscreen={state.fullscreen}
     on:pointSelected={(e) => frozenWt = D.fromPixelsClosestLatticePoint(e.detail)}
     on:pointHovered={(e) => cursorWt = D.fromPixelsClosestLatticePoint(e.detail)}
-    on:pointDeselected={(e) => frozenWt = null}>
+    on:pointDeselected={(e) => frozenWt = null}
+    takeSnapshot={() => ({downloadName: 'WeylCharacters', blob: createSVGSnapshotBlob(svgElem, {hideSelector: '.cursor'})})}
+>
     <g slot="svg">
         <Rank2WeightsDatum
             {D}
@@ -307,34 +299,6 @@
             </tr>
 
             <tr>
-                <td>Save diagram</td>
-                <td>
-                    <button on:click={addSnapshot}>Create SVG</button>
-                    <button on:click={clearSVGSnapshots}>Clear</button>
-                </td>
-                <td>
-                    <InfoTooltip>
-                        <p>
-                            Clicking the <button on:click={addSnapshot}>Create SVG</button> button will take a snapshot of the visualisation (with the green cursor circle removed), and save it as an SVG file named "Snapshot 1".
-                            This can be opened in a new tab to be viewed, or clicked to be downloaded as an SVG.
-                            The <button on:click={clearSVGSnapshots}>Clear</button> button will clear the list of snapshots.
-                        </p>
-                    </InfoTooltip>
-                </td>
-            </tr>
-            <tr>
-                {#if svgList.length > 0}
-                    <td colspan="2">
-                        <ul>
-                            {#each svgList as url, i}
-                                <li><a href={url} target="_blank" download="WeylCharacters.svg">Snapshot {i+1}</a></li>
-                            {/each}
-                        </ul>
-                    </td>
-                {/if}
-            </tr>
-
-            <tr>
                 <td>Show character?</td>
                 <td><input type="checkbox" id="showterms" bind:checked={state.charText} /></td>
             </tr>
@@ -348,7 +312,5 @@
                     />
             {/if}
         </table>
-
-
     </div>
 </InteractiveMap>

@@ -938,14 +938,13 @@ point, but certain operations were just too hard to specify.
     let frame: number = 0
     $: if (canvasElt != null) { drawCanvas(canvasElt, D, rtDat, pDialation, pDialationEnabled, pDialatedGenerator, pxDialatedAlcoves, selCoxElt, shownLabels, shadedSet, cellColours, treeEdges, viewportGeometry, frame, userPort) }
 
-    function createSVG() {
+    function takeSnapshot() {
         let ctx = new C2S(userPort.width, userPort.height)
         ctx.clearRect(userPort.width, userPort.height)
         drawContext(ctx, D, rtDat, pDialation, pDialationEnabled, pDialatedGenerator, pxDialatedAlcoves, selCoxElt, shownLabels, shadedSet, cellColours, treeEdges, viewportGeometry, userPort)
         let svgXml = ctx.getSerializedSvg(true /* Replace any named entities with numbered ones */)
         let blob = new Blob([svgXml], {type: 'image/svg+xml'})
-        let url = URL.createObjectURL(blob)
-        window.location.assign(url)
+        return {downloadName: 'AffineWeyl.svg', blob}
     }
 
     // Perhaps load from the hash
@@ -981,6 +980,7 @@ point, but certain operations were just too hard to specify.
     bind:fullscreen
     bind:userPort
     bind:controlsShown
+    {takeSnapshot}
     on:pointHovered={(e) => hoverPoint(e.detail)}
     >
     <svelte:fragment slot="other">
@@ -1098,9 +1098,6 @@ point, but certain operations were just too hard to specify.
                         <option value="stu">stu</option>
                     </select>
                 </td>
-            </tr>
-            <tr>
-                <td><button on:click={createSVG}>Create SVG</button></td>
             </tr>
         </table>
 
