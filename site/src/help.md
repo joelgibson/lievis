@@ -1,9 +1,9 @@
 ---
-title: LieVis Help
+title: Lievis Help
 toc: false
 ---
 
-Most of LieVis should be self-explanatory, but there are some more advanced features that can be used.
+Most of Lievis should be self-explanatory, but there are some more advanced features that can be used.
 
 
 ## Linking to visualisations
@@ -27,6 +27,6 @@ I have had the most luck by downloading the `librsvg` library, and using the `rs
 
     rsvg-convert foo.svg --output foo.pdf --format pdf
 
-In theory Inkscape should also be able to convert from SVG to PDF, but it seems to misinterpret some of the SVG files that come out of LieVis.
+In theory Inkscape should also be able to convert from SVG to PDF, but it seems to misinterpret some of the SVG files that come out of Lievis.
 
 To perform touch-ups to the SVG, you can use a vector graphics editing program like Inkscape or Adobe Illustrator.

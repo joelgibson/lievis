@@ -16,7 +16,6 @@
     import { createEventDispatcher } from 'svelte';
     import { objectDelta } from '$lib/state';
     import { createSVGSnapshotBlob } from '$lib/snapshots';
-    import InfoTooltip from '$lib/components/InfoTooltip.svelte';
 
 
     const allowedGroups = ['A1xA1', 'SL3', 'B2', 'G2']

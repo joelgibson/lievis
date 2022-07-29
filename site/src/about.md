@@ -1,5 +1,5 @@
 ---
-title: About LieVis
+title: About Lievis
 ---
 
 This collection of visualisations is a work-in-progress on making concepts from representation theory more visible and understandable.
@@ -16,14 +16,14 @@ If you have found this site helpful and have any corrections or suggestions to m
 
 ## Thanks to...
 
-The vast majority of the LieVis code is written from scratch by Joel Gibson.
-However, there are numerous books, papers, discussions, and open-source software projects that have allowed LieVis to happen.
+The vast majority of the Lievis code is written from scratch by Joel Gibson.
+However, there are numerous books, papers, discussions, and open-source software projects that have allowed Lievis to happen.
 On the mathematics side:
 
 - The papers and essays of [Bill Casselman](https://personal.math.ubc.ca/~cass/) are fantastic reading for anyone wishing to implement root systems and Coxeter groups on a computer.
-- The representation and construction of Coxeter groups in LieVis uses an algorithm due to Fokko du Cloux, published in [An abstract model for Bruhat intervals](https://doi.org/10.1006/eujc.1999.0343).
-- Reading about the [LiE](http://wwwmathlabo.univ-poitiers.fr/~maavl/LiE/) software by van Leeuwen, Cohen, and Lisser has been extremely informative at guiding the structure, if not the algorithms themselves, of LieVis.
-- Conversations with Joseph Baine, Geordie Williamson, and Oded Yacobi have been very useful to guide the interface design and mathematical direction of LieVis.
+- The representation and construction of Coxeter groups in Lievis uses an algorithm due to Fokko du Cloux, published in [An abstract model for Bruhat intervals](https://doi.org/10.1006/eujc.1999.0343).
+- Reading about the [LiE](http://wwwmathlabo.univ-poitiers.fr/~maavl/LiE/) software by van Leeuwen, Cohen, and Lisser has been extremely informative at guiding the structure, if not the algorithms themselves, of Lievis.
+- Conversations with Joseph Baine, Geordie Williamson, and Oded Yacobi have been very useful to guide the interface design and mathematical direction of Lievis.
 
 
 On the software side:

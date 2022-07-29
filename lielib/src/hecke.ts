@@ -346,6 +346,9 @@ export class HeckeAlg {
 
         let eltCount = 0
 
+        // Keep a count of the number of polynomials we encountered.
+        let polysCounted = 0
+
         for (let y = 0; y < this.cox.size(); y++) {
             if (this.cox.length(y) > upToLength)
                 continue
@@ -381,6 +384,11 @@ export class HeckeAlg {
                     if (ascendsL && this.cox.descendsL(s, z))
                         addLeftEdge(z, y)
                 }
+
+                // Collect stats
+                let canElt = this.canElt(y)
+                for (let x = 0; x <= y; x++)
+                    polysCounted += canElt.isZero(x) ? 0 : 1
             }
         }
 
@@ -397,8 +405,9 @@ export class HeckeAlg {
 
         performance.mark('cellEnd')
         performance.measure('cell calculation', 'cellStart', 'cellEnd')
-        console.log(performance.getEntriesByType('measure'))
+        console.log(`Cell calculation took ${performance.getEntriesByType('measure')[0].duration} ms`)
         console.log(`${eltCount} elements involved in cell calculation`)
+        console.log(`${polysCounted} polynomials involved in cell calculation`)
 
 
         // Return the strong components

@@ -1,8 +1,8 @@
-# LieVis
+# Lievis
 
 This is the software running the visualisations at <https://www.jgibson.id.au/lievis/>.
 
-LieVis is a collection of Lie theory visualisations. It consists of two parts: a library *lielib* written in TypeScript, and a website written in a combination of [Pandoc markdown](https://pandoc.org/) and [Svelte](https://svelte.dev/). Instructions for getting the site up and running can be found in the [site README](site/README.md).
+Lievis is a collection of Lie theory visualisations. It consists of two parts: a library *lielib* written in TypeScript, and a website written in a combination of [Pandoc markdown](https://pandoc.org/) and [Svelte](https://svelte.dev/). Instructions for getting the site up and running can be found in the [site README](site/README.md).
 
 This is by no means polished code - it's been accumulated over time, and in order to get high performance in some places it is strangely written. There are two implementations of root systems for instance - a more limited, slower one written earlier, and a much better-designed one written later, but both are kept around since rewriting visualiations that already work is not a good use of my time.
 
