@@ -17,6 +17,7 @@ clean:
 		--template=pandoc-template.html \
 		--katex=fake-url \
 		--lua-filter=rebase-links.lua \
+		--lua-filter=remove-table-colwidths.lua \
 		-M base_url=$(BASE_URL) \
 		--toc \
 		--section-divs \

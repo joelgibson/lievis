@@ -44,6 +44,7 @@ Next I'll be working on:
 - Displaying elements in the affine Weyl visualisation as the finite group semidirect product the root lattice.
 - Implement the periodic Hecke module for the affine Weyl visualisation.
 - Find some way to make it obvious how to unfreeze the weight.
+- Potential bug with link copy button on pages with multiple visualisations.
 
 Done:
 - Making all of the Rank2Reps and Affine Weyl visualisations hyperlinkable.

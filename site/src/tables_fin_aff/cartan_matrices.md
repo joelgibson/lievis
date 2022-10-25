@@ -30,6 +30,7 @@ The following table lists the 5 kinds of junctions (6, if we include $A_1 \times
 <figure id="CartanMatrices" class="row"></figure>
 
 - The column $a_{ij} a_{ji}$ records the product of the off-diagonal entries, which determines $m_{ij}$.
+- When there is an arrow, the arrow points to the vertex corresponding to the row in which the $-2$, $-3$, or $-4$ appears in the matrix.
 - The number $m_{ij}$ is the order of $(s_i s_j)$ in the Weyl group, so that $(s_i s_j)^{m_{ij}} = 1$.
 - The matrix $[i \cdot j]$ is the smallest integral symmetrisation of $[a_{ij}]$ such that the diagonals are positive even integers. The diagonal entries record the square lengths of roots. We can see that the arrow always points to the smaller root, and that the number of lines is the ratio of the square lengths of the roots.
 

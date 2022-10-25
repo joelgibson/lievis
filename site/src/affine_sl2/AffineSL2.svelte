@@ -156,14 +156,15 @@
                 {/each}
 
                 <!-- Orbit of selected point. -->
-                {#each selectedPtCoOrbit as pt}
+                <!-- Commented because it looks weird. -->
+                <!-- {#each selectedPtCoOrbit as pt}
                     <circle
                         cx={Cochar.x(pt)}
                         cy={Cochar.y(pt)}
                         r="2"
                         fill="purple"
                         />
-                {/each}
+                {/each} -->
 
                 <!-- Transparent chambers over the top, so that we can detect what chamber the mouse is in. -->
                 {#each chambers as coxElt}
@@ -241,14 +242,15 @@
                 {/each}
 
                 <!-- Orbit of selected point. -->
-                {#each selectedPtOrbit as pt}
+                <!-- Commented because it looks weird. -->
+                <!-- {#each selectedPtOrbit as pt}
                     <circle
                         cx={char.x(pt)}
                         cy={char.y(pt)}
                         r="2"
                         fill="purple"
                         />
-                {/each}
+                {/each} -->
 
                 {#each roots as root, i}
                     <path
@@ -293,6 +295,7 @@
     .wrapper div {
         word-wrap: nowrap;
         user-select: none;
+        -webkit-user-select: none;
     }
 
 </style>

@@ -45,8 +45,8 @@
 
 <style>
     .controls { position: absolute; top: 5px; left: 5px; }
-    .nondraggable { user-select: none; color: grey; }
-    .draggable { cursor: grab; user-select: none; }
+    .nondraggable { user-select: none; -webkit-user-select: none; color: grey; }
+    .draggable { cursor: grab; user-select: none; -webkit-user-select: none; }
 </style>
 
 <svelte:window on:mousemove={onMouseMove} on:mouseup={() => dragging = null} />

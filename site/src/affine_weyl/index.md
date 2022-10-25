@@ -12,6 +12,10 @@ title: The affine Weyl group
     figure {
         height: min(90vh, 800px);
     }
+    #normalisation-table .odd { background-color: #f6f6f6; }
+    #normalisation-table td { min-width: 8em; }
+    #normalisation-table td:not(:last-child) { margin-right: 1em; }
+    /* #normalisation-table td:nth-child(1) { min-width: 10em; } */
 </style>
 
 The visualisation below is a work-in-progress to show features of affine Weyl groups corresponding to the irreducible rank-2 root systems.
@@ -151,7 +155,68 @@ $$ (aT_{ws} + bT_w)(T_s + 1) = (a + bq)T_{ws} + (a + bq)T_w, $$
 and so by induction if $s$ is a right descent for $w$, then $P_{z, w} = P_{zs, w}$ for all $z$. The analagous property holds for left descents.
 
 
+## Table of normalisations
 
+There are two main presentations of the Hecke algebra, together with a normalisation of the standard basis, which come up in the literature.
+The definitions of the standard basis, KL polynomials, and R-polynomials change slightly depending on which normalisation is used (the bar involution and canonical basis remain the same).
+It can be tiresome to track how these normalisations are done across the literature, especially once notation is brought along for the ride.
+The purpose of this section is to lay out some notational touchstones across influential pieces of the literature, so that the reader can triangulate their position from there.
+
+The first I will call the *Lusztig normalisation*, where the Hecke algebra $H_q(W, S)$ is a module over $\mathbb{Z}[q^{± 1}]$ (although square roots of $q$ are usually adjoined), with the standard basis generators $T_s$ satisfying the any of the three equivalent quadratic relations
+$$ (T_s + 1)(T_s - q) = 0, $$
+$$ T_s^2 = T_s(q - 1) + q, $$
+$$ T_s^{-1} = q^{-1} T_s + (q^{-1} - 1).$$
+The second I will call the *Soergel normalisation*, where the Hecke algebra $H_v(W, S)$ is a module over $\mathbb{Z}[v^{± 1}]$, with the standard basis elements $\delta_s$ satisfying any of the three equivalent quadratic relations
+$$ (\delta_s + v)(\delta_s - v^{-1}) = 0, $$
+$$ \delta_s^2 = (v^{-1} - v)\delta_s + 1, $$
+$$ \delta_s^{-1} = \delta_s + (v - v^{-1}). $$
+
+*Note:* Lusztig was not the first to write down the Hecke algebra, and Soergel was not the first to use the Soergel normalisation.
+These names are chosen because they seem semi-common in the literature, and some name is better than no name.
+
+If we identify $q = v^{-2}$, then we can view $\mathbb{Z}[q^{± 1}]$ sitting inside $\mathbb{Z}[v^{± 1}]$.
+By requiring that $\delta_x = v^{l(x)} T_x$, we may then view $H_q(W, S) ⊆ H_v(W, S)$ as $\mathbb{Z}$-modules.
+Under this identification, the Kazhdan-Lusztig bar involution $i$ on $H_v(W, S)$ may be defined as the unique $\mathbb{Z}$-algebra automorphism which acts as $i(v) = v^{-1}$ and $i(\delta_s) = \delta_s^{-1}$ on the algebra generators: it then acts by $i(\delta_x) = \delta_{x^{-1}}^{-1}$ on the standard basis.
+The reader may check that under the chosen embedding $H_q(W, S) ⊆ H_v(W, S)$, this agrees with the involution $j$ on $H_q(W, S)$ defined as $j(q) = q^{-1}$ and $j(T_s) = T_s^{-1}$.
+Hence the embeddings of algebras are compatible with the bar involution.
+
+Now that we have compatible algebra-with-involution structures, it makes sense to compare elements which are written down in different papers.
+Each column of the table below corresponds to a paper or book, with the entries in that column written in the notation used there.
+Each row of the table names a term (The (L) or (S) are *Lusztig* or *Soergel*), then all entries in that row are equal.
+For example, by looking at the second row, we can see that the standard basis elements $\widetilde{T}_x$, $H_x$, and $\delta_x$ are all equal, but $T_x$ itself is not, rather it is scaled $q^{-l(x)/2} T_x = \delta_x$.
+
+Note also the variable substitution $q = v^{-2}$ when comparing Laurent polynomials.
+Take for example $h_{\id, x} = v^2 + v^4$ for $x = ustu$ in type $\widetilde{A}_2$.
+We have $P_{x, y} = v^{l(x) - l(y)} h_{x, y}$, which gives
+$$P_{\id, x} = v^{-4}(v^2 + v^4) = 1 + v^{-2} = 1 + q.$$
+
+The "normalisation table" is below.
+
+::: {#normalisation-table}
+
+|               Name |            [[KL79]]            |            [[Lus83]]             |         [[Soe97]]          |         [[EMTW20]]         |
+| -----------------: | :----------------------------: | :------------------------------: | :------------------------: | :------------------------: |
+| Standard basis (L) |             $T_x$              |   $q^{l(x)/2} \widetilde{T}_x$   |      $v^{-l(x)} H_x$       |    $v^{-l(x)} \delta_x$    |
+| Standard basis (S) |       $q^{-l(x)/2} T_x$        |        $\widetilde{T}_x$         |           $H_x$            |         $\delta_x$         |
+|    Canonical basis |             $C'_x$             |              $C'_x$              |     $\underline{H}_x$      |           $b_x$            |
+|  KL polynomial (L) |           $P_{x, y}$           | $q^{l(y)/2 - l(x)/2} P^*_{x, y}$ | $v^{l(x) - l(y)} h_{x, y}$ | $v^{l(x) - l(y)} h_{x, y}$ |
+|  KL polynomial (S) | $q^{l(x)/2 - l(y)/2} P_{x, y}$ |           $P^*_{x, y}$           |         $h_{x, y}$         |         $h_{x, y}$         |
+|       R-polynomial |           $R_{x, y}$           |   $v^{l(x) - l(y)} R^*_{x, y}$   |             -              |             -              |
+|      R*-polynomial | $q^{l(x)/2 - l(y)/2} R_{x, y}$ |           $R^*_{x, y}$           |                            |                            |
+
+:::
+
+The references in the table are:
+
+- \[[KL79](#KL79){#KL79}]: Kazhdan and Lusztig, *Representations of Coxeter groups and Hecke algebras*, Inventiones Mathematicae, 1979. [DOI](https://doi.org/10.1007/BF01390031).
+- \[[Lus83](#Lus83){#Lus83}]: Lusztig, *Left cells in weyl groups*, Lie Group Representations I, Springer 1983. [DOI](https://doi.org/10.1007/BFb0071433).
+- \[[Soe97](#Soe97){#Soe97}]: Soergel, *Kazhdan-Lusztig polynomials and a combinatoric for tilting modules*, Represent. Theory, 1997. [DOI](https://doi.org/10.1090/S1088-4165-97-00021-6).
+- \[[EMTW20](#EMTW20){#EMTW20}]: Elias, Makisumi, Thiel and Williamson, *Introduction to Soergel Bimodules*, RSME Springer Series, 2020. [DOI](https://doi.org/10.1007/978-3-030-48826-0)
+
+[KL79]: #KL79 (Kazhdan and Lusztig, Representations of Coxeter groups and Hecke algebras, Inventiones Mathematicae, 1979)
+[Lus83]: #Lus83 (Lusztig, Left cells in weyl groups, Lie Group Representations I, Springer 1983)
+[Soe97]: #Soe97 (Soergel, Kazhdan-Lusztig polynomials and a combinatoric for tilting modules, Represent. Theory, 1997)
+[EMTW20]: #EMTW20 (Elias, Makisumi, Thiel and Williamson, Introduction to Soergel Bimodules, RSME Springer Series, 2020)
 
 
 ## Antispherical modules {#antispherical-modules}

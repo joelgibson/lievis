@@ -10,4 +10,5 @@ This is a "laboratory" of work in various stages.
 - [Root poset](/drafts/root_poset/): shows the additive root poset, and the root graph made by reflections.
 - [LS Paths](/drafts/lspaths/): displaying Lakshmibai-Seshadri paths.
 - [Stability Conditions](/drafts/stability_conditions/): stability conditions of root systems.
+- [Root systems](/drafts/root_systems/): combinatorics of building root systems.
 - [Notes](/drafts/notes/): The digital equivalent of scribbles on a bit of paper.
